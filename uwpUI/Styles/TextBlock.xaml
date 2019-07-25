@@ -9,6 +9,8 @@
         <Setter Property="FontSize" Value="{StaticResource ExtraLargeFontSize}" />
         <Setter Property="TextTrimming" Value="CharacterEllipsis" />
         <Setter Property="TextWrapping" Value="NoWrap" />
+        <Setter Property="TextAlignment" Value="Center"/>
+        <Setter Property="Margin"  Value="{StaticResource SmallBottomMargin}"/>
     </Style>
 
     <Style x:Key="BodyTextStyle" TargetType="TextBlock">
