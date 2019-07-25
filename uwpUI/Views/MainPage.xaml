@@ -32,10 +32,9 @@
             <TextBlock
                 Grid.Row="1"
                 Grid.Column="1"
+                FontSize="{StaticResource LargeFontSize}"
                 Style="{StaticResource BodyTextBlockStyle}"
-                x:Name="Time"
-                TextWrapping="WrapWholeWords"
-                MaxWidth="500"/>
+                x:Name="Time"/>
 
         </Grid>
     </Grid>
