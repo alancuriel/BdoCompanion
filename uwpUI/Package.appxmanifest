@@ -10,7 +10,7 @@
   <Identity
     Name="1103alannitro17.BDOCompanion"
     Publisher="CN=732693BD-7C83-4AFE-901E-27C0C68261EF"
-    Version="1.0.9.0" />
+    Version="1.0.10.0" />
 
   <mp:PhoneIdentity PhoneProductId="7a8c4a6b-116b-4891-ae3d-e767da9ccf36" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
