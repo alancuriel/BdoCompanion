@@ -5,6 +5,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:winui="using:Microsoft.UI.Xaml.Controls"
+    xmlns:UI="using:Microsoft.Advertising.WinRT.UI"
     xmlns:cm="using:Caliburn.Micro"
     xmlns:helpers="using:uwpUI.Helpers"
     xmlns:views="using:uwpUI.Views"
@@ -30,7 +31,19 @@
             <winui:NavigationViewItem x:Uid="Shell_Second" helpers:NavHelper.NavigateTo="views:SecondPage" />
         </winui:NavigationView.MenuItems>
         <Grid>
-            <Frame x:Name="shellFrame" DataContext="{x:Null}" />
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Frame Grid.Row="0" x:Name="shellFrame" DataContext="{x:Null}" />
+            
+            <UI:AdControl ApplicationId="3f83fe91-d6be-434d-a0ae-7351c5a997f1"
+            AdUnitId="test"
+            Grid.Row="1"
+            Width="640"
+            Height="100"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Bottom"/>
         </Grid>
     </winui:NavigationView>
 </Page>
