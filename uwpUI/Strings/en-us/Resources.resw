@@ -122,7 +122,7 @@
     <comment>Application display name</comment>
   </data>
   <data name="AppDescription" xml:space="preserve">
-    <value>Companion App for the MMORPG Black Desert Online for Windows 10 and Xbox. Features Currently Include - Boss Timer. Future features will have recipes, profit calculators, and other timers.</value>
+    <value>Companion App for the MMORPG Black Desert Online for Windows 10 and Xbox. Features Currently Include - Boss Notifications. Future features will have recipes, profit calculators, and other timers.</value>
     <comment>Application description</comment>
   </data>
   <data name="Shell_Main.Content" xml:space="preserve">
@@ -130,7 +130,7 @@
     <comment>Navigation view item name for Main</comment>
   </data>
   <data name="Shell_Second.Content" xml:space="preserve">
-    <value>Boss Timers</value>
+    <value>World Bosses</value>
     <comment>Navigation view item name for Second</comment>
   </data>
   <data name="ExceptionSettingsStorageExtensionsFileNameIsNullOrEmpty" xml:space="preserve">
@@ -153,7 +153,7 @@
     <value>About this application</value>
   </data>
   <data name="Settings_AboutDescription.Text" xml:space="preserve">
-    <value>Companion App for the MMORPG Black Desert Online for Windows 10 and Xbox. Features Currently Include - Boss Timer. Future features will have recipes, profit calculators, and other timers.</value>
+    <value>Companion App for the MMORPG Black Desert Online for Windows 10 and Xbox. Features Currently Include - Boss notifications. Future features will have recipes, profit calculators, and other timers.</value>
   </data>
   <data name="Settings_PrivacyTermsLink.Content" xml:space="preserve">
     <value>Privacy Statement</value>
@@ -191,7 +191,7 @@
     <comment>What's new prompt message primary button text</comment>
   </data>
   <data name="FirstRun_Body.Text" xml:space="preserve">
-    <value>Thanks For Downloading! This is a companion app I made for the MMORPG Black Desert Online. I plan on adding more features and adding more to the existing features. Feel free to give feedback or suggestions through the feedback app or email in the settings page. Currently the only working feature is the boss timer for Pc-NA and Xbox-NA. Enjoy😁!</value>
+    <value>Thanks For Downloading! This is a companion app I made for the MMORPG Black Desert Online. I plan on adding more features and adding more to the existing features. Feel free to give feedback or suggestions through the feedback app or email in the settings page. Currently the only working feature is the Boss Notifications for Pc-NA and Xbox-NA. Enjoy😁!</value>
     <comment>First use prompt message body</comment>
   </data>
   <data name="FirstRunDialog.Title" xml:space="preserve">
