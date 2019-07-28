@@ -220,4 +220,14 @@
   <data name="Settings_EmailLink.NavigateUri" xml:space="preserve">
     <value>mailto:blackdesertcompanion@outlook.com</value>
   </data>
+  <data name="BossNotificationTimeTitle.Text" xml:space="preserve">
+    <value>Choose time to be notifed before World Boss Spawns :</value>
+    <comment>Title for choosing time of world boss notifications</comment>
+  </data>
+  <data name="Settings_Region_PCEU.Content" xml:space="preserve">
+    <value>PC - EU</value>
+  </data>
+  <data name="Settings_Region_XBOXEU.Content" xml:space="preserve">
+    <value>Xbox - EU</value>
+  </data>
 </root>

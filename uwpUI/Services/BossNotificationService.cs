@@ -33,6 +33,10 @@ namespace uwpUI.Services
                         return "PC-NA-BossSchedule-PDT.txt";
                     case ServerRegion.XBOXNA:
                         return "Xbox-Na-BossSchedule-PDT.txt";
+                    case ServerRegion.PCEU:
+                        return "PC-EU-BossSchedule-CEST.txt";
+                    case ServerRegion.XBOXEU:
+                        return "Xbox-Eu-BossSchedule-UTC+1.txt";
                     default:
                         throw new Exception("An error occured getting the region boss schedule file");
                 }
@@ -57,7 +61,6 @@ namespace uwpUI.Services
             public static void DisableAllBossNotifications()
             {
                 ToastNotifier notifier = ToastNotificationManager.CreateToastNotifier();
-
                 IReadOnlyList<ScheduledToastNotification> scheduledToasts = notifier.GetScheduledToastNotifications();
 
                 foreach (var toast in scheduledToasts)
@@ -72,7 +75,8 @@ namespace uwpUI.Services
                         case "Vell": notifier.RemoveFromSchedule(toast); break;
                         case "Muraka": notifier.RemoveFromSchedule(toast); break;
                         case "Quint": notifier.RemoveFromSchedule(toast); break;
-                        default: break;
+                        case "Nouver": notifier.RemoveFromSchedule(toast); break;
+                            default: break;
                     }
                 }
             }
@@ -111,7 +115,25 @@ namespace uwpUI.Services
 
             private static DateTime CreateSpawnTime(DayOfWeek day, TimeSpan timeOfDay)
             {
-                TimeZoneInfo timeZoneInfo = TimeZoneInfo.FindSystemTimeZoneById("Pacific Standard Time");
+                TimeZoneInfo timeZoneInfo = null;
+
+                if(RegionSelectorService.Region == ServerRegion.PCNA
+                || RegionSelectorService.Region == ServerRegion.XBOXNA)
+                {
+                    timeZoneInfo = TimeZoneInfo.FindSystemTimeZoneById("Pacific Standard Time");
+                }
+                else if(RegionSelectorService.Region == ServerRegion.XBOXEU)
+                {
+                    timeZoneInfo = TimeZoneInfo.FindSystemTimeZoneById("W. Europe Standard Time");
+                }
+                else if(RegionSelectorService.Region == ServerRegion.PCEU)
+                {
+                    timeZoneInfo = TimeZoneInfo.FindSystemTimeZoneById("Central Europe Standard Time");
+                }
+                else
+                {
+                    throw new Exception("Invalid Server region was used");
+                }
 
                 DateTime now = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, timeZoneInfo);
                 DateTime startOfWeek = now - new TimeSpan((int)now.DayOfWeek, now.Hour, now.Minute, now.Second, now.Millisecond);
