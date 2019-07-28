@@ -11,16 +11,24 @@ namespace uwpUI.ViewModels
         public SecondViewModel()
         {
         }
-
-        protected override async void OnViewLoaded(object view)
+        protected override async void OnInitialize()
         {
             ViewLoaded = false;
-            base.OnViewLoaded(view);
+            
             await CheckBossTimersAsync();
             ViewLoaded = true;
+            base.OnInitialize();
         }
 
-        public bool ViewLoaded { get; set; }
+        //protected override async void OnViewLoaded(object view)
+        //{
+        //    ViewLoaded = false;
+        //    base.OnViewLoaded(view);
+        //    await CheckBossTimersAsync();
+        //    ViewLoaded = true;
+        //}
+
+        public bool ViewLoaded { get; set; } = false;
 
         private ObservableCollection<BossModel> _bosses = new ObservableCollection<BossModel>()
         {
@@ -29,55 +37,63 @@ namespace uwpUI.ViewModels
                 Name = "Karanda",
                 Img = "ms-appx:///Assets/Karanda.png",
                 Location = "Karanda Ridge",
-                
+                IsTimerEnabled = BossNotificationService.IsBossTimerEnabled("Karanda")   
             },
             new BossModel
             {
                 Name = "Kzarka",
                 Img = "ms-appx:///Assets/Kzarka.png",
-                Location = "Serendia Shrine"
+                Location = "Serendia Shrine",
+                IsTimerEnabled = BossNotificationService.IsBossTimerEnabled("Kzarka")
             },
             new BossModel
             {
                 Name = "Garmoth",
                 Img = "ms-appx:///Assets/Garmoth.png",
-                Location = "Tshira Ruins"
+                Location = "Tshira Ruins",
+                IsTimerEnabled = BossNotificationService.IsBossTimerEnabled("Garmoth")
             },
             new BossModel
             {
                 Name = "Nouver",
                 Img = "ms-appx:///Assets/Nouver.png",
-                Location = "The Desert"
+                Location = "The Desert",
+                IsTimerEnabled = BossNotificationService.IsBossTimerEnabled("Nouver")
             },
             new BossModel
             {
                 Name = "Kutum",
                 Img = "ms-appx:///Assets/Kutum.png",
-                Location = "Scarlet Sand Chamber"
+                Location = "Scarlet Sand Chamber",
+                IsTimerEnabled = BossNotificationService.IsBossTimerEnabled("Kutum")
             },
             new BossModel
             {
                 Name = "Offin",
                 Img = "ms-appx:///Assets/Offin.png",
-                Location = "Holo Forest"
+                Location = "Holo Forest",
+                IsTimerEnabled = BossNotificationService.IsBossTimerEnabled("Offin")
             },
             new BossModel
             {
                 Name = "Vell",
                 Img = "ms-appx:///Assets/Vell.png",
-                Location = "The Vell Sea"
+                Location = "The Vell Sea",
+                IsTimerEnabled = BossNotificationService.IsBossTimerEnabled("Offin")
             },
             new BossModel
             {
                 Name = "Muraka",
                 Img = "ms-appx:///Assets/Muraka.png",
-                Location = "Mansha Forest"
+                Location = "Mansha Forest",
+                IsTimerEnabled = BossNotificationService.IsBossTimerEnabled("Muraka")
             },
             new BossModel
             {
                 Name = "Quint",
                 Img = "ms-appx:///Assets/Quint.png",
-                Location = "Quint Hill"
+                Location = "Quint Hill",
+                IsTimerEnabled = BossNotificationService.IsBossTimerEnabled("Quint")
             }
         };
         public ObservableCollection<BossModel> Bosses
@@ -128,7 +144,7 @@ namespace uwpUI.ViewModels
         {
             foreach (var boss in Bosses)
             {
-                boss.IsTimerEnabled = BossNotificationService.IsBossTimerEnabled(boss);
+                //boss.IsTimerEnabled = BossNotificationService.IsBossTimerEnabled(boss);
                 boss.Show = await BossNotificationService.IsBossInRegionAsync(boss);
             }
 
