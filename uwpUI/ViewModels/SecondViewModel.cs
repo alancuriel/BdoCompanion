@@ -129,12 +129,12 @@ namespace uwpUI.ViewModels
                 if (boss.IsTimerEnabled)
                 {
                     BossNotificationService.DisableBossNotifications(boss);
-
+                    boss.IsTimerEnabled = false;
                 }
                 else
                 {
                     await BossNotificationService.EnableBossNotificationsAsync(boss);
-
+                    boss.IsTimerEnabled = true;
                 }
 
             }
