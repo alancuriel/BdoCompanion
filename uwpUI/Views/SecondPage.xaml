@@ -48,17 +48,16 @@
 
                             <StackPanel Grid.Column="1" >
                                 <TextBlock Text="{x:Bind Name}"
-                                       Style="{StaticResource GridViewText}"/>
-                                <ToggleSwitch x:Name="BossSwitch"
-                                              IsOn="{x:Bind IsTimerEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                Style="{StaticResource GridViewText}"/>
+                                
+                                <CheckBox x:Name="BossSwitch"
+                                              IsChecked="{x:Bind IsTimerEnabled, Mode=OneWay}"
                                               cm:Message.Attach="ActivateBossTimerAsync($dataContext)">
-
-                                </ToggleSwitch>
+                                </CheckBox>
                             </StackPanel>
                         </Grid>
                     </DataTemplate>
                 </GridView.ItemTemplate>
-
             </GridView>
 
         </Grid>

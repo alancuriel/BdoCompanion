@@ -141,14 +141,14 @@ namespace uwpUI.Services
                 return DayOfWeek.Sunday;
             }
 
-            public static bool IsBossTimerEnabled(BossModel boss)
+            public static bool IsBossTimerEnabled(string bossName)
             {
                 IReadOnlyList<ScheduledToastNotification> scheduledToasts =
                 ToastNotificationManager.CreateToastNotifier().GetScheduledToastNotifications();
 
                 foreach (var toast in scheduledToasts)
                 {
-                    if (toast.Group == boss.Name)
+                    if (toast.Group == bossName)
                     {
                         return true;
                     }

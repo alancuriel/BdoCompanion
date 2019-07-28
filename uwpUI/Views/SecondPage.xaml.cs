@@ -38,8 +38,8 @@ namespace uwpUI.Views
         {
             GridView item = (sender as GridView);
             GridViewItem gvitem = item.ContainerFromItem(item.SelectedItem) as GridViewItem;
-            ToggleSwitch toggleSwitch = FindControl<ToggleSwitch>(gvitem, typeof(ToggleSwitch), "BossSwitch");
-            toggleSwitch?.Focus(FocusState.Programmatic);
+            CheckBox CheckBox = FindControl<CheckBox>(gvitem, typeof(CheckBox), "BossSwitch");
+            CheckBox?.Focus(FocusState.Programmatic);
         }
 
         private void Bosses_Loaded(object sender, RoutedEventArgs e)
