@@ -27,11 +27,12 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <TextBlock
-                Grid.Row="0"
-                Grid.Column="1"
-                Style="{StaticResource PageTitleStyle}"
-                x:Uid="Main_Title"/>
+            <Button HorizontalAlignment="Center"
+                    Grid.Row="0"
+                    Grid.Column="1">
+                <TextBlock Style="{StaticResource PageTitleStyle}"
+                           x:Uid="Main_Title"/>
+            </Button>
             <TextBlock
                 Grid.Row="1"
                 Grid.Column="1"
