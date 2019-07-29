@@ -25,7 +25,7 @@ namespace uwpUI.Services
 
         private static async Task<int> LoadNotifyTimeFromSettingsAsync()
         {
-            int cacheNotifyTime = 0;//Default
+            int cacheNotifyTime = 0; // 0 is Default
             string notifyTimeName = await ApplicationData.Current.LocalSettings.ReadAsync<string>(BossNotifcationTimeKey);
 
             if (!string.IsNullOrEmpty(notifyTimeName))
@@ -182,7 +182,7 @@ namespace uwpUI.Services
             }
 
 
-            return TimeAppear;
+            return TimeAppear - TimeSpan.FromMinutes(NotifyTime);
         }
 
         private static DayOfWeek StringToDayOfWeek(string str)

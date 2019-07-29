@@ -179,7 +179,7 @@
   <data name="WhatsNew_Body.Text" xml:space="preserve">
     <value>This update brings:
 
--Boss Timer : Notifies you when a world boss spawns. Once Activated, there will be notifcations for the given boss for a week. Regions Include NA-PC, NA-XBOX</value>
+-Boss Notification : Added new PC-EU and Xbox-EU, Allowed to specifiy time to be notified before boss spawn, fixed issue where boss notification would disable itself when navigated back to the page</value>
     <comment>What's new prompt message body</comment>
   </data>
   <data name="WhatsNewDialog.Title" xml:space="preserve">
@@ -191,7 +191,7 @@
     <comment>What's new prompt message primary button text</comment>
   </data>
   <data name="FirstRun_Body.Text" xml:space="preserve">
-    <value>Thanks For Downloading! This is a companion app I made for the MMORPG Black Desert Online. I plan on adding more features and adding more to the existing features. Feel free to give feedback or suggestions through the feedback app or email in the settings page. Currently the only working feature is the Boss Notifications for Pc-NA and Xbox-NA. Enjoy😁!</value>
+    <value>Thanks For Downloading! This is a companion app I made for the MMORPG Black Desert Online. I plan on adding more features and adding more to the existing features. Feel free to give feedback or suggestions through the feedback app or email in the settings page. Currently working feature include in game timers and Boss Notifications for Pc-NA/Eu and Xbox-NA/Eu. Enjoy😁!</value>
     <comment>First use prompt message body</comment>
   </data>
   <data name="FirstRunDialog.Title" xml:space="preserve">
@@ -229,5 +229,8 @@
   </data>
   <data name="Settings_Region_XBOXEU.Content" xml:space="preserve">
     <value>Xbox - EU</value>
+  </data>
+  <data name="BossNotifcationTimeUnit.Text" xml:space="preserve">
+    <value>Minutes before</value>
   </data>
 </root>

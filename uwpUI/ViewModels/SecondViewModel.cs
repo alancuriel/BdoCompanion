@@ -147,17 +147,6 @@ namespace uwpUI.ViewModels
             }
         }
 
-        private string _testString;
-
-        public string TestString
-        {
-            get { return _testString; }
-            set
-            {
-                Set(ref _testString, value);
-            }
-        }
-
         public async void ActivateBossTimerAsync(BossModel boss)
         {
             if (boss != null && ViewLoaded)

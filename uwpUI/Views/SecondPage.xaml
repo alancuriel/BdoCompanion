@@ -29,14 +29,18 @@
             <StackPanel Grid.Row="0"
                         Orientation="Horizontal"
                         HorizontalAlignment="Center"
-                        Margin="{StaticResource SmallBottomMargin}">
+                        Margin="{StaticResource MediumTopBottomMargin}">
                 
                 <TextBlock x:Uid="BossNotificationTimeTitle"
-                           FontSize="{StaticResource MediumLargeFontSize}"/>
+                           FontSize="{StaticResource MediumLargeFontSize}"
+                           Margin="{StaticResource SmallRightMargin}"/>
+
                 <ComboBox x:Name="NotificationTime"
-                          PointerWheelChanged="NotificationTime_PointerWheelChanged">
-                </ComboBox>
-                <TextBlock x:Name="TestString"/>
+                          PointerWheelChanged="NotificationTime_PointerWheelChanged"/>
+                
+                <TextBlock x:Uid="BossNotifcationTimeUnit"
+                           Margin="{StaticResource XSmallLeftMargin}"
+                           FontSize="{StaticResource MediumLargeFontSize}"/>
             </StackPanel>
             
             <GridView x:Name="Bosses" Grid.Row="1"
