@@ -91,6 +91,7 @@ namespace uwpUI.Services
         {
             await ThemeSelectorService.InitializeAsync();
             await RegionSelectorService.InitializeAsync();
+            await BossNotificationService.InitializeAsync();
         }
 
         private async Task StartupAsync()

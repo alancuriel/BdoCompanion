@@ -1,5 +1,7 @@
 ﻿using Caliburn.Micro;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Threading.Tasks;
 using uwpUI.Core.Models;
 using uwpUI.Services;
@@ -10,6 +12,7 @@ namespace uwpUI.ViewModels
     {
         public SecondViewModel()
         {
+            NotificationTime = new BindableCollection<int>(Enumerable.Range(0, 91));           
         }
         protected override async void OnInitialize()
         {
@@ -108,6 +111,28 @@ namespace uwpUI.ViewModels
             }
         }
 
+        public  BindableCollection<int> NotificationTime { get; private set; }
+
+        private int _selectedNotificationTime = BossNotificationService.NotifyTime;
+
+        public int SelectedNotificationTime
+        {
+            get { return _selectedNotificationTime; }
+            set
+            {
+                BossNotificationService.DisableAllBossNotifications();
+                foreach(var boss in Bosses) { boss.IsTimerEnabled = false; }
+                NotifyOfPropertyChange(() => Bosses);
+                SwitchNotifyTime(value);
+                Set(ref _selectedNotificationTime, value);
+            }
+        }
+
+        public async void SwitchNotifyTime(int min)
+        {
+            await BossNotificationService.SetNotifyTimeAsync(min);
+        }
+
         private BossModel _selectedBoss;
 
         public BossModel SelectedBoss
@@ -119,6 +144,17 @@ namespace uwpUI.ViewModels
             set
             {
                 Set(ref _selectedBoss, value);
+            }
+        }
+
+        private string _testString;
+
+        public string TestString
+        {
+            get { return _testString; }
+            set
+            {
+                Set(ref _testString, value);
             }
         }
 
