@@ -43,7 +43,8 @@
             Width="640"
             Height="100"
             HorizontalAlignment="Center"
-            VerticalAlignment="Bottom"/>
+            VerticalAlignment="Bottom"
+            GotFocus="AdControl_GotFocus"/>
         </Grid>
     </winui:NavigationView>
 </Page>
