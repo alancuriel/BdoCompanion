@@ -1,0 +1,66 @@
+﻿Kutum Sun 12:00
+Karanda Sun 12:00
+Nouver Sun 15:00
+Kzarka Sun 15:00
+Kutum Sun 18:00
+Karanda Sun 18:00
+Nouver Sun 21:15
+Kzarka Sun 21:15
+--
+Nouver Mon 8:00
+Kzarka Mon 8:00
+Kutum Mon 18:00
+Karanda Mon 18:00
+Nouver Mon 21:15
+Kzarka Mon 21:15
+--
+Kutum Tue 0:00
+Karanda Tue 0:00
+Kutum Tue 8:00
+Karanda Tue 8:00
+Nouver Tue 18:00
+Kzarka Tue 18:00
+Kutum Tue 21:15
+Karanda Tue 21:15
+--
+Nouver Wed 0:00
+Kzarka Wed 0:00
+Nouver Wed 8:00
+Kzarka Wed 8:00
+Kutum Wed 18:00
+Karanda Wed 18:00
+Nouver Wed 21:15
+Kzarka Wed 21:15
+Quint Wed 22:00
+Muraka Wed 22:00
+--
+Kutum Thu 0:00
+Karanda Thu 0:00
+Kutum Thu 8:00
+Karanda Thu 8:00
+Nouver Thu 18:00
+Kzarka Thu 18:00
+Kutum Thu 21:15
+Karanda Thu 21:15
+--
+Nouver Fri 0:00
+Kzarka Fri 0:00
+Nouver Fri 8:00
+Kzarka Fri 8:00
+Kutum Fri 18:00
+Karanda Fri 18:00
+Nouver Fri 21:15
+Kzarka Fri 21:15
+--
+Kutum Sat 0:00
+Karanda Sat 0:00
+Nouver Sat 8:00
+Kzarka Sat 8:00
+Kutum Sat 15:00
+Karanda Sat 15:00
+Quint Sat 16:00
+Muraka Sat 16:00
+Nouver Sat 18:00
+Kzarka Sat 18:00
+Kutum Sat 23:15
+Karanda Sat 23:15

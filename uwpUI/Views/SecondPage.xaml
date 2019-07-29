@@ -21,8 +21,29 @@
             Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
             <!--The SystemControlPageBackgroundChromeLowBrush background represents where you should place your content. 
                 Place your content here.-->
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
 
-            <GridView x:Name="Bosses"
+            <StackPanel Grid.Row="0"
+                        Orientation="Horizontal"
+                        HorizontalAlignment="Center"
+                        Margin="{StaticResource MediumTopBottomMargin}">
+                
+                <TextBlock x:Uid="BossNotificationTimeTitle"
+                           FontSize="{StaticResource MediumLargeFontSize}"
+                           Margin="{StaticResource SmallRightMargin}"/>
+
+                <ComboBox x:Name="NotificationTime"
+                          PointerWheelChanged="NotificationTime_PointerWheelChanged"/>
+                
+                <TextBlock x:Uid="BossNotifcationTimeUnit"
+                           Margin="{StaticResource XSmallLeftMargin}"
+                           FontSize="{StaticResource MediumLargeFontSize}"/>
+            </StackPanel>
+            
+            <GridView x:Name="Bosses" Grid.Row="1"
                       Style="{StaticResource UpTopStyle}"
                       SelectedItem="{x:Bind ViewModel.SelectedBoss, Mode=TwoWay}"
                       IsItemClickEnabled="True"
@@ -48,11 +69,11 @@
 
                             <StackPanel Grid.Column="1" >
                                 <TextBlock Text="{x:Bind Name}"
-                                Style="{StaticResource GridViewText}"/>
+                                           Style="{StaticResource GridViewText}"/>
                                 
                                 <CheckBox x:Name="BossSwitch"
-                                              IsChecked="{x:Bind IsTimerEnabled, Mode=OneWay}"
-                                              cm:Message.Attach="ActivateBossTimerAsync($dataContext)">
+                                          IsChecked="{x:Bind IsTimerEnabled, Mode=OneWay}"
+                                          cm:Message.Attach="ActivateBossTimerAsync($dataContext)">
                                 </CheckBox>
                             </StackPanel>
                         </Grid>

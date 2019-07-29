@@ -94,6 +94,32 @@
                             <reg:ServerRegion>XBOXNA</reg:ServerRegion>
                         </RadioButton.Tag>
                     </RadioButton>
+
+                    <RadioButton
+                    x:Name="PCEURegionButton"
+                    x:Uid="Settings_Region_PCEU"
+                    GroupName="AppRegion"
+                    FontSize="15"
+                    IsChecked="{x:Bind ViewModel.ServerRegion, Converter={StaticResource EnumToBooleanConvertor0}, ConverterParameter=PCEU,Mode=OneWay}"
+                    cm:Message.Attach="SwitchRegion(PCEURegionButton.Tag)">
+
+                        <RadioButton.Tag>
+                            <reg:ServerRegion>PCEU</reg:ServerRegion>
+                        </RadioButton.Tag>
+                    </RadioButton>
+
+                    <RadioButton
+                    x:Name="XBOXEURegionButton"
+                    x:Uid="Settings_Region_XBOXEU"
+                    GroupName="AppRegion"
+                    FontSize="15"
+                    IsChecked="{x:Bind ViewModel.ServerRegion, Converter={StaticResource EnumToBooleanConvertor0}, ConverterParameter=XBOXEU,Mode=OneWay}"
+                    cm:Message.Attach="SwitchRegion(XBOXEURegionButton.Tag)">
+
+                        <RadioButton.Tag>
+                            <reg:ServerRegion>XBOXEU</reg:ServerRegion>
+                        </RadioButton.Tag>
+                    </RadioButton>
                 </StackPanel>
             </StackPanel>
 

@@ -48,5 +48,9 @@ namespace uwpUI.Views
             gridView.SelectedIndex = 0;
         }
 
+        private void NotificationTime_PointerWheelChanged(object sender, Windows.UI.Xaml.Input.PointerRoutedEventArgs e)
+        {
+
+        }
     }
 }
