@@ -254,7 +254,7 @@ namespace uwpUI.Services
                             new AdaptiveText()
                             {
                                 HintMaxLines = 2,
-                                Text = $"{boss.Name} has spawned"
+                                Text = NotifyTime > 0 ? $"{boss.Name} will spawn in {NotifyTime} minutes." :$"{boss.Name} has spawned!"
                             },
 
                             new AdaptiveText()
