@@ -4,12 +4,14 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:UI="using:Microsoft.Advertising.WinRT.UI"
     xmlns:models="using:uwpUI.Core.Models"
     xmlns:cm="using:Caliburn.Micro"
+    xmlns:Ads="using:uwpUI.Services"
     xmlns:helper="using:uwpUI.Helpers"
     Style="{StaticResource PageStyle}"
     mc:Ignorable="d">
-    
+
     <Page.Resources>
         <helper:BooleanToCollapsedConverter x:Key="BooleanToCollapsedConverter"/>
     </Page.Resources>
@@ -24,25 +26,26 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
             <StackPanel Grid.Row="0"
                         Orientation="Horizontal"
                         HorizontalAlignment="Center"
                         Margin="{StaticResource MediumTopBottomMargin}">
-                
+
                 <TextBlock x:Uid="BossNotificationTimeTitle"
                            FontSize="{StaticResource MediumLargeFontSize}"
                            Margin="{StaticResource SmallRightMargin}"/>
 
                 <ComboBox x:Name="NotificationTime"
                           PointerWheelChanged="NotificationTime_PointerWheelChanged"/>
-                
+
                 <TextBlock x:Uid="BossNotifcationTimeUnit"
                            Margin="{StaticResource XSmallLeftMargin}"
                            FontSize="{StaticResource MediumLargeFontSize}"/>
             </StackPanel>
-            
+
             <GridView x:Name="Bosses" Grid.Row="1"
                       Style="{StaticResource UpTopStyle}"
                       SelectedItem="{x:Bind ViewModel.SelectedBoss, Mode=TwoWay}"
@@ -70,7 +73,7 @@
                             <StackPanel Grid.Column="1" >
                                 <TextBlock Text="{x:Bind Name}"
                                            Style="{StaticResource GridViewText}"/>
-                                
+
                                 <CheckBox x:Name="BossSwitch"
                                           IsChecked="{x:Bind IsTimerEnabled, Mode=OneWay}"
                                           cm:Message.Attach="ActivateBossTimerAsync($dataContext)">
@@ -80,6 +83,17 @@
                     </DataTemplate>
                 </GridView.ItemTemplate>
             </GridView>
+
+            <Button Grid.Row ="6"
+                    HorizontalAlignment="Center">
+                
+                <UI:AdControl ApplicationId="{x:Bind Ads:AdvertisingService.ApplicationID}"
+                              AdUnitId="{x:Bind Ads:AdvertisingService.AdUnitId}"             
+                              Width="640"
+                              Height="100"
+                              HorizontalAlignment="Center"
+                              VerticalAlignment="Bottom"/>
+            </Button>
 
         </Grid>
     </Grid>

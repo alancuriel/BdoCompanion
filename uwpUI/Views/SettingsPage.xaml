@@ -5,6 +5,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Style="{StaticResource PageStyle}"
+    xmlns:UI="using:Microsoft.Advertising.WinRT.UI"
     xmlns:helper="using:uwpUI.Helpers"
     xmlns:reg="using:uwpUI.Services"
     xmlns:xaml="using:Windows.UI.Xaml"
@@ -149,6 +150,17 @@
                 <HyperlinkButton
                     x:Uid="Settings_EmailLink"
                     Margin="{StaticResource XSmallTopMargin}"/>
+
+                <Button Grid.Row="6" Grid.Column="1"
+                        HorizontalAlignment="Center">
+
+                    <UI:AdControl ApplicationId="{x:Bind reg:AdvertisingService.ApplicationID}"
+                                  AdUnitId="{x:Bind reg:AdvertisingService.AdUnitId}"             
+                                  Width="640"
+                                  Height="100"
+                                  HorizontalAlignment="Center"
+                                  VerticalAlignment="Bottom"/>
+                </Button>
 
             </StackPanel>
         </StackPanel>

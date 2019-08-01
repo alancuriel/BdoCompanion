@@ -34,9 +34,6 @@ namespace uwpUI.Views
             return shellFrame;
         }
 
-        private void AdControl_GotFocus(object sender, Windows.UI.Xaml.RoutedEventArgs e)
-        {
-            shellFrame.Focus(Windows.UI.Xaml.FocusState.Programmatic);
-        }
+        
     }
 }
