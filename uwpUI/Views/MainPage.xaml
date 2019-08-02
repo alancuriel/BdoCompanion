@@ -30,10 +30,14 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <TextBlock Style="{StaticResource PageTitleStyle}"
-                       x:Uid="Main_Title"
-                       Grid.Row="0"
-                       Grid.Column="1"/>
+            <ContentControl
+                Grid.Row="0" Grid.Column="1"
+                HorizontalAlignment="Center">
+                
+                <TextBlock
+                    Style="{StaticResource PageTitleStyle}"
+                    x:Uid="Main_Title"/>
+            </ContentControl>
 
             <TextBlock
                 Grid.Row="1"
@@ -71,7 +75,7 @@
                 Style="{StaticResource BodyTextBlockStyle}"
                 x:Name="BSGameReset"/>
 
-            <Button Grid.Row="6" Grid.Column="1">
+            <ContentControl Grid.Row="6" Grid.Column="1" IsFocusEngagementEnabled="True" RequiresPointer="WhenEngaged" >
                 <UI:AdControl x:Name="ControlAd"
                               ApplicationId="{x:Bind Ads:AdvertisingService.ApplicationID}"
                               AdUnitId="{x:Bind Ads:AdvertisingService.AdUnitId}"
@@ -79,7 +83,7 @@
                               HorizontalAlignment="Center"
                               VerticalAlignment="Bottom"
                               AllowFocusWhenDisabled="True"/>
-            </Button>
+            </ContentControl>
 
         </Grid>
     </Grid>

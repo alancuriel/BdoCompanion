@@ -62,7 +62,7 @@ namespace uwpUI.ViewModels
             get { return _imperialTradeReset; }
             set
             {
-                Set(ref _imperialTradeReset, $"Imperial Trade Reset in{value}");
+                Set(ref _imperialTradeReset, $"Imperial Trade Reset in {value}");
             }
         }
 

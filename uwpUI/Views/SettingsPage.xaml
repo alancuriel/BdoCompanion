@@ -151,8 +151,10 @@
                     x:Uid="Settings_EmailLink"
                     Margin="{StaticResource XSmallTopMargin}"/>
 
-                <Button Grid.Row="6" Grid.Column="1"
-                        HorizontalAlignment="Center">
+                <ContentControl Grid.Row="6" Grid.Column="1"
+                                HorizontalAlignment="Center"
+                                IsFocusEngagementEnabled="True"
+                                RequiresPointer="WhenEngaged">
 
                     <UI:AdControl ApplicationId="{x:Bind reg:AdvertisingService.ApplicationID}"
                                   AdUnitId="{x:Bind reg:AdvertisingService.AdUnitId}"             
@@ -160,7 +162,7 @@
                                   Height="100"
                                   HorizontalAlignment="Center"
                                   VerticalAlignment="Bottom"/>
-                </Button>
+                </ContentControl>
 
             </StackPanel>
         </StackPanel>

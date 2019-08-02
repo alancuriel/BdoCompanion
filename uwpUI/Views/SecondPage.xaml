@@ -84,16 +84,18 @@
                 </GridView.ItemTemplate>
             </GridView>
 
-            <Button Grid.Row ="6"
-                    HorizontalAlignment="Center">
-                
+            <ContentControl Grid.Row ="6"
+                            HorizontalAlignment="Center"
+                            IsFocusEngagementEnabled="True"
+                            RequiresPointer="WhenEngaged">
+        
                 <UI:AdControl ApplicationId="{x:Bind Ads:AdvertisingService.ApplicationID}"
                               AdUnitId="{x:Bind Ads:AdvertisingService.AdUnitId}"             
                               Width="640"
                               Height="100"
                               HorizontalAlignment="Center"
                               VerticalAlignment="Bottom"/>
-            </Button>
+            </ContentControl>
 
         </Grid>
     </Grid>
