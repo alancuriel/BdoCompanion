@@ -10,7 +10,7 @@
   <Identity
     Name="1103alannitro17.BDOCompanion"
     Publisher="CN=732693BD-7C83-4AFE-901E-27C0C68261EF"
-    Version="1.0.15.0" />
+    Version="1.0.17.0" />
 
   <mp:PhoneIdentity PhoneProductId="7a8c4a6b-116b-4891-ae3d-e767da9ccf36" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
@@ -33,7 +33,7 @@
       Executable="$targetnametoken$.exe"
       EntryPoint="uwpUI.App">
       <uap:VisualElements
-        DisplayName="BDO Companion"
+        DisplayName="Black Desert Companion"
         Square150x150Logo="Assets\Square150x150Logo.png"
         Square44x44Logo="Assets\Square44x44Logo.png"
         Description="ms-resource:AppDescription"
