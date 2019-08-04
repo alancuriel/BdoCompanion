@@ -233,4 +233,8 @@
   <data name="BossNotifcationTimeUnit.Text" xml:space="preserve">
     <value>Minutes before</value>
   </data>
+  <data name="Shell_Dev.Content" xml:space="preserve">
+    <value>Dev</value>
+    <comment>Navigation view item name for Dev</comment>
+  </data>
 </root>

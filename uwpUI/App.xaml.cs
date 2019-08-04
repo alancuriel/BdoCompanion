@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 
 using Caliburn.Micro;
+
 using Microsoft.EntityFrameworkCore;
+
 using uwpUI.Core.Data;
 using uwpUI.Services;
 using uwpUI.ViewModels;
@@ -83,6 +85,7 @@ namespace uwpUI
             _container.PerRequest<MainViewModel>();
             _container.PerRequest<SecondViewModel>();
             _container.PerRequest<SettingsViewModel>();
+            _container.PerRequest<DevViewModel>();
         }
 
         protected override object GetInstance(Type service, string key)

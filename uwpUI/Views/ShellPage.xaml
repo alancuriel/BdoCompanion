@@ -30,6 +30,7 @@
             -->
             <winui:NavigationViewItem x:Uid="Shell_Main" helpers:NavHelper.NavigateTo="views:MainPage"/>
             <winui:NavigationViewItem x:Uid="Shell_Second" helpers:NavHelper.NavigateTo="views:SecondPage"/>
+            <winui:NavigationViewItem x:Uid="Shell_Dev" helpers:NavHelper.NavigateTo="views:DevPage" />
         </winui:NavigationView.MenuItems>
         <Grid>
             <Grid.RowDefinitions>
