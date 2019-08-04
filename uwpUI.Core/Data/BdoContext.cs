@@ -8,8 +8,8 @@ namespace uwpUI.Core.Data
 {
     public class BdoContext : DbContext
     {
-        public DbSet<BdoItemModel> Items { get; set; }
-        public DbSet<ItemGroupModel> ItemGroups { get; set; }
+        public DbSet<BdoItem> Items { get; set; }
+        public DbSet<ItemGroup> ItemGroups { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
