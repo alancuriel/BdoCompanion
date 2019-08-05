@@ -7,19 +7,40 @@
     Style="{StaticResource PageStyle}"
     xmlns:tg="using:Telerik.UI.Xaml.Controls.Grid"
     xmlns:model="using:uwpUI.Core.Models"
+    xmlns:cm="using:Caliburn.Micro"
     mc:Ignorable="d">
     <Grid x:Name="ContentArea" Margin="{StaticResource MediumLeftRightMargin}">
         <Grid
             Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
-            <tg:RadDataGrid ColumnDataOperationsMode="Flyout" x:Name="grid" ItemsSource="{x:Bind ViewModel.Source, Mode=OneWay}" AutoGenerateColumns="False" >
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Button Grid.Row="0" x:Name="LoadItems" Content="Load Items Json"/>
+
+            <tg:RadDataGrid Grid.Row="1" ColumnDataOperationsMode="Flyout" x:Name="grid" ItemsSource="{x:Bind ViewModel.Source, Mode=OneWay}"
+                            AutoGenerateColumns="False" >
                 <tg:RadDataGrid.Columns>
                     <!--TODO WTS:
                       Remove this column definitions and define columns for your data.
                       Consider adding header properties to Resources.resw-->
                     <tg:DataGridTextColumn PropertyName="Id"/>
                     <tg:DataGridTextColumn PropertyName="Name"/>
-                    <tg:DataGridTextColumn PropertyName="Category"/>
+                    <tg:DataGridTemplateColumn Header="Image">
+                        <tg:DataGridTemplateColumn.CellContentTemplate>
+                            <DataTemplate x:DataType="model:BdoItem">
+                                <Image
+                                    Source="{x:Bind Img}"/>
+                            </DataTemplate>
+                        </tg:DataGridTemplateColumn.CellContentTemplate>
+                    </tg:DataGridTemplateColumn>
                     <tg:DataGridNumericalColumn PropertyName="Grade"/>
+                    <tg:DataGridTextColumn PropertyName="Category"/>
+                    <tg:DataGridTextColumn PropertyName="Weight"/>
+                    <tg:DataGridTextColumn PropertyName="Description"/>
+                    <tg:DataGridTextColumn PropertyName="ItemGroupId"/>
                     <!--<tg:DataGridTextColumn PropertyName="OrderID"/>
                     <tg:DataGridDateColumn PropertyName="OrderDate" />
                     <tg:DataGridTextColumn PropertyName="Company" />

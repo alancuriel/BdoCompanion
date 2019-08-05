@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -50,7 +51,12 @@ namespace uwpUI.Core.Services
             return db.SaveChanges();
         }
 
-        
+        public static BdoItem UpdateItem(BdoItem updatedItem)
+        {
+            var entity = db.Items.Attach(updatedItem);
+            entity.State = EntityState.Modified;
+            return updatedItem;
+        }
 
     }
 }

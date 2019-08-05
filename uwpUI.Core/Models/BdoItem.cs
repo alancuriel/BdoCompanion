@@ -11,7 +11,7 @@ namespace uwpUI.Core.Models
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int Id { get; set; }
         [Required]
-        [MaxLength(30)]
+        [MaxLength(50)]
         public string Name { get; set; }
         [MaxLength(100)]
         public string Img { get; set; }
