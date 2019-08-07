@@ -41,6 +41,9 @@
                     <tg:DataGridTextColumn PropertyName="Weight"/>
                     <tg:DataGridTextColumn PropertyName="Description"/>
                     <tg:DataGridTextColumn PropertyName="ItemGroupId"/>
+                    <tg:DataGridTextColumn PropertyName="Knowledge"/>
+                    <tg:DataGridTextColumn PropertyName="SellPrice"/>
+                    <tg:DataGridTextColumn PropertyName="BuyPrice"/>
                     <!--<tg:DataGridTextColumn PropertyName="OrderID"/>
                     <tg:DataGridDateColumn PropertyName="OrderDate" />
                     <tg:DataGridTextColumn PropertyName="Company" />

@@ -41,7 +41,18 @@ namespace uwpUI.ViewModels
                 }
                 else
                 {
-                    BdoDataService.UpdateItem(item);
+                    bdoItem.Name = item.Name;
+                    bdoItem.Grade = item.Grade;
+                    bdoItem.Img = item.Img;
+                    bdoItem.Description = item.Description;
+                    bdoItem.Category = item.Category;
+                    bdoItem.Weight = item.Weight;
+                    bdoItem.ItemGroupId = item.ItemGroupId;
+                    bdoItem.BuyPrice = item.BuyPrice;
+                    bdoItem.SellPrice = item.SellPrice;
+                    bdoItem.Knowledge = item.Knowledge;
+                    
+                    BdoDataService.UpdateItem(bdoItem);
                 }
                 BdoDataService.Commit();
             }

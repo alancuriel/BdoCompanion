@@ -20,8 +20,10 @@ namespace uwpUI.Core.Models
         public ItemGrade Grade { get; set; }
         [MaxLength(25)]
         public string Weight { get; set; }
-        [MaxLength(3000)]
         public string Description { get; set; }
+        public string Knowledge { get; set; }
+        public string SellPrice { get; set; }
+        public string BuyPrice { get; set; }
         public int? ItemGroupId { get; set; }
     }
 }
