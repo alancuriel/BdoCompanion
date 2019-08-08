@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 
 using Caliburn.Micro;
@@ -62,18 +64,69 @@ namespace uwpUI.ViewModels
 
         }
 
+        public async Task LoadDescriptionsAsync()
+        {
+            var picker = new Windows.Storage.Pickers.FileOpenPicker();
+            picker.ViewMode = Windows.Storage.Pickers.PickerViewMode.Thumbnail;
+            picker.SuggestedStartLocation = Windows.Storage.Pickers.PickerLocationId.DocumentsLibrary;
+            picker.FileTypeFilter.Add(".txt");
+
+            StorageFile file = await picker.PickSingleFileAsync();
+            var stream = await file.OpenAsync(Windows.Storage.FileAccessMode.Read);
+
+            using(StreamReader sr = new StreamReader(stream.AsStreamForRead()))
+            {
+                while (!sr.EndOfStream)
+                {
+                    string line = sr.ReadLine();
+
+                    if (line[0] == '0')
+                    {
+                        var val = line.Split('\t');
+
+                        if(val[4] == "1")
+                        {
+                            int id = Int32.Parse(val[1]);
+                            BdoItem item = BdoDataService.GetItemById(id);
+
+                            if(item != null)
+                            {
+                                string description = val[5].Trim('\"');
+                                item.Description = description;
+
+                                BdoDataService.UpdateItem(item);
+                                BdoDataService.Commit();
+                            }
+                        }
+
+                    }
+                    else if(line.StartsWith("34"))
+                    {
+                        var val = line.Split('\t');
+
+                        if(val[4] == "1")
+                        {
+                            BdoItem item = BdoDataService.GetItemsByKnowledge($"theme--{val[1]}")?.FirstOrDefault();
+
+
+                            if (item != null)
+                            {
+                                string knowledge = val[5].Trim('\"');
+                                item.Knowledge = knowledge;
+
+                                BdoDataService.UpdateItem(item);
+                                BdoDataService.Commit();
+                            }
+                        }
+                    }
+                }
+            }
+
+        }
+
         public async Task LoadDataAsync()
         {
             Source.Clear();
-
-            //BdoDataService.AddItem(new BdoItem
-            //{
-            //    Id = 4435,
-            //    Name = "Vell's Concentrated Magic",
-            //    Category = "General",
-            //    Grade = ItemGrade.Orange
-            //});
-            //BdoDataService.Commit();
 
             // TODO WTS: Replace this with your actual data
             var data = BdoDataService.AllItems();

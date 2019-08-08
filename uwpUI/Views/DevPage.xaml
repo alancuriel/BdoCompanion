@@ -18,7 +18,10 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            <Button Grid.Row="0" x:Name="LoadItems" Content="Load Items Json"/>
+            <StackPanel Grid.Row="0" Orientation="Horizontal">
+                <Button x:Name="LoadItems" Content="Load Items Json"/>
+                <Button x:Name="LoadDescriptions" Content="Load from language txt file"/>
+            </StackPanel>
 
             <tg:RadDataGrid Grid.Row="1" ColumnDataOperationsMode="Flyout" x:Name="grid" ItemsSource="{x:Bind ViewModel.Source, Mode=OneWay}"
                             AutoGenerateColumns="False" >

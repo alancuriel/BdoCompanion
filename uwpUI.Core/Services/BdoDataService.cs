@@ -58,5 +58,13 @@ namespace uwpUI.Core.Services
             return updatedItem;
         }
 
+        public static IEnumerable<BdoItem> GetItemsByKnowledge(string knowledge)
+        {
+            IEnumerable<BdoItem> query = from i in db.Items
+                            where i.Knowledge.StartsWith(knowledge) || string.IsNullOrEmpty(knowledge)
+                            select i;
+            return query;
+        }
+
     }
 }
