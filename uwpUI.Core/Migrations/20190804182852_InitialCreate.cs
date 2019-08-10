@@ -11,7 +11,7 @@ namespace uwpUI.Core.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false),
-                    Name = table.Column<int>(maxLength: 30, nullable: false)
+                    Name = table.Column<string>(maxLength: 30, nullable: false)
                 },
                 constraints: table =>
                 {

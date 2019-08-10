@@ -15,12 +15,14 @@
 
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
-                <RowDefinition Height="*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
             </Grid.RowDefinitions>
-
+            
             <StackPanel Grid.Row="0" Orientation="Horizontal">
                 <Button x:Name="LoadItems" Content="Load Items Json"/>
                 <Button x:Name="LoadDescriptions" Content="Load from language txt file"/>
+                <Button x:Name="LoadItemGroups" Content="Load itemGroups w/ items"/>
             </StackPanel>
 
             <tg:RadDataGrid Grid.Row="1" ColumnDataOperationsMode="Flyout" x:Name="grid" ItemsSource="{x:Bind ViewModel.Source, Mode=OneWay}"
@@ -66,6 +68,15 @@
                     </tg:DataGridTemplateColumn>-->
                 </tg:RadDataGrid.Columns>
             </tg:RadDataGrid>
-        </Grid>
+
+            <tg:RadDataGrid Grid.Row="2" ColumnDataOperationsMode="Flyout" x:Name="gridd" ItemsSource="{x:Bind ViewModel.Groups, Mode=OneWay}"
+                            AutoGenerateColumns="False">
+                <tg:RadDataGrid.Columns>
+                    <tg:DataGridTextColumn PropertyName="Id"/>
+                    <tg:DataGridTextColumn PropertyName="Name"/>
+                    <tg:DataGridTextColumn PropertyName="Items"/>
+                </tg:RadDataGrid.Columns>
+            </tg:RadDataGrid>
+         </Grid>
     </Grid>
 </Page>

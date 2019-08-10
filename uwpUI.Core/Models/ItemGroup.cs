@@ -12,7 +12,7 @@ namespace uwpUI.Core.Models
         public int Id { get; set; }
         [MaxLength(30)]
         [Required]
-        public int Name { get; set; }
+        public string Name { get; set; }
 
         public List<BdoItem> Items { get; set; }
     }

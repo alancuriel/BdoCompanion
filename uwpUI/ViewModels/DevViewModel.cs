@@ -17,6 +17,7 @@ namespace uwpUI.ViewModels
     public class DevViewModel : Screen
     {
         public ObservableCollection<BdoItem> Source { get; } = new ObservableCollection<BdoItem>();
+        public ObservableCollection<ItemGroup> Groups { get; } = new ObservableCollection<ItemGroup>();
 
         public DevViewModel()
         {
@@ -34,10 +35,10 @@ namespace uwpUI.ViewModels
             string jsonText = await FileIO.ReadTextAsync(file);
             List<BdoItem> items = await Json.ToObjectAsync<List<BdoItem>>(jsonText);
 
-            foreach(var item in items)
+            foreach (var item in items)
             {
                 BdoItem bdoItem = BdoDataService.GetItemById(item.Id);
-                if(bdoItem == null)
+                if (bdoItem == null)
                 {
                     BdoDataService.AddItem(item);
                 }
@@ -53,14 +54,14 @@ namespace uwpUI.ViewModels
                     bdoItem.BuyPrice = item.BuyPrice;
                     bdoItem.SellPrice = item.SellPrice;
                     bdoItem.Knowledge = item.Knowledge;
-                    
+
                     BdoDataService.UpdateItem(bdoItem);
                 }
                 BdoDataService.Commit();
             }
 
             await LoadDataAsync();
-            
+
 
         }
 
@@ -74,7 +75,7 @@ namespace uwpUI.ViewModels
             StorageFile file = await picker.PickSingleFileAsync();
             var stream = await file.OpenAsync(Windows.Storage.FileAccessMode.Read);
 
-            using(StreamReader sr = new StreamReader(stream.AsStreamForRead()))
+            using (StreamReader sr = new StreamReader(stream.AsStreamForRead()))
             {
                 while (!sr.EndOfStream)
                 {
@@ -84,12 +85,12 @@ namespace uwpUI.ViewModels
                     {
                         var val = line.Split('\t');
 
-                        if(val[4] == "1")
+                        if (val[4] == "1")
                         {
                             int id = Int32.Parse(val[1]);
                             BdoItem item = BdoDataService.GetItemById(id);
 
-                            if(item != null)
+                            if (item != null)
                             {
                                 string description = val[5].Trim('\"');
                                 item.Description = description;
@@ -100,11 +101,11 @@ namespace uwpUI.ViewModels
                         }
 
                     }
-                    else if(line.StartsWith("34"))
+                    else if (line.StartsWith("34"))
                     {
                         var val = line.Split('\t');
 
-                        if(val[4] == "1")
+                        if (val[4] == "1")
                         {
                             BdoItem item = BdoDataService.GetItemsByKnowledge($"theme--{val[1]}")?.FirstOrDefault();
 
@@ -121,21 +122,77 @@ namespace uwpUI.ViewModels
                     }
                 }
             }
+            await LoadDataAsync();
+        }
 
+        public async Task LoadItemGroups()
+        {
+            var picker = new Windows.Storage.Pickers.FileOpenPicker();
+            picker.ViewMode = Windows.Storage.Pickers.PickerViewMode.Thumbnail;
+            picker.SuggestedStartLocation = Windows.Storage.Pickers.PickerLocationId.DocumentsLibrary;
+            picker.FileTypeFilter.Add(".json");
+
+            StorageFile file = await picker.PickSingleFileAsync();
+
+            string jsonText = await FileIO.ReadTextAsync(file);
+            var itemGroups = await Json.ToObjectAsync<List<ItemGroup>>(jsonText);
+
+            foreach (var itemGroup in itemGroups)
+            {
+                BdoDataService.AddItemGroup(new ItemGroup
+                {
+                    Id = itemGroup.Id,
+                    Name = itemGroup.Name
+                });
+
+                BdoDataService.Commit();
+
+                foreach (var item in itemGroup.Items)
+                {
+                    var dbItem = BdoDataService.GetItemById(item.Id);
+
+                    if(dbItem == null)
+                    {
+                        item.ItemGroupId = itemGroup.Id;
+                        BdoDataService.AddItem(item);
+                    }
+                    else
+                    {
+                        dbItem.ItemGroupId = itemGroup.Id;
+                        BdoDataService.UpdateItem(dbItem);
+                    }
+
+                    BdoDataService.Commit();
+                }
+
+            }
+            await LoadDataAsync();
         }
 
         public async Task LoadDataAsync()
         {
             Source.Clear();
+            Groups.Clear();
+
+
+
+            
 
             // TODO WTS: Replace this with your actual data
             var data = BdoDataService.AllItems();
+            var groupdata = BdoDataService.AllItemGroups();
             await Task.CompletedTask;
 
             foreach (var item in data)
             {
                 Source.Add(item);
             }
+
+            foreach (var group in groupdata)
+            {
+                Groups.Add(group);
+            }
+
         }
     }
 }

@@ -56,7 +56,8 @@ namespace uwpUI.Core.Migrations
                 {
                     b.Property<int>("Id");
 
-                    b.Property<int>("Name")
+                    b.Property<string>("Name")
+                        .IsRequired()
                         .HasMaxLength(30);
 
                     b.HasKey("Id");

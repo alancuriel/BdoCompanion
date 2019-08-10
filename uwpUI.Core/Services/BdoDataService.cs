@@ -66,5 +66,27 @@ namespace uwpUI.Core.Services
             return query;
         }
 
+        public static ItemGroup AddItemGroup(ItemGroup itemGroup)
+        {
+            db.Add(itemGroup);
+            return itemGroup;
+        }
+
+        public static ItemGroup UpdateItemGroup(ItemGroup updatedItemGroup)
+        {
+            var entity = db.ItemGroups.Attach(updatedItemGroup);
+            entity.State = EntityState.Modified;
+            return updatedItemGroup;
+        }
+
+        public static ItemGroup GetItemGroupById(int i)
+        {
+            return db.ItemGroups.Find(i);
+        }
+
+        public static IEnumerable<ItemGroup> AllItemGroups()
+        {
+            return db.ItemGroups.ToList();
+        }
     }
 }
