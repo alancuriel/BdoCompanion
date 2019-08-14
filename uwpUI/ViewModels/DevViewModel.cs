@@ -4,7 +4,6 @@ using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-
 using Caliburn.Micro;
 using uwpUI.Core.Helpers;
 using uwpUI.Core.Models;
@@ -18,6 +17,8 @@ namespace uwpUI.ViewModels
     {
         public ObservableCollection<BdoItem> Source { get; } = new ObservableCollection<BdoItem>();
         public ObservableCollection<ItemGroup> Groups { get; } = new ObservableCollection<ItemGroup>();
+        public ObservableCollection<Recipe> Recipes { get; } = new ObservableCollection<Recipe>();
+        public ObservableCollection<RecipeMat> RecipeMats { get; } = new ObservableCollection<RecipeMat>();
 
         public DevViewModel()
         {
@@ -61,8 +62,72 @@ namespace uwpUI.ViewModels
             }
 
             await LoadDataAsync();
+        }
 
+        public async Task LoadRecipesAsync()
+        {
+            var picker = new Windows.Storage.Pickers.FileOpenPicker();
+            picker.ViewMode = Windows.Storage.Pickers.PickerViewMode.Thumbnail;
+            picker.SuggestedStartLocation = Windows.Storage.Pickers.PickerLocationId.DocumentsLibrary;
+            picker.FileTypeFilter.Add(".json");
 
+            StorageFile file = await picker.PickSingleFileAsync();
+
+            string jsonText = await FileIO.ReadTextAsync(file);
+            var recipes = await Json.ToObjectAsync<List<JsonRecipeModel>>(jsonText);
+
+            foreach (var Jsonrecipe in recipes)
+            {
+                var recipe = new Recipe
+                {
+                    Id = Jsonrecipe.Id,
+                    Name = Jsonrecipe.Name,
+                    Img = Jsonrecipe.Img,
+                    Exp = Jsonrecipe.Exp,
+                    Grade = Jsonrecipe.Grade,
+                    Type = Jsonrecipe.Type,
+                    SkillLevel = Jsonrecipe.SkillLevel
+                };
+
+                for(int i = 1; i <= Jsonrecipe.CraftingResults.Count; i++)
+                {
+                    if (i == 1)
+                        recipe.Item1Id = Int32.Parse(Jsonrecipe.CraftingResults[0].Replace("item--",""));
+
+                    if (i == 2)
+                        recipe.Item2Id = Int32.Parse(Jsonrecipe.CraftingResults[1].Replace("item--", ""));
+                }
+
+                BdoDataService.AddRecipe(recipe);
+                BdoDataService.Commit();
+
+                foreach (var mat in Jsonrecipe.ItemMaterials)
+                {
+                    var recipeMat = new RecipeMat
+                    {
+                        RecipeId = recipe.Id,
+                        Amount = mat.Value
+                    };
+                    
+
+                    string[] itemOrGroup = mat.Key.Split("--");
+
+                    if(itemOrGroup[0] == "item")
+                    {
+                        recipeMat.IsItem = true;
+                        recipeMat.ItemId = Int32.Parse(itemOrGroup[1]);
+                    }
+                    else
+                    {
+                        recipeMat.IsItem = false;
+                        recipeMat.ItemGroupId = Int32.Parse(itemOrGroup[1]);
+                    }
+
+                    BdoDataService.AddRecipeMat(recipeMat);
+                    BdoDataService.Commit();
+                }
+            }
+            await LoadDataAsync();
         }
 
         public async Task LoadDescriptionsAsync()
@@ -139,6 +204,10 @@ namespace uwpUI.ViewModels
 
             foreach (var itemGroup in itemGroups)
             {
+                ItemGroup dbitemgroup = BdoDataService.GetItemGroupById(itemGroup.Id);
+                if (dbitemgroup != null)
+                    continue;
+
                 BdoDataService.AddItemGroup(new ItemGroup
                 {
                     Id = itemGroup.Id,
@@ -174,13 +243,16 @@ namespace uwpUI.ViewModels
             Source.Clear();
             Groups.Clear();
 
-
-
-            
+            //BdoDataService.DeleteRecipe(115);
+            //BdoDataService.DeleteRecipeMat(3);
+            //BdoDataService.DeleteRecipeMat(4);
+            //BdoDataService.DeleteRecipeMat(5);
+            //BdoDataService.Commit();
 
             // TODO WTS: Replace this with your actual data
             var data = BdoDataService.AllItems();
             var groupdata = BdoDataService.AllItemGroups();
+            var recipes = BdoDataService.AllRecipes();
             await Task.CompletedTask;
 
             foreach (var item in data)

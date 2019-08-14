@@ -23,14 +23,13 @@
                 <Button x:Name="LoadItems" Content="Load Items Json"/>
                 <Button x:Name="LoadDescriptions" Content="Load from language txt file"/>
                 <Button x:Name="LoadItemGroups" Content="Load itemGroups w/ items"/>
+                <Button x:Name="LoadRecipes" Content="Load Recipe json"/>
             </StackPanel>
 
             <tg:RadDataGrid Grid.Row="1" ColumnDataOperationsMode="Flyout" x:Name="grid" ItemsSource="{x:Bind ViewModel.Source, Mode=OneWay}"
                             AutoGenerateColumns="False" >
                 <tg:RadDataGrid.Columns>
-                    <!--TODO WTS:
-                      Remove this column definitions and define columns for your data.
-                      Consider adding header properties to Resources.resw-->
+                    
                     <tg:DataGridTextColumn PropertyName="Id"/>
                     <tg:DataGridTextColumn PropertyName="Name"/>
                     <tg:DataGridTemplateColumn Header="Image">
@@ -49,23 +48,7 @@
                     <tg:DataGridTextColumn PropertyName="Knowledge"/>
                     <tg:DataGridTextColumn PropertyName="SellPrice"/>
                     <tg:DataGridTextColumn PropertyName="BuyPrice"/>
-                    <!--<tg:DataGridTextColumn PropertyName="OrderID"/>
-                    <tg:DataGridDateColumn PropertyName="OrderDate" />
-                    <tg:DataGridTextColumn PropertyName="Company" />
-                    <tg:DataGridTextColumn PropertyName="ShipTo" />
-                    <tg:DataGridNumericalColumn PropertyName="OrderTotal" />
-                    <tg:DataGridTextColumn PropertyName="Status" />
-                    <tg:DataGridTemplateColumn Header="Symbol">
-                        <tg:DataGridTemplateColumn.CellContentTemplate>
-                            <DataTemplate x:DataType="model:SampleOrder">
-                                <FontIcon
-                                      HorizontalAlignment="Left"
-                                      Margin="{StaticResource MediumLeftRightMargin}"
-                                      FontFamily="{ThemeResource SymbolThemeFontFamily}"
-                                      Glyph="{x:Bind Symbol}" />
-                            </DataTemplate>
-                        </tg:DataGridTemplateColumn.CellContentTemplate>
-                    </tg:DataGridTemplateColumn>-->
+                    
                 </tg:RadDataGrid.Columns>
             </tg:RadDataGrid>
 

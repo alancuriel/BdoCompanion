@@ -10,6 +10,8 @@ namespace uwpUI.Core.Data
     {
         public DbSet<BdoItem> Items { get; set; }
         public DbSet<ItemGroup> ItemGroups { get; set; }
+        public DbSet<Recipe> Recipes { get; set; }
+        public DbSet<RecipeMat> RecipeMats { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

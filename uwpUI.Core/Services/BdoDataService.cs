@@ -40,6 +40,11 @@ namespace uwpUI.Core.Services
             return db.Items.ToList();
         }
 
+        public static IEnumerable<Recipe> AllRecipes()
+        {
+            return db.Recipes.ToList();
+        }
+
         public static BdoItem AddItem(BdoItem item)
         {
             db.Add(item);
@@ -72,6 +77,18 @@ namespace uwpUI.Core.Services
             return itemGroup;
         }
 
+        public static Recipe AddRecipe(Recipe recipe)
+        {
+            db.Add(recipe);
+            return recipe;
+        }
+
+        public static RecipeMat AddRecipeMat(RecipeMat recipeMat)
+        {
+            db.Add(recipeMat);
+            return recipeMat;
+        }
+
         public static ItemGroup UpdateItemGroup(ItemGroup updatedItemGroup)
         {
             var entity = db.ItemGroups.Attach(updatedItemGroup);
@@ -87,6 +104,40 @@ namespace uwpUI.Core.Services
         public static IEnumerable<ItemGroup> AllItemGroups()
         {
             return db.ItemGroups.ToList();
+        }
+
+        public static Recipe DeleteRecipe(int id)
+        {
+            Recipe recipe = GetRecipeById(id);
+
+            if (recipe != null)
+            {
+                db.Recipes.Remove(recipe);
+            }
+
+            return recipe;
+        }
+
+        private static Recipe GetRecipeById(int id)
+        {
+            return db.Recipes.Find(id);
+        }
+
+        public static RecipeMat DeleteRecipeMat(int id)
+        {
+            RecipeMat recipeMat = GetRecipeMatById(id);
+
+            if(recipeMat != null)
+            {
+                db.RecipeMats.Remove(recipeMat);
+            }
+
+            return recipeMat;
+        }
+
+        private static RecipeMat GetRecipeMatById(int id)
+        {
+            return db.RecipeMats.Find(id);
         }
     }
 }
