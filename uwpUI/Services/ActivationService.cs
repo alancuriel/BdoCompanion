@@ -93,6 +93,7 @@ namespace uwpUI.Services
             await ThemeSelectorService.InitializeAsync();
             await RegionSelectorService.InitializeAsync();
             await BossNotificationService.InitializeAsync();
+            await BdoDataLoadService.InitializeAsync();
             await BdoDataService.InitializeAsync();
         }
 

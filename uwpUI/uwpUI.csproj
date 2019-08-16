@@ -150,6 +150,7 @@
     <Compile Include="Services\ActivationService.cs" />
     <Compile Include="Activation\DefaultLaunchActivationHandler.cs" />
     <Compile Include="Services\AdvertisingService.cs" />
+    <Compile Include="Services\BdoDataLoadService.cs" />
     <Compile Include="Services\BossNotificationService.cs" />
     <Compile Include="Services\DevCenterNotificationsService.cs" />
     <Compile Include="Services\FirstRunDisplayService.cs" />
@@ -336,6 +337,9 @@
     <Content Include="Assets\Wide310x150Logo.scale-125.png" />
     <Content Include="Assets\Wide310x150Logo.scale-150.png" />
     <Content Include="Assets\Wide310x150Logo.scale-400.png" />
+    <None Include="Assets\bdoData.db">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Package.StoreAssociation.xml" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />

@@ -243,16 +243,12 @@ namespace uwpUI.ViewModels
             Source.Clear();
             Groups.Clear();
 
-            //BdoDataService.DeleteRecipe(115);
-            //BdoDataService.DeleteRecipeMat(3);
-            //BdoDataService.DeleteRecipeMat(4);
-            //BdoDataService.DeleteRecipeMat(5);
-            //BdoDataService.Commit();
+            
 
             // TODO WTS: Replace this with your actual data
             var data = BdoDataService.AllItems();
             var groupdata = BdoDataService.AllItemGroups();
-            var recipes = BdoDataService.AllRecipes();
+            
             await Task.CompletedTask;
 
             foreach (var item in data)
