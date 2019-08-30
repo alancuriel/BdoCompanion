@@ -5,6 +5,7 @@ using Caliburn.Micro;
 
 using Microsoft.EntityFrameworkCore;
 
+
 using uwpUI.Core.Data;
 using uwpUI.Services;
 using uwpUI.ViewModels;
@@ -43,6 +44,7 @@ namespace uwpUI
             //using (var db = new BdoContext())
             //{
             //    db.Database.Migrate();
+                
             //}
 
 
@@ -89,6 +91,7 @@ namespace uwpUI
             _container.PerRequest<SecondViewModel>();
             _container.PerRequest<SettingsViewModel>();
             _container.PerRequest<DevViewModel>();
+            _container.PerRequest<CookingRecipesViewModel>();
         }
 
         protected override object GetInstance(Type service, string key)

@@ -23,6 +23,32 @@ namespace uwpUI.Core.Services
             return db.Items.Find(id);
         }
 
+        public static IEnumerable<Recipe> AllCookingRecipes()
+        {
+            IEnumerable<Recipe> query = from r in db.Recipes
+                           where r.Type == RecipeType.Cooking
+                           select r;
+            return query;
+        }
+
+        public static IEnumerable<RecipeMat> GetRecipeMatsByRecipeID(int recipeId)
+        {
+            IEnumerable<RecipeMat> query = from rm in db.RecipeMats
+                                           where rm.RecipeId == recipeId
+                                           select rm;
+            return query;
+        }
+
+        public static IEnumerable<Recipe> AllAlchemyRecipes()
+        {
+            IEnumerable<Recipe> query = from r in db.Recipes
+                                        where r.Type == RecipeType.Alchemy
+                                        select r;
+            return query;
+        }
+
+        public static bool RecipeMatExists(RecipeMat recipeMat) => db.RecipeMats.Contains(recipeMat);
+
         public static BdoItem DeleteItem(int id)
         {
             BdoItem item = GetItemById(id);
@@ -40,10 +66,7 @@ namespace uwpUI.Core.Services
             return db.Items.ToList();
         }
 
-        public static IEnumerable<Recipe> AllRecipes()
-        {
-            return db.Recipes.ToList();
-        }
+        public static IEnumerable<Recipe> AllRecipes() => db.Recipes.ToList();
 
         public static BdoItem AddItem(BdoItem item)
         {
@@ -101,6 +124,14 @@ namespace uwpUI.Core.Services
             return db.ItemGroups.Find(i);
         }
 
+        public static BdoItem FirstItemFromItemGroup(int itemGroupId)
+        {
+            BdoItem query = (from ig in db.Items
+                             where ig.ItemGroupId == itemGroupId
+                             select ig).First();
+            return query;
+        }
+
         public static IEnumerable<ItemGroup> AllItemGroups()
         {
             return db.ItemGroups.ToList();
@@ -118,7 +149,7 @@ namespace uwpUI.Core.Services
             return recipe;
         }
 
-        private static Recipe GetRecipeById(int id)
+        public static Recipe GetRecipeById(int id)
         {
             return db.Recipes.Find(id);
         }

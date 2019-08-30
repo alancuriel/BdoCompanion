@@ -9,8 +9,8 @@ using uwpUI.Core.Data;
 namespace uwpUI.Core.Migrations
 {
     [DbContext(typeof(BdoContext))]
-    [Migration("20190811023451_InitialMigration")]
-    partial class InitialMigration
+    [Migration("20190820131204_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

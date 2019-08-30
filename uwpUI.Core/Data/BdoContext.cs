@@ -16,6 +16,7 @@ namespace uwpUI.Core.Data
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlite("Data Source=bdoData.db");
+            
         }
     }
 }
