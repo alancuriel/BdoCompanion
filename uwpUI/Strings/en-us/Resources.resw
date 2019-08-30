@@ -233,4 +233,26 @@
   <data name="BossNotifcationTimeUnit.Text" xml:space="preserve">
     <value>Minutes before</value>
   </data>
+  <data name="Shell_Dev.Content" xml:space="preserve">
+    <value>Dev</value>
+    <comment>Navigation view item name for Dev</comment>
+  </data>
+  <data name="Recipes_NoSelection.Text" xml:space="preserve">
+    <value>Select an Item</value>
+    <comment>No selection text for CookingRecipes</comment>
+  </data>
+  <data name="Shell_CookingRecipes.Content" xml:space="preserve">
+    <value>Recipes</value>
+    <comment>Navigation view item name for CookingRecipes</comment>
+  </data>
+  <data name="Recipes.MasterHeader" xml:space="preserve">
+    <value>Recipes</value>
+    <comment>Title for CookingRecipesPage</comment>
+  </data>
+  <data name="Recipes_Type_Alchemy.Content" xml:space="preserve">
+    <value>Alchemy</value>
+  </data>
+  <data name="Recipes_Type_Cooking.Content" xml:space="preserve">
+    <value>Cooking</value>
+  </data>
 </root>

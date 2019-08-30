@@ -3,8 +3,10 @@ using System.Collections.Generic;
 
 using Caliburn.Micro;
 
+using Microsoft.EntityFrameworkCore;
 
 
+using uwpUI.Core.Data;
 using uwpUI.Services;
 using uwpUI.ViewModels;
 
@@ -38,6 +40,15 @@ namespace uwpUI
 
             // Deferred execution until used. Check https://msdn.microsoft.com/library/dd642331(v=vs.110).aspx for further info on Lazy<T> class.
             _activationService = new Lazy<ActivationService>(CreateActivationService);
+
+            //using (var db = new BdoContext())
+            //{
+            //    db.Database.Migrate();
+                
+            //}
+
+
+
 
             RequiresPointerMode = Windows.UI.Xaml.ApplicationRequiresPointerMode.WhenRequested;
         }
@@ -79,6 +90,8 @@ namespace uwpUI
             _container.PerRequest<MainViewModel>();
             _container.PerRequest<SecondViewModel>();
             _container.PerRequest<SettingsViewModel>();
+            _container.PerRequest<DevViewModel>();
+            _container.PerRequest<CookingRecipesViewModel>();
         }
 
         protected override object GetInstance(Type service, string key)
