@@ -1,0 +1,32 @@
+﻿Kutum Mon 0:00
+Nouver Mon 0:00
+Kzarka Mon 1:30
+Garmoth Mon 7:00
+Nouver Mon 15:00
+Karanda Mon 16:00
+Kzarka Mon 20:00
+--
+Offin Tue 0:00
+Nouver Tue 1:30
+Kutum Tue 7:00
+Kzarka Tue 11:00
+Kutum Tue 15:00
+Nouver Tue 16:00
+Quint Tue 20:00
+Muraka Tue 20:00
+--
+Kutum Wed 0:00
+Nouver Wed 0:00	
+Kzarka Wed 1:30
+Kzarka Wed 11:00
+Karanda Wed 15:00
+Kutum Wed 20:00
+--
+Offin Thu 0:00
+Kutum Thu 1:30
+Nouver Thu 7:00
+Kzarka Thu 11:00
+Kutum Thu 15:00
+Kzarka Thu 16:00
+Karanda Thu 16:00
+Garmoth Thu 20:00

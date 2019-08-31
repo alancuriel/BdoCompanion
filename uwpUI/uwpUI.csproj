@@ -249,6 +249,7 @@
     <Content Include="Assets\BossSchedules\PC-NA-BossSchedule-PDT.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Assets\BossSchedules\PC-SEA-BossSchedule-WITA.txt" />
     <Content Include="Assets\BossSchedules\Xbox-Eu-BossSchedule-UTC+1.txt" />
     <Content Include="Assets\BossSchedules\Xbox-Na-BossSchedule-PDT.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
