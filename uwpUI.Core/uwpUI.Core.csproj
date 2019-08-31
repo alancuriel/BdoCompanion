@@ -5,7 +5,19 @@
     <RootNamespace>uwpUI.Core</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="Migrations\20190804043753_InitialCreate.cs" />
+    <Compile Remove="Migrations\20190804043753_InitialCreate.Designer.cs" />
+    <Compile Remove="Migrations\20190804180107_InitialCreate.cs" />
+    <Compile Remove="Migrations\20190804180107_InitialCreate.Designer.cs" />
+    <Compile Remove="Migrations\20190804181653_InitialCreate.cs" />
+    <Compile Remove="Migrations\20190804181653_InitialCreate.Designer.cs" />
+    <Compile Remove="Migrations\20190810214131_InitialRecipe.cs" />
+    <Compile Remove="Migrations\20190810214131_InitialRecipe.Designer.cs" />
+  </ItemGroup>
+
    <ItemGroup>
+     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="2.2.6" />
      <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
    </ItemGroup>
 </Project>

@@ -7,6 +7,7 @@ using Caliburn.Micro;
 
 using uwpUI.Activation;
 using uwpUI.Core.Helpers;
+using uwpUI.Core.Services;
 using uwpUI.Services;
 
 using Windows.ApplicationModel.Activation;
@@ -92,6 +93,8 @@ namespace uwpUI.Services
             await ThemeSelectorService.InitializeAsync();
             await RegionSelectorService.InitializeAsync();
             await BossNotificationService.InitializeAsync();
+            await BdoDataLoadService.InitializeAsync();
+            await BdoDataService.InitializeAsync();
         }
 
         private async Task StartupAsync()

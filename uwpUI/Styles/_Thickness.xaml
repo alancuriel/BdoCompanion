@@ -11,7 +11,6 @@
     <Thickness x:Key="MediumLeftTopRightBottomMargin">24,24,24,24</Thickness>
     <Thickness x:Key="MediumLeftTopBottomMargin">24,24,0,24</Thickness>
     <Thickness x:Key="MediumBottomMargin">0,0,0,24</Thickness>
-
     <!--Small size margins-->
     <Thickness x:Key="SmallLeftMargin">12, 0, 0, 0</Thickness>
     <Thickness x:Key="SmallTopMargin">0, 12, 0, 0</Thickness>
@@ -19,13 +18,13 @@
     <Thickness x:Key="SmallLeftRightMargin">12, 0, 12, 0</Thickness>
     <Thickness x:Key="SmallRightMargin">0, 0, 12, 0</Thickness>
     <Thickness x:Key="SmallBottomMargin">0, 0, 0, 12</Thickness>
-
     <!--Extra Small size margins-->
     <Thickness x:Key="XSmallLeftMargin">8, 0, 0, 0</Thickness>
     <Thickness x:Key="XSmallTopMargin">0, 8, 0, 0</Thickness>
     <Thickness x:Key="XSmallLeftTopRightBottomMargin">8, 8, 8, 8</Thickness>
     <Thickness x:Key="XSmallBottomMargin">0, 0, 0, 8</Thickness>
-
     <!--Extra Extra Small size margins-->
     <Thickness x:Key="XXSmallTopMargin">0, 4, 0, 0</Thickness>
+    <!--MasterDetail size margins-->
+    <Thickness x:Key="DetailPageMargin">52,40,52,0</Thickness>
 </ResourceDictionary>
