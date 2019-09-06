@@ -59,7 +59,6 @@
             MasterHeaderTemplate="{StaticResource MasterHeaderTemplate}"
             ItemsSource="{x:Bind ViewModel.Items}"
             ItemTemplate="{StaticResource ItemTemplate}"
-            
             Loaded="MasterDetailsViewControl_Loaded"
             NoSelectionContentTemplate="{StaticResource NoSelectionContentTemplate}"
             SelectedItem="{x:Bind ViewModel.ActiveItem, Mode=TwoWay}">

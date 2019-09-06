@@ -12,16 +12,15 @@
 
     <winui:NavigationView
         x:Name="navigationView"
-        IsBackButtonVisible="Visible"
         IsBackEnabled="{x:Bind ViewModel.IsBackEnabled, Mode=OneWay}"
         SelectedItem="{x:Bind ViewModel.Selected, Mode=OneWay}"
         IsSettingsVisible="True"
         cm:Message.Attach="[Event ItemInvoked] = [Action OnItemInvoked($eventArgs)]"
-        PaneDisplayMode="Top"
+        PaneDisplayMode="LeftMinimal"
         Background="{ThemeResource SystemControlBackgroundAltHighBrush}"
-        ShoulderNavigationEnabled="Always"
-        SelectionFollowsFocus="Enabled">
+        >
         <winui:NavigationView.MenuItems>
+            
             <!--
             TODO WTS: Change the symbols for each item as appropriate for your app
             More on Segoe UI Symbol icons: https://docs.microsoft.com/windows/uwp/style/segoe-ui-symbol-font

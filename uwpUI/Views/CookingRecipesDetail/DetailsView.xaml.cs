@@ -12,5 +12,6 @@ namespace uwpUI.Views.CookingRecipesDetail
         }
 
         public CookingRecipesDetailViewModel ViewModel => DataContext as CookingRecipesDetailViewModel;
+
     }
 }

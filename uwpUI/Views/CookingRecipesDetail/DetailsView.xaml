@@ -49,57 +49,58 @@
                         Style="{StaticResource DetailSubTitleStyle}"
                         Text="Experience" />
                     <TextBlock Text="{x:Bind ViewModel.Item.Exp, Mode=OneWay}" Style="{StaticResource DetailBodyBaseMediumStyle}" />
-                    <TextBlock
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        
+                        <TextBlock Grid.Row="0" Grid.Column="0"
                         Margin="{StaticResource SmallTopMargin}"
                         Style="{StaticResource DetailSubTitleStyle}"
                         Text="Materials" />
-                    
-                    <ListView x:Name="Materials">
-                        <ListView.ItemTemplate>
-                            <DataTemplate x:DataType="models:RecipeMaterialModel">
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock Style="{StaticResource DetailBodyBaseMediumStyle}" Text="{x:Bind Amount}"
-                                               Margin="{StaticResource SmallRightMargin}" VerticalAlignment="Center"/>
-                                    <Image x:Name="MatImg" Source="{x:Bind Img}"/>
-                                    <TextBlock x:Name="MatName" Foreground="{x:Bind Grade, Converter={StaticResource ItemGradeEnumToColorConverter}}"
-                                               Margin="{StaticResource SmallLeftMargin}" Text="{x:Bind Name}" VerticalAlignment="Center"/>
-                                </StackPanel>
-                            </DataTemplate>
-                        </ListView.ItemTemplate>
-                    </ListView>
-                    
-                    <TextBlock
-                        Margin="{StaticResource SmallTopMargin}"
-                        Style="{StaticResource DetailSubTitleStyle}"
-                        Text="Results"/>
 
-                    <ListView x:Name="Results">
-                        <ListView.ItemTemplate>
-                            <DataTemplate x:DataType="local:BdoItem">
-                                <StackPanel Orientation="Horizontal">
-                                    <Image Source="{x:Bind Img}"/>
-                                    <TextBlock Style="{StaticResource DetailBodyBaseMediumStyle}"  Text="{x:Bind Name}"
+                        <ListView x:Name="Materials"
+                                  Grid.Row="1" Grid.Column="0">
+                            <ListView.ItemTemplate>
+                                <DataTemplate x:DataType="models:RecipeMaterialModel">
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Style="{StaticResource DetailBodyBaseMediumStyle}" Text="{x:Bind Amount}"
+                                               Margin="{StaticResource SmallRightMargin}" VerticalAlignment="Center"/>
+                                        <Image x:Name="MatImg" Source="{x:Bind Img}"/>
+                                        <TextBlock x:Name="MatName" Foreground="{x:Bind Grade, Converter={StaticResource ItemGradeEnumToColorConverter}}"
+                                               Margin="{StaticResource SmallLeftMargin}" Text="{x:Bind Name}" VerticalAlignment="Center"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+
+                        <TextBlock
+                            Grid.Row="0" Grid.Column="1"
+                            Margin="{StaticResource SmallTopMargin}"
+                            Style="{StaticResource DetailSubTitleStyle}"
+                            Text="Results"/>
+
+                        <ListView x:Name="Results"
+                                  Grid.Row="1" Grid.Column="1">
+                            <ListView.ItemTemplate>
+                                <DataTemplate x:DataType="local:BdoItem">
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image Source="{x:Bind Img}"/>
+                                        <TextBlock Style="{StaticResource DetailBodyBaseMediumStyle}"  Text="{x:Bind Name}"
                                                Foreground="{x:Bind Grade, Converter={StaticResource ItemGradeEnumToColorConverter}}"
                                                VerticalAlignment="Center" Margin="{StaticResource SmallLeftMargin}"/>
-                                </StackPanel>
-                            </DataTemplate>
-                        </ListView.ItemTemplate>
-                    </ListView>
-                    
-                    <!--<TextBlock
-                        Margin="{StaticResource MediumTopMargin}"
-                        Style="{StaticResource DetailSubTitleStyle}"
-                        Text="Note 1" />
-                    <TextBlock Style="{StaticResource DetailBodyStyle}" Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis quis hendrerit nulla, vel molestie libero. In nec ultricies magna, ultricies molestie ipsum. Mauris non dignissim velit. Etiam malesuada blandit mauris eu maximus. Quisque ornare, felis nec scelerisque mollis, risus dolor posuere magna, in gravida quam mi id nisi. Nullam mattis consequat ex. Cras nulla neque, dictum ac urna et, vestibulum feugiat ex. Pellentesque malesuada accumsan ligula, vel fringilla lacus facilisis sit amet. Proin convallis tempor arcu, ac placerat libero pretium ut. Praesent hendrerit nisl at lobortis viverra. Fusce vitae velit odio. Nam ut tortor sed purus finibus sollicitudin quis at ante. Ut sodales dolor vel eros mollis suscipit. Donec eu nulla id urna ultricies consequat. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae;" />
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </Grid>
 
-                    <TextBlock
-                        Margin="{StaticResource SmallTopMargin}"
-                        Style="{StaticResource DetailSubTitleStyle}"
-                        Text="Note 2" />
-                    <TextBlock
-                        Margin="{StaticResource MediumBottomMargin}"
-                        Style="{StaticResource DetailBodyStyle}"
-                        Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis quis hendrerit nulla, vel molestie libero. In nec ultricies magna, ultricies molestie ipsum. Mauris non dignissim velit. Etiam malesuada blandit mauris eu maximus. Quisque ornare, felis nec scelerisque mollis, risus dolor posuere magna, in gravida quam mi id nisi. Nullam mattis consequat ex. Cras nulla neque, dictum ac urna et, vestibulum feugiat ex. Pellentesque malesuada accumsan ligula, vel fringilla lacus facilisis sit amet. Proin convallis tempor arcu, ac placerat libero pretium ut. Praesent hendrerit nisl at lobortis viverra. Fusce vitae velit odio. Nam ut tortor sed purus finibus sollicitudin quis at ante. Ut sodales dolor vel eros mollis suscipit. Donec eu nulla id urna ultricies consequat. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae;" />-->
                 </StackPanel>
             </StackPanel>
         </ScrollViewer>

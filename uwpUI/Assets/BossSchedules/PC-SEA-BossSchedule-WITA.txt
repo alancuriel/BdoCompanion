@@ -1,4 +1,13 @@
-﻿Kutum Mon 0:00
+﻿Karanda Sun 1:30
+Kutum Sun 7:00
+Kzarka Sun 11:00
+Karanda Sun 11:00
+Karanda Sun 15:00
+Nouver Sun 15:00
+Vell Sun 16:00
+Karanda Sun 20:00
+--
+Kutum Mon 0:00
 Nouver Mon 0:00
 Kzarka Mon 1:30
 Garmoth Mon 7:00
@@ -16,7 +25,7 @@ Quint Tue 20:00
 Muraka Tue 20:00
 --
 Kutum Wed 0:00
-Nouver Wed 0:00	
+Nouver Wed 0:00
 Kzarka Wed 1:30
 Kzarka Wed 11:00
 Karanda Wed 15:00
@@ -30,3 +39,22 @@ Kutum Thu 15:00
 Kzarka Thu 16:00
 Karanda Thu 16:00
 Garmoth Thu 20:00
+--
+Kzarka Fri 0:00
+Nouver Fri 0:00
+Kzarka Fri 1:30
+Karanda Fri 7:00
+Kutum Fri 11:00
+Kzarka Fri 15:00
+Nouver Fri 20:00
+--
+Offin Sat 0:00
+Karanda Sat 1:30
+Nouver Sat 7:00
+Kutum Sat 11:00
+Kzarka Sat 11:00
+Karanda Sat 15:00
+Nouver Sat 15:00
+Garmoth Sat 15:00
+Quint Sat 20:00
+Muraka Sat 20:00
