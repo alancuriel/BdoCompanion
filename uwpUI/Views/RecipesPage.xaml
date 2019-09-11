@@ -8,18 +8,24 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:local="using:uwpUI.ViewModels"
     xmlns:models="using:uwpUI.Core.Models"
+    xmlns:UI="using:Microsoft.Advertising.WinRT.UI"
+    xmlns:reg="using:uwpUI.Services"
     Style="{StaticResource PageStyle}"
     mc:Ignorable="d">
     <Page.Resources>
         <DataTemplate x:Key="ItemTemplate">
-            <ContentControl cm:View.Model="{Binding}" cm:View.Context="MasterView" />
+            <ContentControl x:Name="Items" cm:View.Model="{Binding}" cm:View.Context="MasterView"
+                            IsFocusEngagementEnabled="False" IsFocusEngaged="False"
+                            />
         </DataTemplate>
 
         <DataTemplate x:Key="DetailsTemplate">
-            <ContentControl cm:View.Model="{Binding}" cm:View.Context="DetailsView" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" />
+            <ContentControl x:Name="ItemPages" cm:View.Model="{Binding}" cm:View.Context="DetailsView"
+                            HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
+                            IsFocusEngagementEnabled="True" FocusVisualPrimaryThickness="1" UseSystemFocusVisuals="True" />
         </DataTemplate>
 
-        <DataTemplate x:Key="NoSelectionContentTemplate">
+        <DataTemplate x:Key="NoSelectionContentTemplate" >
             <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
                 <TextBlock
                     x:Uid="CookingRecipes_NoSelection"
@@ -31,11 +37,33 @@
         </DataTemplate>
 
         <DataTemplate x:Key="MasterHeaderTemplate">
-            <StackPanel Orientation="Horizontal">
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Center"
+                        Margin="{StaticResource XSmallBottomMargin}">
+                <!--<RadioButton GroupName="recipeType" IsChecked="True"
+                    x:Uid="Recipes_Type_Cooking" cm:Message.Attach="LoadDataAsync('Cooking')">-->
                 <RadioButton GroupName="recipeType" IsChecked="True"
-                    x:Uid="Recipes_Type_Cooking" cm:Message.Attach="LoadDataAsync('Cooking')"/>
+                                 cm:Message.Attach="LoadDataAsync('Cooking')">
+                    <RadioButton.Content>
+                        <StackPanel Orientation="Horizontal">
+                            <FontIcon FontFamily="/Assets/Fonts/Font-Awesome-5-Pro-Solid-900.otf#Font Awesome 5 Pro"
+                                      Glyph="&#xf2e7;" Margin="{StaticResource SmallRightMargin}"/>
+                            <TextBlock Text="Cooking"/>
+                        </StackPanel>
+                    </RadioButton.Content>
+                </RadioButton>
+
                 <RadioButton GroupName="recipeType"
-                    x:Uid="Recipes_Type_Alchemy"  cm:Message.Attach="LoadDataAsync('Alchemy')"/>
+                    cm:Message.Attach="LoadDataAsync('Alchemy')">
+                    <RadioButton.Content>
+                        <StackPanel Orientation="Horizontal">
+                            <FontIcon FontFamily="/Assets/Fonts/Font-Awesome-5-Pro-Solid-900.otf#Font Awesome 5 Pro"
+                                      Glyph="&#xf6e1;" Margin="{StaticResource SmallRightMargin}"/>
+                            <TextBlock Text="Alchemy"/>
+                        </StackPanel>
+                    </RadioButton.Content>
+                </RadioButton>
+
             </StackPanel>
 
             <!--<TextBlock
@@ -48,8 +76,12 @@
     </Page.Resources>
 
     <Grid x:Name="ContentArea">
-
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
         <controls:MasterDetailsView
+            Grid.Row="0"
             x:Name="MasterDetailsViewControl"
             x:Uid="Recipes"
             BackButtonBehavior="Automatic"
@@ -61,8 +93,23 @@
             ItemTemplate="{StaticResource ItemTemplate}"
             Loaded="MasterDetailsViewControl_Loaded"
             NoSelectionContentTemplate="{StaticResource NoSelectionContentTemplate}"
-            SelectedItem="{x:Bind ViewModel.ActiveItem, Mode=TwoWay}">
+            SelectedItem="{x:Bind ViewModel.ActiveItem, Mode=TwoWay}"
+            >
  
         </controls:MasterDetailsView>
+
+        <ContentControl Grid.Row="1"
+                        HorizontalAlignment="Center"
+                        IsFocusEngagementEnabled="True"
+                        RequiresPointer="WhenEngaged"
+                        VerticalAlignment="Bottom">
+
+            <UI:AdControl ApplicationId="{x:Bind reg:AdvertisingService.ApplicationID}"
+                          AdUnitId="{x:Bind reg:AdvertisingService.AdUnitId}"             
+                          Width="640"
+                          Height="100"
+                          HorizontalAlignment="Center"
+                          VerticalAlignment="Bottom"/>
+        </ContentControl>
     </Grid>
 </Page>

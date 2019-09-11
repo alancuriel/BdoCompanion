@@ -10,7 +10,8 @@ namespace uwpUI.Services
         PCNA = 0,
         PCEU = 1,
         XBOXNA = 2,
-        XBOXEU = 3
+        XBOXEU = 3,
+        PCSEA = 4
     }
 
     public static class RegionSelectorService

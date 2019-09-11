@@ -72,6 +72,8 @@ namespace uwpUI.Services
                     return "PC-EU-BossSchedule-CEST.txt";
                 case ServerRegion.XBOXEU:
                     return "Xbox-Eu-BossSchedule-UTC+1.txt";
+                case ServerRegion.PCSEA:
+                    return "PC-SEA-BossSchedule-WITA.txt";
                 default:
                     throw new Exception("An error occured getting the region boss schedule file");
             }
@@ -164,6 +166,10 @@ namespace uwpUI.Services
             else if (RegionSelectorService.Region == ServerRegion.PCEU)
             {
                 timeZoneInfo = TimeZoneInfo.FindSystemTimeZoneById("Central Europe Standard Time");
+            }
+            else if(RegionSelectorService.Region == ServerRegion.PCSEA)
+            {
+                timeZoneInfo = TimeZoneInfo.FindSystemTimeZoneById("China Standard Time");
             }
             else
             {

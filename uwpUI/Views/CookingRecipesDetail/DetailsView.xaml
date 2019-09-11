@@ -11,7 +11,7 @@
     xmlns:models="using:uwpUI.Models"
     xmlns:helpers="using:uwpUI.Helpers"
     d:DesignHeight="300"
-    d:DesignWidth="400">
+    d:DesignWidth="400" >
 
     <UserControl.Resources>
         <helpers:ItemGradeEnumToColorConverter x:Key="ItemGradeEnumToColorConverter"/>
@@ -66,7 +66,8 @@
                         Text="Materials" />
 
                         <ListView x:Name="Materials"
-                                  Grid.Row="1" Grid.Column="0">
+                                  Grid.Row="1" Grid.Column="0"
+                                  XYFocusRight="{x:Bind Results}">
                             <ListView.ItemTemplate>
                                 <DataTemplate x:DataType="models:RecipeMaterialModel">
                                     <StackPanel Orientation="Horizontal">
@@ -87,7 +88,8 @@
                             Text="Results"/>
 
                         <ListView x:Name="Results"
-                                  Grid.Row="1" Grid.Column="1">
+                                  Grid.Row="1" Grid.Column="1"
+                                  XYFocusLeft="{x:Bind Materials}">
                             <ListView.ItemTemplate>
                                 <DataTemplate x:DataType="local:BdoItem">
                                     <StackPanel Orientation="Horizontal">

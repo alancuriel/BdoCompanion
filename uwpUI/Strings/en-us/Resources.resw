@@ -122,7 +122,7 @@
     <comment>Application display name</comment>
   </data>
   <data name="AppDescription" xml:space="preserve">
-    <value>Companion App for the MMORPG Black Desert Online for Windows 10 and Xbox. Features Currently Include - Boss Notifications. Future features will have recipes, profit calculators, and other timers.</value>
+    <value>Companion App for the MMORPG Black Desert Online for Windows 10 and Xbox. Features Currently Include - Boss Notifications,Alchemy and Cooking Recipe Database, and in-game timers. Future features will have profit calculators and other features</value>
     <comment>Application description</comment>
   </data>
   <data name="Shell_Main.Content" xml:space="preserve">
@@ -179,7 +179,8 @@
   <data name="WhatsNew_Body.Text" xml:space="preserve">
     <value>This update brings:
 
--Boss Notification : Added new PC-EU and Xbox-EU, Allowed to specifiy time to be notified before boss spawn, fixed issue where boss notification would disable itself when navigated back to the page</value>
+-NEW recipe feature: Includes cooking and alchemy recipes
+-Boss Notification : Added new PC-SEA region</value>
     <comment>What's new prompt message body</comment>
   </data>
   <data name="WhatsNewDialog.Title" xml:space="preserve">
@@ -191,7 +192,7 @@
     <comment>What's new prompt message primary button text</comment>
   </data>
   <data name="FirstRun_Body.Text" xml:space="preserve">
-    <value>Thanks For Downloading! This is a companion app I made for the MMORPG Black Desert Online. I plan on adding more features and adding more to the existing features. Feel free to give feedback or suggestions through the feedback app or email in the settings page. Currently working feature include in game timers and Boss Notifications for Pc-NA/Eu and Xbox-NA/Eu. Enjoy😁!</value>
+    <value>Thanks For Downloading! This is a companion app I made for the MMORPG Black Desert Online. I plan on adding more features and adding more to the existing features. Feel free to give feedback or suggestions through the feedback app or email in the settings page. Currently working feature include recipe database, in-game timers and Boss Notifications for Pc-NA/EU/SEA and Xbox-NA/EU. Enjoy😁!</value>
     <comment>First use prompt message body</comment>
   </data>
   <data name="FirstRunDialog.Title" xml:space="preserve">
@@ -221,7 +222,7 @@
     <value>mailto:blackdesertcompanion@outlook.com</value>
   </data>
   <data name="BossNotificationTimeTitle.Text" xml:space="preserve">
-    <value>Choose time to be notifed before World Boss Spawns :</value>
+    <value>Notify me</value>
     <comment>Title for choosing time of world boss notifications</comment>
   </data>
   <data name="Settings_Region_PCEU.Content" xml:space="preserve">
@@ -231,7 +232,7 @@
     <value>Xbox - EU</value>
   </data>
   <data name="BossNotifcationTimeUnit.Text" xml:space="preserve">
-    <value>Minutes before</value>
+    <value>minutes before spawn</value>
   </data>
   <data name="Shell_Dev.Content" xml:space="preserve">
     <value>Dev</value>
@@ -254,5 +255,8 @@
   </data>
   <data name="Recipes_Type_Cooking.Content" xml:space="preserve">
     <value>Cooking</value>
+  </data>
+  <data name="Settings_Region_PCSEA.Content" xml:space="preserve">
+    <value>PC - SEA</value>
   </data>
 </root>

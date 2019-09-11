@@ -16,61 +16,68 @@
         <helper:EnumToBooleanConverter x:Key="EnumToBooleanConvertor0" EnumType="reg:ServerRegion" />
     </Page.Resources>
 
-    <Grid Margin="{StaticResource MediumLeftRightMargin}">
-        <StackPanel
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            
+        </Grid.RowDefinitions>
+        <ScrollViewer Grid.Row="0"
+                      Margin="{StaticResource MediumLeftMargin}">
+            <StackPanel Grid.Row="0"
             x:Name="ContentArea">
-            <TextBlock
+                <TextBlock
                 x:Uid="Settings_Personalization"
                 Style="{ThemeResource SubtitleTextBlockStyle}" />
 
-            <StackPanel Margin="{StaticResource SmallTopBottomMargin}">
-                <TextBlock
+                <StackPanel Margin="{StaticResource SmallTopBottomMargin}">
+                    <TextBlock
                     x:Uid="Settings_Theme" />
 
-                <StackPanel Margin="{StaticResource XSmallTopMargin}">
-                    <RadioButton
+                    <StackPanel Margin="{StaticResource XSmallTopMargin}">
+                        <RadioButton
                         x:Name="ThemeLightButton"
                         x:Uid="Settings_Theme_Light"
                         GroupName="AppTheme"
                         IsChecked="{x:Bind ViewModel.ElementTheme, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=Light, Mode=OneWay}"
                         cm:Message.Attach="SwitchTheme(ThemeLightButton.Tag)"
                         FontSize="15">
-                        <RadioButton.Tag>
-                            <xaml:ElementTheme>Light</xaml:ElementTheme>
-                        </RadioButton.Tag>
-                    </RadioButton>
-                    <RadioButton
+                            <RadioButton.Tag>
+                                <xaml:ElementTheme>Light</xaml:ElementTheme>
+                            </RadioButton.Tag>
+                        </RadioButton>
+                        <RadioButton
                         x:Name="ThemeDarkButton"
                         x:Uid="Settings_Theme_Dark"
                         GroupName="AppTheme"
                         IsChecked="{x:Bind ViewModel.ElementTheme, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=Dark, Mode=OneWay}"
                         cm:Message.Attach="SwitchTheme(ThemeDarkButton.Tag)"
                         FontSize="15">
-                        <RadioButton.Tag>
-                            <xaml:ElementTheme>Dark</xaml:ElementTheme>
-                        </RadioButton.Tag>
-                    </RadioButton>
-                    <RadioButton
+                            <RadioButton.Tag>
+                                <xaml:ElementTheme>Dark</xaml:ElementTheme>
+                            </RadioButton.Tag>
+                        </RadioButton>
+                        <RadioButton
                         x:Name="ThemeDefaultButton"
                         x:Uid="Settings_Theme_Default"
                         GroupName="AppTheme"
                         IsChecked="{x:Bind ViewModel.ElementTheme, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=Default, Mode=OneWay}"
                         cm:Message.Attach="SwitchTheme(ThemeDefaultButton.Tag)"
                         FontSize="15">
-                        <RadioButton.Tag>
-                            <xaml:ElementTheme>Default</xaml:ElementTheme>
-                        </RadioButton.Tag>
-                    </RadioButton>
+                            <RadioButton.Tag>
+                                <xaml:ElementTheme>Default</xaml:ElementTheme>
+                            </RadioButton.Tag>
+                        </RadioButton>
+                    </StackPanel>
                 </StackPanel>
-            </StackPanel>
 
-            <StackPanel Margin="{StaticResource SmallTopMargin}">
-                <TextBlock
+                <StackPanel Margin="{StaticResource SmallTopMargin}">
+                    <TextBlock
                 x:Uid="Settings_Region"
                 Style="{ThemeResource SubtitleTextBlockStyle}" />
 
-                <StackPanel Margin="{StaticResource XSmallTopMargin}">
-                    <RadioButton
+                    <StackPanel Margin="{StaticResource XSmallTopMargin}">
+                        <RadioButton
                     x:Name="PCNARegionButton"
                     x:Uid="Settings_Region_PCNA"
                     GroupName="AppRegion"
@@ -78,12 +85,12 @@
                     IsChecked="{x:Bind ViewModel.ServerRegion, Converter={StaticResource EnumToBooleanConvertor0}, ConverterParameter=PCNA, Mode=OneWay}"
                     cm:Message.Attach="SwitchRegion(PCNARegionButton.Tag)">
 
-                        <RadioButton.Tag>
-                            <reg:ServerRegion>PCNA</reg:ServerRegion>
-                        </RadioButton.Tag>
-                    </RadioButton>
+                            <RadioButton.Tag>
+                                <reg:ServerRegion>PCNA</reg:ServerRegion>
+                            </RadioButton.Tag>
+                        </RadioButton>
 
-                    <RadioButton
+                        <RadioButton
                     x:Name="XBOXNARegionButton"
                     x:Uid="Settings_Region_XBOXNA"
                     GroupName="AppRegion"
@@ -91,12 +98,12 @@
                     IsChecked="{x:Bind ViewModel.ServerRegion, Converter={StaticResource EnumToBooleanConvertor0}, ConverterParameter=XBOXNA,Mode=OneWay}"
                     cm:Message.Attach="SwitchRegion(XBOXNARegionButton.Tag)">
 
-                        <RadioButton.Tag>
-                            <reg:ServerRegion>XBOXNA</reg:ServerRegion>
-                        </RadioButton.Tag>
-                    </RadioButton>
+                            <RadioButton.Tag>
+                                <reg:ServerRegion>XBOXNA</reg:ServerRegion>
+                            </RadioButton.Tag>
+                        </RadioButton>
 
-                    <RadioButton
+                        <RadioButton
                     x:Name="PCEURegionButton"
                     x:Uid="Settings_Region_PCEU"
                     GroupName="AppRegion"
@@ -104,67 +111,81 @@
                     IsChecked="{x:Bind ViewModel.ServerRegion, Converter={StaticResource EnumToBooleanConvertor0}, ConverterParameter=PCEU,Mode=OneWay}"
                     cm:Message.Attach="SwitchRegion(PCEURegionButton.Tag)">
 
-                        <RadioButton.Tag>
-                            <reg:ServerRegion>PCEU</reg:ServerRegion>
-                        </RadioButton.Tag>
-                    </RadioButton>
+                            <RadioButton.Tag>
+                                <reg:ServerRegion>PCEU</reg:ServerRegion>
+                            </RadioButton.Tag>
+                        </RadioButton>
 
-                    <RadioButton
-                    x:Name="XBOXEURegionButton"
-                    x:Uid="Settings_Region_XBOXEU"
-                    GroupName="AppRegion"
-                    FontSize="15"
-                    IsChecked="{x:Bind ViewModel.ServerRegion, Converter={StaticResource EnumToBooleanConvertor0}, ConverterParameter=XBOXEU,Mode=OneWay}"
-                    cm:Message.Attach="SwitchRegion(XBOXEURegionButton.Tag)">
+                        <RadioButton
+                        x:Name="XBOXEURegionButton"
+                        x:Uid="Settings_Region_XBOXEU"
+                        GroupName="AppRegion"
+                        FontSize="15"
+                        IsChecked="{x:Bind ViewModel.ServerRegion, Converter={StaticResource EnumToBooleanConvertor0}, ConverterParameter=XBOXEU,Mode=OneWay}"
+                        cm:Message.Attach="SwitchRegion(XBOXEURegionButton.Tag)">
 
-                        <RadioButton.Tag>
-                            <reg:ServerRegion>XBOXEU</reg:ServerRegion>
-                        </RadioButton.Tag>
-                    </RadioButton>
+                            <RadioButton.Tag>
+                                <reg:ServerRegion>XBOXEU</reg:ServerRegion>
+                            </RadioButton.Tag>
+                        </RadioButton>
+
+                        <RadioButton
+                        x:Name="PCSEARegionButton"
+                        x:Uid="Settings_Region_PCSEA"
+                        GroupName="AppRegion"
+                        FontSize="15"
+                        IsChecked="{x:Bind ViewModel.ServerRegion, Converter={StaticResource EnumToBooleanConvertor0}, ConverterParameter=PCSEA,Mode=OneWay}"
+                        cm:Message.Attach="SwitchRegion(PCSEARegionButton.Tag)">
+
+                            <RadioButton.Tag>
+                                <reg:ServerRegion>PCSEA</reg:ServerRegion>
+                            </RadioButton.Tag>
+                        </RadioButton>
+
+                    </StackPanel>
                 </StackPanel>
-            </StackPanel>
 
-            <TextBlock
+                <TextBlock
                     x:Uid="Settings_About"
                     Style="{ThemeResource SubtitleTextBlockStyle}"/>
 
-            <StackPanel Margin="{StaticResource XSmallTopMargin}">
-                <TextBlock
+                <StackPanel Margin="{StaticResource XSmallTopMargin}">
+                    <TextBlock
                     Text="{x:Bind ViewModel.VersionDescription, Mode=OneWay}"
                     Style="{ThemeResource BodyTextBlockStyle}" />
-                <TextBlock
+                    <TextBlock
                     x:Uid="Settings_AboutDescription"
                     Margin="{StaticResource XSmallTopMargin}"
                     Style="{ThemeResource BodyTextBlockStyle}" />
 
-                <!--<HyperlinkButton
+                    <!--<HyperlinkButton
                     x:Uid="Settings_PrivacyTermsLink"
                     Margin="{StaticResource XSmallTopMargin}" />-->
 
-                <HyperlinkButton
+                    <HyperlinkButton
                     Margin="{StaticResource XSmallTopMargin}"
                     x:Uid="FeedbackHub_Link"
                     cm:Message.Attach="LaunchFeedbackHub;"
                     Visibility="{x:Bind ViewModel.FeedbackLinkVisibility}" />
 
-                <HyperlinkButton
+                    <HyperlinkButton
                     x:Uid="Settings_EmailLink"
                     Margin="{StaticResource XSmallTopMargin}"/>
-
-                <ContentControl Grid.Row="6" Grid.Column="1"
-                                HorizontalAlignment="Center"
-                                IsFocusEngagementEnabled="True"
-                                RequiresPointer="WhenEngaged">
-
-                    <UI:AdControl ApplicationId="{x:Bind reg:AdvertisingService.ApplicationID}"
-                                  AdUnitId="{x:Bind reg:AdvertisingService.AdUnitId}"             
-                                  Width="640"
-                                  Height="100"
-                                  HorizontalAlignment="Center"
-                                  VerticalAlignment="Bottom"/>
-                </ContentControl>
-
+                </StackPanel>
             </StackPanel>
-        </StackPanel>
+        </ScrollViewer>
+        <ContentControl Grid.Row="1"
+                        HorizontalAlignment="Center"
+                        IsFocusEngagementEnabled="True"
+                        RequiresPointer="WhenEngaged"
+                        VerticalAlignment="Bottom">
+
+            <UI:AdControl ApplicationId="{x:Bind reg:AdvertisingService.ApplicationID}"
+                          AdUnitId="{x:Bind reg:AdvertisingService.AdUnitId}"             
+                          Width="640"
+                          Height="100"
+                          HorizontalAlignment="Center"
+                          VerticalAlignment="Bottom"/>
+        </ContentControl>
     </Grid>
 </Page>

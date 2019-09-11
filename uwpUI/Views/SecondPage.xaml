@@ -17,8 +17,7 @@
     </Page.Resources>
 
     <Grid
-        x:Name="ContentArea"
-        Margin="{StaticResource MediumLeftRightMargin}">
+        x:Name="ContentArea">
         <Grid
             Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
             <!--The SystemControlPageBackgroundChromeLowBrush background represents where you should place your content. 
@@ -60,15 +59,15 @@
                         <Grid Visibility="{x:Bind Show, Converter={StaticResource BooleanToCollapsedConverter}}">
 
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="2*"/>
-                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
 
                             <Image Source="{x:Bind Img}"
                                    Grid.Column="0"
                                    Stretch="UniformToFill"
-                                   MaxHeight="200"
-                                   MaxWidth="200"/>
+                                   MaxHeight="125"
+                                   MaxWidth="125"/>
 
                             <StackPanel Grid.Column="1" >
                                 <TextBlock Text="{x:Bind Name}"

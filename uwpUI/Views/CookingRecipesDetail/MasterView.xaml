@@ -8,7 +8,9 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
     mc:Ignorable="d"
     d:DesignHeight="300"
-    d:DesignWidth="400">
+    d:DesignWidth="400"
+    IsFocusEngaged="False"
+    IsFocusEngagementEnabled="False">
 
     <UserControl.Resources>
         <helpers:ItemGradeEnumToColorConverter x:Key="ItemGradeEnumToColorConverter"/>

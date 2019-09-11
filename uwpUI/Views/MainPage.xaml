@@ -9,8 +9,7 @@
     Style="{StaticResource PageStyle}"
     mc:Ignorable="d">
     <Grid
-        x:Name="ContentArea"
-        Margin="{StaticResource MediumLeftRightMargin}">
+        x:Name="ContentArea">
         <Grid
             Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
             <!--The SystemControlPageBackgroundChromeLowBrush background represents where you should place your content. 
@@ -33,44 +32,49 @@
             <ContentControl
                 Grid.Row="0" Grid.Column="1"
                 HorizontalAlignment="Center">
-                
-                <TextBlock
+
+                <StackPanel>
+                    <TextBlock
                     Style="{StaticResource PageTitleStyle}"
                     x:Uid="Main_Title"/>
+                    <Line Stroke="{StaticResource SystemAccentColor}"
+                          StrokeThickness="3"
+                          HorizontalAlignment="Center"/>
+                </StackPanel>
             </ContentControl>
 
             <TextBlock
                 Grid.Row="1"
                 Grid.Column="1"
-                Margin="12,4,0,24"
+                Margin="20,4,0,24"
                 FontSize="{StaticResource LargeFontSize}"
                 Style="{StaticResource BodyTextBlockStyle}"
                 x:Name="Time"/>
             <TextBlock
                 Grid.Row="2"
                 Grid.Column="1"
-                Margin="12,0,0,8"
+                Margin="20,0,0,8"
                 FontSize="{StaticResource MediumLargeFontSize}"
                 Style="{StaticResource BodyTextBlockStyle}"
                 x:Name="DailyReset"/>
             <TextBlock
                 Grid.Row="3"
                 Grid.Column="1"
-                Margin="12,0,0,8"
+                Margin="20,0,0,8"
                 FontSize="{StaticResource MediumLargeFontSize}"
                 Style="{StaticResource BodyTextBlockStyle}"
                 x:Name="ImperialReset"/>
             <TextBlock
                 Grid.Row="4"
                 Grid.Column="1"
-                Margin="12,0,0,8"
+                Margin="20,0,0,8"
                 FontSize="{StaticResource MediumLargeFontSize}"
                 Style="{StaticResource BodyTextBlockStyle}"
                 x:Name="ImperialTradeReset"/>
             <TextBlock
                 Grid.Row="5"
                 Grid.Column="1"
-                Margin="12,0,0,8"
+                Margin="20,0,0,8"
                 FontSize="{StaticResource MediumLargeFontSize}"
                 Style="{StaticResource BodyTextBlockStyle}"
                 x:Name="BSGameReset"/>

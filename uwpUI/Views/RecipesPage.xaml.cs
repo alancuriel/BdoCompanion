@@ -15,6 +15,7 @@ namespace uwpUI.Views
         public CookingRecipesPage()
         {
             InitializeComponent();
+            
         }
 
         private CookingRecipesViewModel ViewModel
@@ -29,5 +30,7 @@ namespace uwpUI.Views
                 ViewModel.ActiveItem = ViewModel.Items.FirstOrDefault();
             }
         }
+
+        
     }
 }
