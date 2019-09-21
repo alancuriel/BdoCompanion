@@ -19,7 +19,7 @@
     <WindowsXamlEnableOverview>true</WindowsXamlEnableOverview>
     <PackageCertificateKeyFile>
     </PackageCertificateKeyFile>
-    <PackageCertificateThumbprint>35B2F6C79767E4176CD5DBA75AA7906691B607EF</PackageCertificateThumbprint>
+    <PackageCertificateThumbprint>CDD355628CDC5BA0E5D2B4A3501510BDC4D9E50C</PackageCertificateThumbprint>
     <GenerateAppInstallerFile>False</GenerateAppInstallerFile>
     <AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
     <AppxBundle>Always</AppxBundle>
@@ -114,7 +114,7 @@
       <Version>1.14.0</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
-      <Version>6.2.8</Version>
+      <Version>6.2.9</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.Services.Store.Engagement">
       <Version>10.1901.28001</Version>
@@ -132,7 +132,7 @@
       <Version>5.1.1</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.UI.Xaml">
-      <Version>2.1.190606001</Version>
+      <Version>2.2.190830001</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.Xaml.Behaviors.Uwp.Managed">
       <Version>2.0.1</Version>

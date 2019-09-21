@@ -19,10 +19,12 @@ namespace uwpUI.Services
                 var localFolder = ApplicationData.Current.LocalFolder;
                 var originalDbFileUri = new Uri("ms-appx:///Assets/bdoData.db");
                 var originalDbFile = await StorageFile.GetFileFromApplicationUriAsync(originalDbFileUri);
-
+                
                 if (null != originalDbFile)
                 {
-                    dbFile = await originalDbFile.CopyAsync(localFolder, "bdoData.db", NameCollisionOption.ReplaceExisting);
+                    var bytesread = await originalDbFile.ReadBytesAsync();
+                    await ApplicationData.Current.LocalFolder.WriteBytesToFileAsync(bytesread, "bdoData.db"
+                        ,CreationCollisionOption.ReplaceExisting);
                 }
             }
         }
