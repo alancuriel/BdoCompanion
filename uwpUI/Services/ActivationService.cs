@@ -95,6 +95,7 @@ namespace uwpUI.Services
             await BossNotificationService.InitializeAsync();
             await BdoDataLoadService.InitializeAsync();
             await BdoDataService.InitializeAsync();
+            await BdoNewsDataService.InitializeAsync();
         }
 
         private async Task StartupAsync()
