@@ -1,8 +1,11 @@
 ﻿using System;
-
+using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 using Caliburn.Micro;
-
+using uwpUI.Core.Models;
+using uwpUI.Core.Services;
 using uwpUI.Helpers;
+using uwpUI.Services;
 using Windows.UI.Xaml;
 
 namespace uwpUI.ViewModels
@@ -11,6 +14,31 @@ namespace uwpUI.ViewModels
     {
         public MainViewModel()
         {
+        }
+
+        private NewsItem _selectedNewsItem;
+
+        public NewsItem SelectedNewsItem
+        {
+            get { return _selectedNewsItem; }
+            set
+            {
+                Set(ref _selectedNewsItem, value);
+            }
+        }
+
+
+        private ObservableCollection<NewsItem> _news;
+        public ObservableCollection<NewsItem> News
+        {
+            get
+            {
+                return _news;
+            }
+            set
+            {
+                Set(ref _news, value);
+            }
         }
 
         private bool _isDay;
@@ -40,7 +68,7 @@ namespace uwpUI.ViewModels
             get { return _dailyReset; }
             set
             {
-                Set(ref _dailyReset, $"Daily reset in: {value}");
+                Set(ref _dailyReset, $"Daily reset in\n{value}");
             }
         }
 
@@ -51,7 +79,7 @@ namespace uwpUI.ViewModels
             get { return _imperialReset; }
             set
             {
-                Set(ref _imperialReset, $"Imperial Reset in: {value}");
+                Set(ref _imperialReset, $"Imperial Reset in\n{value}");
             }
         }
 
@@ -62,7 +90,7 @@ namespace uwpUI.ViewModels
             get { return _imperialTradeReset; }
             set
             {
-                Set(ref _imperialTradeReset, $"Imperial Trade Reset in {value}");
+                Set(ref _imperialTradeReset, $"Imperial Trade Reset in\n{value}");
             }
         }
 
@@ -73,14 +101,14 @@ namespace uwpUI.ViewModels
             get { return _bSGameReset; }
             set
             {
-                Set(ref _bSGameReset, $"Black Spirit Adventure Reset in: {value}");
+                Set(ref _bSGameReset, $"Black Spirit Adventure Reset in\n{value}");
             }
         }
 
 
 
 
-        protected override void OnInitialize()
+        protected override async void OnInitialize()
         {
             base.OnInitialize();
 
@@ -96,6 +124,24 @@ namespace uwpUI.ViewModels
 
             clockTimer.Start();
             countdownTimer.Start();
+
+            if(RegionSelectorService.Region == ServerRegion.XBOXEU ||
+               RegionSelectorService.Region == ServerRegion.XBOXNA)
+            {
+                News?.Clear();
+                News = new ObservableCollection<NewsItem>( await BdoNewsDataService.GetXboxNews());
+            }
+            else if(RegionSelectorService.Region == ServerRegion.PCEU ||
+                    RegionSelectorService.Region == ServerRegion.PCNA)
+            {
+                News?.Clear();
+                News = new ObservableCollection<NewsItem>( await BdoNewsDataService.GetPcNews());
+            }
+            else if(RegionSelectorService.Region == ServerRegion.PCSEA)
+            {
+                News?.Clear();
+                News = new ObservableCollection<NewsItem>(await BdoNewsDataService.GetPcNews(isSea : true));
+            }
         }
 
         private void InitCountdownTick(object sender, object e)
@@ -182,6 +228,11 @@ namespace uwpUI.ViewModels
 
             var inGameTime = new TimeSpan(inGameHour, inGameMinute,0);
             Time = DateTime.Today.Add(inGameTime).ToString("h:mm tt");
+        }
+
+        public async Task LoadNewsItemAsync()
+        {
+
         }
     }
 }
