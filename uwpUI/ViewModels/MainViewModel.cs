@@ -6,6 +6,7 @@ using uwpUI.Core.Models;
 using uwpUI.Core.Services;
 using uwpUI.Helpers;
 using uwpUI.Services;
+using Windows.UI.Core;
 using Windows.UI.Xaml;
 
 namespace uwpUI.ViewModels
@@ -125,28 +126,28 @@ namespace uwpUI.ViewModels
             clockTimer.Start();
             countdownTimer.Start();
 
-            if(RegionSelectorService.Region == ServerRegion.XBOXEU ||
+            if (RegionSelectorService.Region == ServerRegion.XBOXEU ||
                RegionSelectorService.Region == ServerRegion.XBOXNA)
             {
                 News?.Clear();
-                News = new ObservableCollection<NewsItem>( await BdoNewsDataService.GetXboxNews());
+                News = new ObservableCollection<NewsItem>(await BdoNewsDataService.GetXboxNews());
             }
-            else if(RegionSelectorService.Region == ServerRegion.PCEU ||
+            else if (RegionSelectorService.Region == ServerRegion.PCEU ||
                     RegionSelectorService.Region == ServerRegion.PCNA)
             {
                 News?.Clear();
-                News = new ObservableCollection<NewsItem>( await BdoNewsDataService.GetPcNews());
+                News = new ObservableCollection<NewsItem>(await BdoNewsDataService.GetPcNews());
             }
-            else if(RegionSelectorService.Region == ServerRegion.PCSEA)
+            else if (RegionSelectorService.Region == ServerRegion.PCSEA)
             {
                 News?.Clear();
-                News = new ObservableCollection<NewsItem>(await BdoNewsDataService.GetPcNews(isSea : true));
+                News = new ObservableCollection<NewsItem>(await BdoNewsDataService.GetPcNews(isSea: true));
             }
         }
 
         private void InitCountdownTick(object sender, object e)
         {
-            OnCountdownTick(sender,e);
+            OnCountdownTick(sender, e);
 
             var timer = (DispatcherTimer)sender;
             timer.Stop();
@@ -202,7 +203,7 @@ namespace uwpUI.ViewModels
             int inGameHour;
             int inGameMinute;
 
-            if(secsIntoGameDay >= 12000)
+            if (secsIntoGameDay >= 12000)
             {
                 var secsIntoGameNight = secsIntoGameDay - 12000;
                 var pctOfNightDone = secsIntoGameNight / (40 * 60);
@@ -226,13 +227,13 @@ namespace uwpUI.ViewModels
                 inGameMinute = (int)(gameHour % 1 * (60 >> 0));
             }
 
-            var inGameTime = new TimeSpan(inGameHour, inGameMinute,0);
+            var inGameTime = new TimeSpan(inGameHour, inGameMinute, 0);
             Time = DateTime.Today.Add(inGameTime).ToString("h:mm tt");
         }
 
-        public async Task LoadNewsItemAsync()
-        {
+        public async void LoadNewsItemAsync() => await Windows.System.Launcher
+            .LaunchUriAsync(new Uri(SelectedNewsItem.DetailUrl, UriKind.Absolute));
 
-        }
+
     }
 }

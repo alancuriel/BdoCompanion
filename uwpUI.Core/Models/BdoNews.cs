@@ -65,7 +65,7 @@ namespace uwpUI.Core.Models
 
         [JsonProperty("hashTags")]
         public string HashTags { get; set; }
-
+        public string NavDetailUri => string.IsNullOrEmpty(DetailUrl) ? $"http:{DetailUrl}": string.Empty;
         public string DetailUrl { get; set; }
     }
 }

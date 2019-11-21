@@ -122,7 +122,7 @@
     <comment>Application display name</comment>
   </data>
   <data name="AppDescription" xml:space="preserve">
-    <value>Companion App for the MMORPG Black Desert Online for Windows 10 and Xbox. Features Currently Include - Boss Notifications,Alchemy and Cooking Recipe Database, and in-game timers. Future features will have profit calculators and other features</value>
+    <value>Companion App for the MMORPG Black Desert Online for Windows 10 and Xbox. Features Currently Include - Boss Notifications,Alchemy and Cooking Recipe Database, Game News, and in-game timers. Future features will have profit calculators and other features</value>
     <comment>Application description</comment>
   </data>
   <data name="Shell_Main.Content" xml:space="preserve">
@@ -178,9 +178,8 @@
   </data>
   <data name="WhatsNew_Body.Text" xml:space="preserve">
     <value>This update brings:
--BUG FIX where app hangs on open when on retail mode
--NEW recipe feature: Includes cooking and alchemy recipes
--Boss Notification : Added new PC-SEA region</value>
+-Game News 
+-Fix: Fixes Xbox Eu boss notifications</value>
     <comment>What's new prompt message body</comment>
   </data>
   <data name="WhatsNewDialog.Title" xml:space="preserve">
@@ -192,7 +191,7 @@
     <comment>What's new prompt message primary button text</comment>
   </data>
   <data name="FirstRun_Body.Text" xml:space="preserve">
-    <value>Thanks For Downloading! This is a companion app I made for the MMORPG Black Desert Online. I plan on adding more features and adding more to the existing features. Feel free to give feedback or suggestions through the feedback app or email in the settings page. Currently working feature include recipe database, in-game timers and Boss Notifications for Pc-NA/EU/SEA and Xbox-NA/EU. Enjoy😁!</value>
+    <value>Thanks For Downloading! This is a companion app I made for the MMORPG Black Desert Online. I plan on adding more features and adding more to the existing features. Feel free to give feedback or suggestions through the feedback app or email in the settings page. Currently working features include news, recipe database, in-game timers and Boss Notifications for Pc-NA/EU/SEA and Xbox-NA/EU. Enjoy😁!</value>
     <comment>First use prompt message body</comment>
   </data>
   <data name="FirstRunDialog.Title" xml:space="preserve">

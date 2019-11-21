@@ -161,7 +161,7 @@ namespace uwpUI.Services
             }
             else if (RegionSelectorService.Region == ServerRegion.XBOXEU)
             {
-                timeZoneInfo = TimeZoneInfo.FindSystemTimeZoneById("W. Europe Standard Time");
+                timeZoneInfo = TimeZoneInfo.FindSystemTimeZoneById("UTC");
             }
             else if (RegionSelectorService.Region == ServerRegion.PCEU)
             {
@@ -180,6 +180,8 @@ namespace uwpUI.Services
             DateTime startOfWeek = now - new TimeSpan((int)now.DayOfWeek, now.Hour, now.Minute, now.Second, now.Millisecond);
 
             DateTime TimeAppear = startOfWeek + new TimeSpan((int)day, 0, 0, 0) + timeOfDay;
+               // (now.IsDaylightSavingTime() ? timeOfDay : timeOfDay.Add(TimeSpan.FromHours(1)));
+
             TimeAppear = TimeZoneInfo.ConvertTimeToUtc(TimeAppear, timeZoneInfo);
 
             if (TimeAppear < DateTime.UtcNow)
@@ -232,7 +234,7 @@ namespace uwpUI.Services
             bool inRegion = text.Contains(boss.Name);
             return inRegion;
         }
-
+         
         private static void ScheduleBossSpawns(BossModel boss, List<DateTime> spawns)
         {
             foreach (var time in spawns)
