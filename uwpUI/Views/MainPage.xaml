@@ -86,7 +86,8 @@
                       ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                       Margin="{StaticResource MediumRightMargin}"
                       SelectedItem="{x:Bind ViewModel.SelectedNewsItem ,Mode=TwoWay}"
-                      cm:Message.Attach="LoadNewsItemAsync()">
+                      IsItemClickEnabled="True"
+                      cm:Message.Attach="[Event ItemClick] = [Action LoadNewsItemAsync()]">
 
                 <ListView.ItemTemplate>
                     <DataTemplate x:DataType="models:NewsItem">
