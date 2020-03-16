@@ -17,6 +17,9 @@ namespace uwpUI.ViewModels
         {
         }
 
+        private DispatcherTimer clockTimer;
+        private DispatcherTimer countdownTimer;
+
         private NewsItem _selectedNewsItem;
 
         public NewsItem SelectedNewsItem
@@ -106,7 +109,16 @@ namespace uwpUI.ViewModels
             }
         }
 
+        protected override void OnDeactivate(bool close)
+        {
+            base.OnDeactivate(close);
 
+            clockTimer.Stop();
+            clockTimer.Tick -= InitTimeTick;
+
+            countdownTimer.Stop();
+            countdownTimer.Tick -= InitCountdownTick;
+        }
 
 
         protected override async void OnInitialize()
@@ -115,11 +127,13 @@ namespace uwpUI.ViewModels
 
             var startInterval = TimeSpan.FromMilliseconds(100);
 
-            var clockTimer = new DispatcherTimer();
-            clockTimer.Interval = startInterval;
+            clockTimer = new DispatcherTimer
+            {
+                Interval = startInterval
+            };
             clockTimer.Tick += InitTimeTick;
 
-            var countdownTimer = new DispatcherTimer();
+            countdownTimer = new DispatcherTimer();
             countdownTimer.Interval += startInterval;
             countdownTimer.Tick += InitCountdownTick;
 
@@ -231,8 +245,14 @@ namespace uwpUI.ViewModels
             Time = DateTime.Today.Add(inGameTime).ToString("h:mm tt");
         }
 
-        public async void LoadNewsItemAsync() => await Windows.System.Launcher
-            .LaunchUriAsync(new Uri(SelectedNewsItem.DetailUrl, UriKind.Absolute));
+        public async void LoadNewsItemAsync()
+        {
+            if (SelectedNewsItem?.DetailUrl != null)
+            {
+                await Windows.System.Launcher
+                    .LaunchUriAsync(new Uri(SelectedNewsItem.DetailUrl, UriKind.Absolute));
+            }
+        }
 
 
     }
