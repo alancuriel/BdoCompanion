@@ -27,23 +27,9 @@ namespace uwpUI.Services
 
                             new AdaptiveText()
                             {
-                                 Text = @"Click OK to see how activation from a toast notification can be handled in the ToastNotificationService."
+                                 Text = @"This is a test notification"
                             }
                         }
-                    }
-                },
-
-                Actions = new ToastActionsCustom()
-                {
-                    Buttons =
-                    {
-                        // More about Toast Buttons at https://docs.microsoft.com/dotnet/api/microsoft.toolkit.uwp.notifications.toastbutton
-                        new ToastButton("OK", "ToastButtonActivationArguments")
-                        {
-                            ActivationType = ToastActivationType.Foreground
-                        },
-
-                        new ToastButtonDismiss("Cancel")
                     }
                 }
             };

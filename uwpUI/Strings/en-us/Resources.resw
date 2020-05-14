@@ -258,4 +258,8 @@
   <data name="Settings_Region_PCSEA.Content" xml:space="preserve">
     <value>PC - SEA</value>
   </data>
+  <data name="Shell_BossNotifcations.Content" xml:space="preserve">
+    <value>BossNotifcations</value>
+    <comment>Navigation view item name for BossNotifcations</comment>
+  </data>
 </root>

@@ -1,0 +1,144 @@
+﻿<Page
+    x:Class="uwpUI.Views.BossNotifcationsPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:models="using:uwpUI.Core.Models"
+    xmlns:cm="using:Caliburn.Micro"
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    Style="{StaticResource PageStyle}"
+    mc:Ignorable="d">
+    <Grid x:Name="ContentArea">
+        <Grid
+            Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="1.5*"/>
+            </Grid.ColumnDefinitions>
+            
+
+            <GridView ItemsSource="{x:Bind ViewModel.WorldBosses}"
+                      SelectedItem="{x:Bind ViewModel.SelectedBoss,Mode=TwoWay}"
+                      IsItemClickEnabled="True"
+                      SingleSelectionFollowsFocus="True"
+                      Grid.Row="1" Grid.Column="0"
+                      HorizontalAlignment="Center"
+                      AllowFocusOnInteraction="True"
+                      SelectionChanged="GridView_SelectionChanged"
+                      
+                      >
+               
+                <GridView.ItemContainerStyle>
+                    <Style TargetType="GridViewItem">
+                        <Setter Property="Margin" Value="5, 5, 5, 5"/>
+                    </Style>
+                </GridView.ItemContainerStyle>
+
+
+                <GridView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <ItemsWrapGrid x:Name="MaxItemsWrapGrid" 
+                                       MaximumRowsOrColumns="4"
+                                       Orientation="Horizontal" />
+                    </ItemsPanelTemplate>
+                </GridView.ItemsPanel>
+                
+                
+                <GridView.Transitions>
+                    <TransitionCollection>
+                        <EntranceThemeTransition IsStaggeringEnabled="True"/>
+                    </TransitionCollection>
+                </GridView.Transitions>
+
+                <GridView.ItemTemplate>
+                    <DataTemplate x:DataType="models:WorldBoss">
+                        <Grid Width="150" CornerRadius="10">
+
+                            <Image  Source="{x:Bind Image}" Stretch="UniformToFill"/>
+                            <Grid  Height="40" VerticalAlignment="Bottom" Padding="5,1,5,1" 
+                                   Background="Gray" Opacity=".65" >
+                                <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch">
+                                    <TextBlock Text="{x:Bind Name}"/>
+                                    <TextBlock Text="2 Min"/>
+                                </StackPanel>
+                                <CheckBox x:Name="BossCheckBox" HorizontalAlignment="Right" FlowDirection="LeftToRight"
+                                          IsChecked="{x:Bind IsTimerEnabled, Mode=OneWay}"
+                                          Padding="0" MinWidth="0"
+                                          cm:Message.Attach="[Event Click] = [Action EnableTimerAsync($dataContext)]">
+                                </CheckBox>
+                            </Grid>
+                        </Grid>
+                    </DataTemplate>
+                </GridView.ItemTemplate>
+
+            </GridView>
+            <Grid x:Name="Settings"
+                  
+                  Grid.Column="1"
+                  Grid.Row="0"
+                  Grid.RowSpan="3">
+                <Grid.Resources>
+                    <ThemeShadow x:Name="SettingsShadow"/>
+                </Grid.Resources>
+
+                <Grid x:Name="SettingsBackgroundGrid"
+                      Background="{ThemeResource SystemControlPageBackgroundBaseLowBrush}"/>
+                <StackPanel >
+                    <TextBlock FontSize="{StaticResource LargeFontSize}"
+                           Margin="{StaticResource SmallTopLeftMargin}"
+                           FontWeight="Bold"
+                           TextWrapping="Wrap"
+                           Text="Notification Settings"/>
+                    <StackPanel Margin="{StaticResource SmallTopLeftMargin}"
+                            Orientation="Horizontal">
+
+                        <TextBlock FontSize="{StaticResource MediumLargeFontSize}"
+                               FontWeight="SemiBold"
+                               Text="Server: "/>
+                        <TextBlock FontSize="{StaticResource MediumLargeFontSize}"
+                               FontWeight="SemiBold"
+                               Text=" NA"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal"
+                            Spacing="12"
+                            Margin="{StaticResource SmallTopLeftMargin}">
+
+                        <Button x:Name="DisableAll"
+                            Content="Disable All"/>
+                        <Button x:Name="EnableAll"
+                            Content="Enable All"/>
+                    </StackPanel>
+
+                    <TextBlock FontSize="{StaticResource MediumLargeFontSize}"
+                           Margin="{StaticResource SmallTopLeftMargin}"
+                           FontWeight="SemiBold"
+                           Text="Notify Time"/>
+                    <TextBlock FontSize="{StaticResource SmallFontSize}"
+                           Margin="{StaticResource SmallLeftMargin}"
+                           Text="*Resets Notifications*"/>
+
+                    <StackPanel Orientation="Horizontal"
+                            Spacing="5">
+                        <ComboBox x:Name="NotificationTime"
+                          Margin="12,4,0,0"/>
+                        <TextBlock Text="Min. Before"
+                               VerticalAlignment="Bottom"
+                               FontSize="{StaticResource MediumLargeFontSize}"/>
+                    </StackPanel>
+
+                    <Button x:Name="NotificationTest"
+                        Margin="{StaticResource SmallTopLeftMargin}"
+                        Content="Test Notification"/>
+
+                </StackPanel>
+            </Grid>
+        </Grid>
+    </Grid>
+</Page>

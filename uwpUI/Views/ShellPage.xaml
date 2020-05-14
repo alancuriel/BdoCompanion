@@ -46,6 +46,7 @@
                     <FontIcon FontFamily="/Assets/Fonts/Font-Awesome-5-Pro-Solid-900.otf#Font Awesome 5 Pro" Glyph="&#xf6bf;"/>
                 </winui:NavigationViewItem.Icon>
             </winui:NavigationViewItem>
+            <winui:NavigationViewItem x:Uid="Shell_BossNotifcations" helpers:NavHelper.NavigateTo="views:BossNotifcationsPage" />
         </winui:NavigationView.MenuItems>
         <Grid>
             <Grid.RowDefinitions>

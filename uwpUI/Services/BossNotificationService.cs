@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using uwpUI.Core.Helpers;
 using uwpUI.Core.Models;
@@ -16,6 +17,148 @@ namespace uwpUI.Services
         static string RegionBossScheduleDir = "ms-appx:///Assets/BossSchedules/";
 
         private const string BossNotifcationTimeKey = "AppBackgroundRequestedNotificationTime";
+
+        internal static async Task<List<WorldBoss>> GetRegionBossesAsync()
+        {
+            var scheduleFile = RegionBossScheduleDir + GetRegionScheduleFileName();
+
+            return await ParseFileAsync(scheduleFile);
+        }
+
+        private static async Task<List<WorldBoss>> ParseFileAsync(string scheduleFile)
+        {
+            var bosses = new List<WorldBoss>();
+            StorageFile file = await StorageFile.GetFileFromApplicationUriAsync(new Uri(scheduleFile));
+            var stream = await file.OpenAsync(FileAccessMode.Read);
+
+            string line;
+            using (StreamReader reader = new StreamReader(stream.AsStream()))
+            {
+                while ((line = reader.ReadLine()) != null)
+                {
+                    if (line.StartsWith("--"))
+                    {
+                        continue;
+                    }
+
+                    string[] scheduleValues = line.Split(' ');
+
+                    var boss = bosses.Find(b => b.Name == scheduleValues[0]);
+
+                    if (boss == null)
+                    {
+                        boss = CreateBoss(scheduleValues[0]);
+                        bosses.Add(boss);
+                    }
+
+                    boss.SpawnTimes.Add(
+                            new TimeSpan((int)StringToDayOfWeek(scheduleValues[1]), 0, 0, 0) +
+                            TimeSpan.Parse(scheduleValues[2]));
+                }
+            }
+
+            return bosses;
+        }
+
+        private static WorldBoss CreateBoss(string v)
+        {
+            switch (v)
+            {
+                case "Karanda":
+                    return new WorldBoss
+                    {
+                        Name = "Karanda",
+                        Image = "ms-appx:///Assets/Karanda.png",
+                        Location = "Karanda Ridge",
+                        SpawnTimes = new List<TimeSpan>(),
+                        IsTimerEnabled = IsBossTimerEnabled("Karanda")
+                    };
+                case "Kzarka":
+                    return new WorldBoss
+                    {
+                        Name = "Kzarka",
+                        Image = "ms-appx:///Assets/Kzarka.png",
+                        Location = "Serendia Shrine",
+                        SpawnTimes = new List<TimeSpan>(),
+                        IsTimerEnabled = IsBossTimerEnabled("Kzarka")
+                    };
+                case "Garmoth":
+                    return new WorldBoss
+                    {
+                        Name = "Garmoth",
+                        Image = "ms-appx:///Assets/Garmoth.png",
+                        Location = "Tshira Ruins",
+                        SpawnTimes = new List<TimeSpan>(),
+                        IsTimerEnabled = IsBossTimerEnabled("Garmoth")
+                    };
+                case "Nouver":
+                    return new WorldBoss
+                    {
+                        Name = "Nouver",
+                        Image = "ms-appx:///Assets/Nouver.png",
+                        Location = "The Desert",
+                        SpawnTimes = new List<TimeSpan>(),
+                        IsTimerEnabled = IsBossTimerEnabled("Nouver")
+                    };
+                case "Kutum":
+                    return new WorldBoss
+                    {
+                        Name = "Kutum",
+                        Image = "ms-appx:///Assets/Kutum.png",
+                        Location = "Scarlet Sand Chamber",
+                        SpawnTimes = new List<TimeSpan>(),
+                        IsTimerEnabled = IsBossTimerEnabled("Kutum")
+                    };
+                case "Offin":
+                    return new WorldBoss
+                    {
+                        Name = "Offin",
+                        Image = "ms-appx:///Assets/Offin.png",
+                        Location = "Holo Forest",
+                        SpawnTimes = new List<TimeSpan>(),
+                        IsTimerEnabled = IsBossTimerEnabled("Offin")
+                    };
+                case "Vell":
+                    return new WorldBoss
+                    {
+                        Name = "Vell",
+                        Image = "ms-appx:///Assets/Vell.png",
+                        Location = "The Vell Sea",
+                        SpawnTimes = new List<TimeSpan>(),
+                        IsTimerEnabled = IsBossTimerEnabled("Vell")
+                    };
+                case "Muraka":
+                    return new WorldBoss
+                    {
+                        Name = "Muraka",
+                        Image = "ms-appx:///Assets/Muraka.png",
+                        Location = "Mansha Forest",
+                        SpawnTimes = new List<TimeSpan>(),
+                        IsTimerEnabled = IsBossTimerEnabled("Muraka")
+                    };
+                case "Quint":
+                    return new WorldBoss
+                    {
+                        Name = "Quint",
+                        Image = "ms-appx:///Assets/Quint.png",
+                        Location = "Quint Hill",
+                        SpawnTimes = new List<TimeSpan>(),
+                        IsTimerEnabled = IsBossTimerEnabled("Quint")
+                    };
+                default:
+                    throw new Exception("Boss Does Not Exist");
+            }
+        }
+
+        private static bool BossExists(string s)
+        {
+            return s == "Kzarka" || s == "Karanda"
+                || s == "Garmoth" || s == "Nouver"
+                || s == "Kutum" || s == "Offin"
+                || s == "Vell" || s == "Muraka"
+                || s == "Quint";
+        }
+
         public static int NotifyTime { get; set; } = 0;
 
         public static async Task InitializeAsync()
@@ -46,6 +189,14 @@ namespace uwpUI.Services
         private static async Task SaveNotifyTimeInSettingsAsync(int min)
         {
             await ApplicationData.Current.LocalSettings.SaveAsync(BossNotifcationTimeKey, min.ToString());
+        }
+
+        public static async Task EnableNotifications(WorldBoss boss)
+        {
+            var spawnDateTimes = CreateSpawnTimes(boss.SpawnTimes);
+
+            ScheduleNotifications(boss, spawnDateTimes);
+            await Task.CompletedTask;
         }
 
         public static async Task EnableBossNotificationsAsync(BossModel boss)
@@ -92,7 +243,20 @@ namespace uwpUI.Services
                     notifier.RemoveFromSchedule(toast);
                 }
             }
+        }
 
+        public static async Task DisableNotifications(WorldBoss boss)
+        {
+            var tm = ToastNotificationManager.CreateToastNotifier();
+
+            foreach (var toast in tm.GetScheduledToastNotifications())
+            {
+                if (toast.Group == boss.Name)
+                {
+                    tm.RemoveFromSchedule(toast);
+                }
+            }
+            await Task.CompletedTask;
         }
 
         public static void DisableAllBossNotifications()
@@ -102,18 +266,9 @@ namespace uwpUI.Services
 
             foreach (var toast in scheduledToasts)
             {
-                switch (toast.Group)
+                if(BossExists(toast.Group))
                 {
-                    case "Kzarka": notifier.RemoveFromSchedule(toast); break;
-                    case "Karanda": notifier.RemoveFromSchedule(toast); break;
-                    case "Garmoth": notifier.RemoveFromSchedule(toast); break;
-                    case "Kutum": notifier.RemoveFromSchedule(toast); break;
-                    case "Offin": notifier.RemoveFromSchedule(toast); break;
-                    case "Vell": notifier.RemoveFromSchedule(toast); break;
-                    case "Muraka": notifier.RemoveFromSchedule(toast); break;
-                    case "Quint": notifier.RemoveFromSchedule(toast); break;
-                    case "Nouver": notifier.RemoveFromSchedule(toast); break;
-                    default: break;
+                    notifier.RemoveFromSchedule(toast);
                 }
             }
         }
@@ -150,6 +305,58 @@ namespace uwpUI.Services
             return spawnTimes;
         }
 
+        private static List<DateTime> CreateSpawnTimes(IEnumerable<TimeSpan> timeOfWeeks)
+        {
+            TimeZoneInfo timeZoneInfo = null;
+
+            if (RegionSelectorService.Region == ServerRegion.PCNA
+            || RegionSelectorService.Region == ServerRegion.XBOXNA)
+            {
+                timeZoneInfo = TimeZoneInfo.FindSystemTimeZoneById("Pacific Standard Time");
+            }
+            else if (RegionSelectorService.Region == ServerRegion.XBOXEU)
+            {
+                timeZoneInfo = TimeZoneInfo.FindSystemTimeZoneById("UTC");
+            }
+            else if (RegionSelectorService.Region == ServerRegion.PCEU)
+            {
+                timeZoneInfo = TimeZoneInfo.FindSystemTimeZoneById("Central Europe Standard Time");
+            }
+            else if (RegionSelectorService.Region == ServerRegion.PCSEA)
+            {
+                timeZoneInfo = TimeZoneInfo.FindSystemTimeZoneById("China Standard Time");
+            }
+            else
+            {
+                throw new Exception("Invalid Server region was used");
+            }
+
+            var spawnDateTimes = new List<DateTime>();
+
+            for (int i = 0; i < 4; i++/*3 weeks */)
+            {
+                foreach (var timeOfWeek in timeOfWeeks)
+                {
+                    DateTime now = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, timeZoneInfo);
+                    DateTime startOfWeek = now - new TimeSpan((int)now.DayOfWeek, now.Hour, now.Minute, now.Second, now.Millisecond);
+
+                    DateTime TimeAppear = startOfWeek + timeOfWeek + new TimeSpan(i,0,0,0);
+                    // (now.IsDaylightSavingTime() ? timeOfDay : timeOfDay.Add(TimeSpan.FromHours(1)));
+
+                    TimeAppear = TimeZoneInfo.ConvertTimeToUtc(TimeAppear, timeZoneInfo);
+
+                    if (TimeAppear < DateTime.UtcNow)
+                    {
+                        continue;
+                    }
+
+                    spawnDateTimes.Add(TimeAppear - TimeSpan.FromMinutes(NotifyTime));
+                }
+            }
+
+            return spawnDateTimes;
+        }
+
         private static DateTime CreateSpawnTime(DayOfWeek day, TimeSpan timeOfDay)
         {
             TimeZoneInfo timeZoneInfo = null;
@@ -167,7 +374,7 @@ namespace uwpUI.Services
             {
                 timeZoneInfo = TimeZoneInfo.FindSystemTimeZoneById("Central Europe Standard Time");
             }
-            else if(RegionSelectorService.Region == ServerRegion.PCSEA)
+            else if (RegionSelectorService.Region == ServerRegion.PCSEA)
             {
                 timeZoneInfo = TimeZoneInfo.FindSystemTimeZoneById("China Standard Time");
             }
@@ -180,7 +387,7 @@ namespace uwpUI.Services
             DateTime startOfWeek = now - new TimeSpan((int)now.DayOfWeek, now.Hour, now.Minute, now.Second, now.Millisecond);
 
             DateTime TimeAppear = startOfWeek + new TimeSpan((int)day, 0, 0, 0) + timeOfDay;
-               // (now.IsDaylightSavingTime() ? timeOfDay : timeOfDay.Add(TimeSpan.FromHours(1)));
+            // (now.IsDaylightSavingTime() ? timeOfDay : timeOfDay.Add(TimeSpan.FromHours(1)));
 
             TimeAppear = TimeZoneInfo.ConvertTimeToUtc(TimeAppear, timeZoneInfo);
 
@@ -234,7 +441,51 @@ namespace uwpUI.Services
             bool inRegion = text.Contains(boss.Name);
             return inRegion;
         }
-         
+
+        private static void ScheduleNotifications(WorldBoss boss, IEnumerable<DateTime> dateTimes)
+        {
+            var toastContent = CreateToastContent(boss);
+
+            foreach (var dateTime in dateTimes)
+            {
+                Singleton<ToastNotificationsService>.Instance.ScheduleToastNotification(new ScheduledToastNotification(toastContent.GetXml(), dateTime)
+                {
+                    Group = boss.Name
+                });
+            }
+        }
+
+        private static ToastContent CreateToastContent(WorldBoss boss)
+        {
+            return new ToastContent()
+            {
+                Visual = new ToastVisual()
+                {
+                    BindingGeneric = new ToastBindingGeneric()
+                    {
+                        Children =
+                        {
+                            new AdaptiveText()
+                            {
+                                HintMaxLines = 2,
+                                Text = NotifyTime > 0 ? $"{boss.Name} will spawn in {NotifyTime} minutes." :$"{boss.Name} has spawned!"
+                            },
+
+                            new AdaptiveText()
+                            {
+                                 Text = $"Located at {boss.Location}"
+                            }
+                        },
+
+                        AppLogoOverride = new ToastGenericAppLogo()
+                        {
+                            Source = boss.Image
+                        }
+                    },
+                }
+            };
+        }
+
         private static void ScheduleBossSpawns(BossModel boss, List<DateTime> spawns)
         {
             foreach (var time in spawns)

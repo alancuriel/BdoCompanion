@@ -5,7 +5,6 @@ using Caliburn.Micro;
 
 using Microsoft.EntityFrameworkCore;
 
-
 using uwpUI.Core.Data;
 using uwpUI.Services;
 using uwpUI.ViewModels;
@@ -34,8 +33,11 @@ namespace uwpUI
             //AppCenter.Start("{Your App Secret}", typeof(Analytics), typeof(Crashes));
 
             Initialize();
-            
-            
+
+            if (AnalyticsInfo.VersionInfo.DeviceFamily == "Windows.Xbox")
+            {
+                this.FocusVisualKind = FocusVisualKind.Reveal;
+            }
 
             // Deferred execution until used. Check https://msdn.microsoft.com/library/dd642331(v=vs.110).aspx for further info on Lazy<T> class.
             _activationService = new Lazy<ActivationService>(CreateActivationService);
@@ -91,6 +93,7 @@ namespace uwpUI
             _container.PerRequest<SettingsViewModel>();
             _container.PerRequest<DevViewModel>();
             _container.PerRequest<CookingRecipesViewModel>();
+            _container.PerRequest<BossNotifcationsViewModel>();
         }
 
         protected override object GetInstance(Type service, string key)
