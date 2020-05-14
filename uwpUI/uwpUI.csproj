@@ -12,7 +12,7 @@
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
     <TargetPlatformVersion Condition=" '$(TargetPlatformVersion)' == '' ">10.0.18362.0</TargetPlatformVersion>
-    <TargetPlatformMinVersion>10.0.17763.0</TargetPlatformMinVersion>
+    <TargetPlatformMinVersion>10.0.18362.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -149,6 +149,7 @@
     <Compile Include="Activation\ActivationHandler.cs" />
     <Compile Include="Helpers\BooleanToCollapsedConverter.cs" />
     <Compile Include="Helpers\EnumToBooleanConverter.cs" />
+    <Compile Include="Helpers\FindControlHelper.cs" />
     <Compile Include="Helpers\ItemGradeEnumToColorConverter.cs" />
     <Compile Include="Helpers\NavHelper.cs" />
     <Compile Include="Helpers\SettingsStorageExtensions.cs" />
@@ -165,6 +166,7 @@
     <Compile Include="Services\ToastNotificationsService.cs" />
     <Compile Include="Services\ToastNotificationsService.Samples.cs" />
     <Compile Include="Services\WhatsNewDisplayService.cs" />
+    <Compile Include="ViewModels\BossNotifcationsViewModel.cs" />
     <Compile Include="ViewModels\CookingRecipesDetailViewModel.cs" />
     <Compile Include="ViewModels\CookingRecipesViewModel.cs" />
     <Compile Include="ViewModels\DevViewModel.cs" />
@@ -172,6 +174,9 @@
     <Compile Include="ViewModels\SecondViewModel.cs" />
     <Compile Include="ViewModels\SettingsViewModel.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />
+    <Compile Include="Views\BossNotifcationsPage.xaml.cs">
+      <DependentUpon>BossNotifcationsPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\CookingRecipesDetail\DetailsView.xaml.cs">
       <DependentUpon>DetailsView.xaml</DependentUpon>
     </Compile>
@@ -234,6 +239,10 @@
     <Page Include="Styles\TextBlock.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\BossNotifcationsPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\CookingRecipesDetail\DetailsView.xaml">
       <Generator>MSBuild:Compile</Generator>
