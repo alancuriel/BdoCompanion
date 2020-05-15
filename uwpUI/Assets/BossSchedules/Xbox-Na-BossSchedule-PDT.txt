@@ -1,5 +1,6 @@
 Kutum Sun 11:00
 Karanda Sun 11:00
+Offin Sun 13:00
 Nouver Sun 14:00
 Kzarka Sun 14:00
 Kutum Sun 17:00
@@ -9,6 +10,7 @@ Kzarka Sun 20:15
 --
 Nouver Mon 7:00
 Kzarka Mon 7:00
+Offin Mon 16:00
 Kutum Mon 17:00
 Karanda Mon 17:00
 Nouver Mon 20:15
@@ -51,6 +53,7 @@ Kutum Fri 17:00
 Karanda Fri 17:00
 Nouver Fri 20:15
 Kzarka Fri 20:15
+Offin Fri 21:00
 Kutum Fri 23:00
 Karanda Fri 23:00
 --
