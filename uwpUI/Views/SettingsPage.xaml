@@ -171,6 +171,10 @@
                     <HyperlinkButton
                     x:Uid="Settings_EmailLink"
                     Margin="{StaticResource XSmallTopMargin}"/>
+
+                    <HyperlinkButton Content="Store Page"
+                                     NavigateUri="ms-windows-store://pdp/?ProductId=9ND9F6Q1TWR5"
+                                     Margin="{StaticResource XSmallTopMargin}"/>
                 </StackPanel>
             </StackPanel>
         </ScrollViewer>
