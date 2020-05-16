@@ -8,7 +8,6 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:local="using:uwpUI.ViewModels"
     xmlns:models="using:uwpUI.Core.Models"
-    xmlns:UI="using:Microsoft.Advertising.WinRT.UI"
     xmlns:reg="using:uwpUI.Services"
     Style="{StaticResource PageStyle}"
     mc:Ignorable="d">
@@ -80,6 +79,7 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
+        
         <controls:MasterDetailsView
             Grid.Row="0"
             x:Name="MasterDetailsViewControl"
@@ -95,21 +95,7 @@
             NoSelectionContentTemplate="{StaticResource NoSelectionContentTemplate}"
             SelectedItem="{x:Bind ViewModel.ActiveItem, Mode=TwoWay}"
             >
- 
+
         </controls:MasterDetailsView>
-
-        <ContentControl Grid.Row="1"
-                        HorizontalAlignment="Center"
-                        IsFocusEngagementEnabled="True"
-                        RequiresPointer="WhenEngaged"
-                        VerticalAlignment="Bottom">
-
-            <UI:AdControl ApplicationId="{x:Bind reg:AdvertisingService.ApplicationID}"
-                          AdUnitId="{x:Bind reg:AdvertisingService.AdUnitId}"             
-                          Width="640"
-                          Height="100"
-                          HorizontalAlignment="Center"
-                          VerticalAlignment="Bottom"/>
-        </ContentControl>
     </Grid>
 </Page>

@@ -5,7 +5,6 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Style="{StaticResource PageStyle}"
-    xmlns:UI="using:Microsoft.Advertising.WinRT.UI"
     xmlns:helper="using:uwpUI.Helpers"
     xmlns:reg="using:uwpUI.Services"
     xmlns:xaml="using:Windows.UI.Xaml"
@@ -178,18 +177,5 @@
                 </StackPanel>
             </StackPanel>
         </ScrollViewer>
-        <ContentControl Grid.Row="1"
-                        HorizontalAlignment="Center"
-                        IsFocusEngagementEnabled="True"
-                        RequiresPointer="WhenEngaged"
-                        VerticalAlignment="Bottom">
-
-            <UI:AdControl ApplicationId="{x:Bind reg:AdvertisingService.ApplicationID}"
-                          AdUnitId="{x:Bind reg:AdvertisingService.AdUnitId}"             
-                          Width="640"
-                          Height="100"
-                          HorizontalAlignment="Center"
-                          VerticalAlignment="Bottom"/>
-        </ContentControl>
     </Grid>
 </Page>
