@@ -13,76 +13,88 @@
         <Grid
             Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
             <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*" MinHeight="100"/>
+                <RowDefinition Height="Auto" MinHeight="150"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="3*"/>
                 <ColumnDefinition Width="1.5*"/>
             </Grid.ColumnDefinitions>
+
+            <TextBlock Text="World Bosses"
+                       FontSize="{StaticResource ExtraLargeFontSize}"
+                       FontWeight="SemiBold"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Top"
+                       Margin="{StaticResource MediumTopLeftMargin}"
+                       Grid.Row="0"
+                       Grid.Column="0"
+                       Grid.RowSpan="1"/>
+
             
+                <GridView ItemsSource="{x:Bind ViewModel.WorldBosses}"
+                          SelectedItem="{x:Bind ViewModel.SelectedBoss,Mode=TwoWay}"
+                          IsItemClickEnabled="True"
+                          SingleSelectionFollowsFocus="True"
+                          HorizontalAlignment="Center"
+                          AllowFocusOnInteraction="True"
+                          SelectionChanged="GridView_SelectionChanged"
+                          Grid.Row="1" Grid.Column="0"
+                          ScrollViewer.VerticalScrollBarVisibility="Visible"
+                          ScrollViewer.HorizontalScrollBarVisibility="Visible">
 
-            <GridView ItemsSource="{x:Bind ViewModel.WorldBosses}"
-                      SelectedItem="{x:Bind ViewModel.SelectedBoss,Mode=TwoWay}"
-                      IsItemClickEnabled="True"
-                      SingleSelectionFollowsFocus="True"
-                      Grid.Row="1" Grid.Column="0"
-                      HorizontalAlignment="Center"
-                      AllowFocusOnInteraction="True"
-                      SelectionChanged="GridView_SelectionChanged"
-                      
-                      >
-               
-                <GridView.ItemContainerStyle>
-                    <Style TargetType="GridViewItem">
-                        <Setter Property="Margin" Value="5, 5, 5, 5"/>
-                    </Style>
-                </GridView.ItemContainerStyle>
-
-
-                <GridView.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <ItemsWrapGrid x:Name="MaxItemsWrapGrid" 
+                    <GridView.ItemContainerStyle>
+                        <Style TargetType="GridViewItem">
+                            <Setter Property="Margin" Value="5, 5, 5, 5"/>
+                        </Style>
+                    </GridView.ItemContainerStyle>
+                    <GridView.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <ItemsWrapGrid x:Name="MaxItemsWrapGrid" 
                                        MaximumRowsOrColumns="4"
-                                       Orientation="Horizontal" />
-                    </ItemsPanelTemplate>
-                </GridView.ItemsPanel>
-                
-                
-                <GridView.Transitions>
-                    <TransitionCollection>
-                        <EntranceThemeTransition IsStaggeringEnabled="True"/>
-                    </TransitionCollection>
-                </GridView.Transitions>
+                                       CanBeScrollAnchor="True"
+                                       Orientation="Horizontal"
+                                       
+                                       ScrollViewer.IsVerticalScrollChainingEnabled="True"
+                                       ScrollViewer.IsHorizontalScrollChainingEnabled="True"/>
+                        </ItemsPanelTemplate>
+                    </GridView.ItemsPanel>
+                    <GridView.Transitions>
+                        <TransitionCollection>
+                            <EntranceThemeTransition IsStaggeringEnabled="True"/>
+                        </TransitionCollection>
+                    </GridView.Transitions>
 
-                <GridView.ItemTemplate>
-                    <DataTemplate x:DataType="models:WorldBoss">
-                        <Grid Width="150" CornerRadius="10">
+                    <GridView.ItemTemplate>
+                        <DataTemplate x:DataType="models:WorldBoss">
+                            <Grid Width="150" CornerRadius="10">
 
-                            <Image  Source="{x:Bind Image}" Stretch="UniformToFill"/>
-                            <Grid  Height="40" VerticalAlignment="Bottom" Padding="5,1,5,1" 
+                                <Image  Source="{x:Bind Image}" Stretch="UniformToFill"/>
+                                <Grid  Height="40" VerticalAlignment="Bottom" Padding="5,1,5,1" 
                                    Background="Gray" Opacity=".65" >
-                                <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch">
-                                    <TextBlock Text="{x:Bind Name}"/>
-                                    <TextBlock Text="2 Min"/>
-                                </StackPanel>
-                                <CheckBox x:Name="BossCheckBox" HorizontalAlignment="Right" FlowDirection="LeftToRight"
+                                    <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch">
+                                        <TextBlock Text="{x:Bind Name}"
+                                                   FontWeight="SemiBold"/>
+                                        <TextBlock Text="{x:Bind TimeTillNextSpawn, Mode=OneWay}"/>
+                                    </StackPanel>
+                                    <CheckBox x:Name="BossCheckBox" HorizontalAlignment="Right" FlowDirection="LeftToRight"
                                           IsChecked="{x:Bind IsTimerEnabled, Mode=OneWay}"
                                           Padding="0" MinWidth="0"
                                           cm:Message.Attach="[Event Click] = [Action EnableTimerAsync($dataContext)]">
-                                </CheckBox>
+                                    </CheckBox>
+                                </Grid>
                             </Grid>
-                        </Grid>
-                    </DataTemplate>
-                </GridView.ItemTemplate>
+                        </DataTemplate>
+                    </GridView.ItemTemplate>
 
-            </GridView>
+                </GridView>
+            
             <Grid x:Name="Settings"
                   
                   Grid.Column="1"
                   Grid.Row="0"
-                  Grid.RowSpan="3">
+                  Grid.RowSpan="4">
                 <Grid.Resources>
                     <ThemeShadow x:Name="SettingsShadow"/>
                 </Grid.Resources>
@@ -100,10 +112,11 @@
 
                         <TextBlock FontSize="{StaticResource MediumLargeFontSize}"
                                FontWeight="SemiBold"
-                               Text="Server: "/>
-                        <TextBlock FontSize="{StaticResource MediumLargeFontSize}"
-                               FontWeight="SemiBold"
-                               Text=" NA"/>
+                               Text="Server:"/>
+                        <TextBlock x:Name="ServerRegion"
+                                   Margin="{StaticResource XSmallLeftMargin}"
+                                   FontSize="{StaticResource MediumLargeFontSize}"
+                                   FontWeight="Medium"/>
                     </StackPanel>
 
                     <StackPanel Orientation="Horizontal"

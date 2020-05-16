@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 using uwpUI.Activation;
@@ -25,7 +26,16 @@ namespace uwpUI.Services
         public void ScheduleToastNotification(ScheduledToastNotification toastNotification)
         {
             ToastNotificationManager.CreateToastNotifier().AddToSchedule(toastNotification);
+        }
 
+        public void ScheduleToastNotifications(IEnumerable<ScheduledToastNotification> toastNotifications)
+        {
+            var toastNotifier = ToastNotificationManager.CreateToastNotifier();
+
+            foreach (var toastNotification in toastNotifications)
+            {
+                toastNotifier.AddToSchedule(toastNotification);
+            }
         }
 
         protected override async Task HandleInternalAsync(ToastNotificationActivatedEventArgs args)

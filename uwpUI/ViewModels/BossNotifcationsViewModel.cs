@@ -1,11 +1,14 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading.Tasks;
 using Caliburn.Micro;
 using uwpUI.Core.Helpers;
 using uwpUI.Core.Models;
 using uwpUI.Helpers;
 using uwpUI.Services;
+using Windows.UI.Xaml;
 
 namespace uwpUI.ViewModels
 {
@@ -18,6 +21,15 @@ namespace uwpUI.ViewModels
             NotificationTime = new BindableCollection<int>(Enumerable.Range(0, 91));
         }
 
+        readonly private ServerRegion _serverRegion = RegionSelectorService.Region;
+
+        public ServerRegion ServerRegion
+        {
+            get { return _serverRegion; }
+        }
+
+        private DispatcherTimer bossSpawnTimer;
+
         protected override async void OnInitialize()
         {
             base.OnInitialize();
@@ -27,6 +39,41 @@ namespace uwpUI.ViewModels
                WorldBosses.Add(boss);
            });
 
+            bossSpawnTimer = new DispatcherTimer
+            {
+                Interval = TimeSpan.FromSeconds(1)
+            };
+            bossSpawnTimer.Tick += BossSpawnTimer_Tick;
+
+            bossSpawnTimer.Start();
+            NotifyOfPropertyChange(() => WorldBosses);
+        }
+
+        protected override void OnDeactivate(bool close)
+        {
+            base.OnDeactivate(close);
+
+            bossSpawnTimer.Stop();
+            bossSpawnTimer.Tick -= BossSpawnTimer_Tick;
+        }
+
+        private void BossSpawnTimer_Tick(object sender, object e)
+        {
+            foreach (var boss in WorldBosses)
+            {
+                boss.NextSpawnTime = BossNotificationService.GetTimeTillNextSpawn(boss);
+
+                if (boss.NextSpawnTime.Days > 0)
+                {
+                    boss.TimeTillNextSpawn = boss.NextSpawnTime.ToString(@"d\.hh\:mm\:ss");
+                }
+                else
+                {
+                    boss.TimeTillNextSpawn = boss.NextSpawnTime.ToString(@"hh\:mm\:ss");
+                }
+
+            }
+            WorldBosses.OrderBy(b => b.NextSpawnTime);
             NotifyOfPropertyChange(() => WorldBosses);
         }
 
@@ -113,28 +160,49 @@ namespace uwpUI.ViewModels
 
         public void NotificationTest() => Singleton<ToastNotificationsService>.Instance.ShowToastNotificationSample();
 
-        public void DisableAll()
+        public async void DisableAll()
         {
             BossNotificationService.DisableAllBossNotifications();
             foreach (var boss in WorldBosses) { boss.IsTimerEnabled = false; }
             NotifyOfPropertyChange(() => WorldBosses);
+            await Task.CompletedTask;
         }
         public async void EnableAll()
         {
             if(WorldBosses?.Count > 0)
             {
                 BossNotificationService.DisableAllBossNotifications();
-                foreach (var boss in WorldBosses)
-                {
-                    if (!boss.IsTimerEnabled)
-                    {
-                        await BossNotificationService.EnableNotifications(boss);
-                        boss.IsTimerEnabled = true;
-                    }
-                }
+
+                Task.WaitAll(EnableAllTasks().ToArray());
+
+                //foreach (var boss in WorldBosses)
+                //{
+                //        await BossNotificationService.EnableNotifications(boss);
+                //        boss.IsTimerEnabled = true;              
+                //}
 
                 NotifyOfPropertyChange(() => WorldBosses);
+                await Task.CompletedTask;
             }
         }
+
+        public IEnumerable<Task> EnableAllTasks()
+        {
+            //var tasks = new Task[WorldBosses.Count];
+            //for(short i = 0; i < WorldBosses.Count; i++)
+            //{
+            //     tasks[i] = BossNotificationService.EnableNotifications(WorldBosses[i]);
+            //    WorldBosses[i].IsTimerEnabled = true;
+            //}
+            //return tasks;
+
+            foreach(var boss in WorldBosses)
+            {
+                boss.IsTimerEnabled = true;
+                yield return BossNotificationService.EnableNotifications(boss);
+            }
+
+        }
+
     }
 }
