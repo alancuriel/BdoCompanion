@@ -34,7 +34,7 @@
             <ContentControl
                 Grid.Row="0" Grid.Column="0"
                 Grid.ColumnSpan="2"
-                HorizontalAlignment="Center">
+                HorizontalAlignment="Left">
 
                 <TextBlock
                     Style="{StaticResource PageTitleStyle}"

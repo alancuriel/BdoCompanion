@@ -130,16 +130,23 @@
                             Spacing="12"
                             Margin="{StaticResource SmallTopLeftMargin}">
 
-                        <Button cm:Message.Attach="DisableAllAsync"
-                            Content="Disable All"/>
-                        <Button cm:Message.Attach="EnableAllAsync"
-                            Content="Enable All"/>
+                        <Button x:Name="BtnDisableAll"
+                                cm:Message.Attach="DisableAllAsync"
+                                Content="Disable All"
+                                XYFocusRight="{x:Bind BtnEnableAll}"
+                                XYFocusDown="{x:Bind NotificationTime}"/>
+                        <Button x:Name="BtnEnableAll"
+                                cm:Message.Attach="EnableAllAsync"
+                                Content="Enable All"
+                                XYFocusLeft="{x:Bind BtnDisableAll}"
+                                XYFocusDown="{x:Bind NotificationTime}"/>
                     </StackPanel>
 
                     <TextBlock FontSize="{StaticResource MediumLargeFontSize}"
-                           Margin="{StaticResource SmallTopLeftMargin}"
-                           FontWeight="SemiBold"
-                           Text="Notify Time"/>
+                               Margin="{StaticResource SmallTopLeftMargin}"
+                               FontWeight="SemiBold"
+                               Text="Notify Time"/>
+                    
                     <TextBlock FontSize="{StaticResource SmallFontSize}"
                            Margin="{StaticResource SmallLeftMargin}"
                            Text="*Resets Notifications*"/>
@@ -147,15 +154,18 @@
                     <StackPanel Orientation="Horizontal"
                             Spacing="5">
                         <ComboBox x:Name="NotificationTime"
-                          Margin="12,4,0,0"/>
+                                  Margin="12,4,0,0"
+                                  XYFocusUp="{x:Bind BtnDisableAll}"
+                                  XYFocusDown="{x:Bind NotificationTest}"/>
                         <TextBlock Text="Min. Before"
-                               VerticalAlignment="Bottom"
-                               FontSize="{StaticResource MediumLargeFontSize}"/>
+                                   VerticalAlignment="Bottom"
+                                   FontSize="{StaticResource MediumLargeFontSize}"/>
                     </StackPanel>
 
                     <Button x:Name="NotificationTest"
-                        Margin="{StaticResource SmallTopLeftMargin}"
-                        Content="Test Notification"/>
+                            Margin="{StaticResource SmallTopLeftMargin}"
+                            Content="Test Notification"
+                            XYFocusUp="{x:Bind NotificationTime}"/>
 
                 </StackPanel>
             </Grid>

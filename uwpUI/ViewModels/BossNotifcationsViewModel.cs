@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using Caliburn.Micro;
+using ColorCode.Common;
 using uwpUI.Core.Helpers;
 using uwpUI.Core.Models;
 using uwpUI.Helpers;
@@ -85,9 +86,28 @@ namespace uwpUI.ViewModels
                 }
 
             }
-            WorldBosses.OrderBy(b => b.NextSpawnTime);
+
+            if (!IsBossesSorted())
+            {
+                WorldBosses.SortStable((a, b) => { return a.NextSpawnTime.CompareTo(b.NextSpawnTime); });
+            }
+
             NotifyOfPropertyChange(() => WorldBosses);
         }
+
+        private bool IsBossesSorted()
+        {
+            for (int i = 0; i < WorldBosses.Count - 1; i++)
+            {
+                if (WorldBosses[i].NextSpawnTime > WorldBosses[i+1].NextSpawnTime)
+                {
+                    if((WorldBosses[i].NextSpawnTime - WorldBosses[i+1].NextSpawnTime) > TimeSpan.FromSeconds(2) ) return false;
+                }
+            }
+            return true;
+        }
+
+        
 
         //protected override void OnViewLoaded(object view)
         //{
