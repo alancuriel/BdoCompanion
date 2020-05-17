@@ -32,6 +32,8 @@
                        Grid.Column="0"
                        Grid.RowSpan="1"/>
 
+            
+
             <GridView ItemsSource="{x:Bind ViewModel.WorldBosses}"
                           SelectedItem="{x:Bind ViewModel.SelectedBoss,Mode=TwoWay}"
                           IsItemClickEnabled="True"
@@ -84,12 +86,22 @@
                 </GridView.ItemTemplate>
             </GridView>
 
+            <controls:Loading  Grid.Column="0" Grid.Row="0"
+                               Grid.RowSpan="2"
+                               Visibility="Visible"
+                               IsLoading="{x:Bind ViewModel.IsLoading, Mode=OneWay}">
+                
+                <controls:Loading.Background>
+                    <SolidColorBrush Color="{StaticResource SystemAltMediumColor}" Opacity="0.7"/>
+                </controls:Loading.Background>
+                <ProgressRing IsActive="True"/>
+            </controls:Loading>
 
-            <Grid x:Name="Settings"
-                  
+            <Grid x:Name="Settings" 
                   Grid.Column="1"
                   Grid.Row="0"
                   Grid.RowSpan="4">
+                
                 <Grid.Resources>
                     <ThemeShadow x:Name="SettingsShadow"/>
                 </Grid.Resources>
@@ -118,9 +130,9 @@
                             Spacing="12"
                             Margin="{StaticResource SmallTopLeftMargin}">
 
-                        <Button x:Name="DisableAll"
+                        <Button cm:Message.Attach="DisableAllAsync"
                             Content="Disable All"/>
-                        <Button x:Name="EnableAll"
+                        <Button cm:Message.Attach="EnableAllAsync"
                             Content="Enable All"/>
                     </StackPanel>
 

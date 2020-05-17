@@ -28,6 +28,18 @@ namespace uwpUI.ViewModels
             get { return _serverRegion; }
         }
 
+        private bool _isLoading = false;
+
+        public bool IsLoading
+        {
+            get { return _isLoading; }
+            set
+            {
+                Set(ref _isLoading, value);
+            }
+        }
+
+
         private DispatcherTimer bossSpawnTimer;
 
         protected override async void OnInitialize()
@@ -147,7 +159,7 @@ namespace uwpUI.ViewModels
             get { return _selectedNotificationTime; }
             set
             {
-                DisableAll();
+                DisableAllAsync();
                 SwitchNotifyTime(value);
                 Set(ref _selectedNotificationTime, value);
             }
@@ -160,17 +172,38 @@ namespace uwpUI.ViewModels
 
         public void NotificationTest() => Singleton<ToastNotificationsService>.Instance.ShowToastNotificationSample();
 
-        public async void DisableAll()
+        public async void DisableAllAsync()
         {
+            await Task.Run( () =>
+            {
+                IsLoading = true;
+                NotifyOfPropertyChange(() => IsLoading);
+            });
+            
+
             BossNotificationService.DisableAllBossNotifications();
             foreach (var boss in WorldBosses) { boss.IsTimerEnabled = false; }
             NotifyOfPropertyChange(() => WorldBosses);
+
+
+            await Task.Run(() =>
+            {
+                IsLoading = false;
+                NotifyOfPropertyChange(() => IsLoading);
+            });
+
             await Task.CompletedTask;
         }
-        public async void EnableAll()
+        public async void EnableAllAsync()
         {
             if(WorldBosses?.Count > 0)
             {
+                await Task.Run(() =>
+                {
+                    IsLoading = true;
+                    NotifyOfPropertyChange(() => IsLoading);
+                });
+
                 BossNotificationService.DisableAllBossNotifications();
 
                 Task.WaitAll(EnableAllTasks().ToArray());
@@ -182,6 +215,13 @@ namespace uwpUI.ViewModels
                 //}
 
                 NotifyOfPropertyChange(() => WorldBosses);
+
+                await Task.Run(() =>
+                {
+                    IsLoading = false;
+                    NotifyOfPropertyChange(() => IsLoading);
+                });
+
                 await Task.CompletedTask;
             }
         }
