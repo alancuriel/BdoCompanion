@@ -10,12 +10,12 @@
     Style="{StaticResource PageStyle}"
     mc:Ignorable="d">
     <Grid x:Name="ContentArea">
-        <Grid
+        <Grid CanBeScrollAnchor="True"
             Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
             <Grid.RowDefinitions>
-                <RowDefinition Height="*" MinHeight="100"/>
-                <RowDefinition Height="Auto" MinHeight="150"/>
+                <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
+
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="3*"/>
@@ -32,64 +32,59 @@
                        Grid.Column="0"
                        Grid.RowSpan="1"/>
 
-            
-                <GridView ItemsSource="{x:Bind ViewModel.WorldBosses}"
+            <GridView ItemsSource="{x:Bind ViewModel.WorldBosses}"
                           SelectedItem="{x:Bind ViewModel.SelectedBoss,Mode=TwoWay}"
                           IsItemClickEnabled="True"
                           SingleSelectionFollowsFocus="True"
                           HorizontalAlignment="Center"
+                          VerticalAlignment="Center"
                           AllowFocusOnInteraction="True"
                           SelectionChanged="GridView_SelectionChanged"
-                          Grid.Row="1" Grid.Column="0"
-                          ScrollViewer.VerticalScrollBarVisibility="Visible"
-                          ScrollViewer.HorizontalScrollBarVisibility="Visible">
+                          Grid.Column="0" Grid.Row="2">
 
-                    <GridView.ItemContainerStyle>
-                        <Style TargetType="GridViewItem">
-                            <Setter Property="Margin" Value="5, 5, 5, 5"/>
-                        </Style>
-                    </GridView.ItemContainerStyle>
-                    <GridView.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <ItemsWrapGrid x:Name="MaxItemsWrapGrid" 
+                <GridView.ItemContainerStyle>
+                    <Style TargetType="GridViewItem">
+                        <Setter Property="Margin" Value="5, 5, 5, 5"/>
+                    </Style>
+                </GridView.ItemContainerStyle>
+                <GridView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <ItemsWrapGrid x:Name="MaxItemsWrapGrid"
                                        MaximumRowsOrColumns="4"
-                                       CanBeScrollAnchor="True"
-                                       Orientation="Horizontal"
-                                       
-                                       ScrollViewer.IsVerticalScrollChainingEnabled="True"
-                                       ScrollViewer.IsHorizontalScrollChainingEnabled="True"/>
-                        </ItemsPanelTemplate>
-                    </GridView.ItemsPanel>
-                    <GridView.Transitions>
-                        <TransitionCollection>
-                            <EntranceThemeTransition IsStaggeringEnabled="True"/>
-                        </TransitionCollection>
-                    </GridView.Transitions>
+                                       CanBeScrollAnchor="False"
+                                       Orientation="Horizontal"/>
+                    </ItemsPanelTemplate>
+                </GridView.ItemsPanel>
+                <GridView.Transitions>
+                    <TransitionCollection>
+                        <EntranceThemeTransition IsStaggeringEnabled="True"/>
+                    </TransitionCollection>
+                </GridView.Transitions>
 
-                    <GridView.ItemTemplate>
-                        <DataTemplate x:DataType="models:WorldBoss">
-                            <Grid Width="150" CornerRadius="10">
+                <GridView.ItemTemplate>
+                    <DataTemplate x:DataType="models:WorldBoss">
+                        <Grid Width="150" CornerRadius="10">
 
-                                <Image  Source="{x:Bind Image}" Stretch="UniformToFill"/>
-                                <Grid  Height="40" VerticalAlignment="Bottom" Padding="5,1,5,1" 
+                            <Image  Source="{x:Bind Image}" Stretch="UniformToFill"/>
+                            <Grid  Height="40" VerticalAlignment="Bottom" Padding="5,1,5,1" 
                                    Background="Gray" Opacity=".65" >
-                                    <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch">
-                                        <TextBlock Text="{x:Bind Name}"
+                                <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch">
+                                    <TextBlock Text="{x:Bind Name}"
                                                    FontWeight="SemiBold"/>
-                                        <TextBlock Text="{x:Bind TimeTillNextSpawn, Mode=OneWay}"/>
-                                    </StackPanel>
-                                    <CheckBox x:Name="BossCheckBox" HorizontalAlignment="Right" FlowDirection="LeftToRight"
+                                    <TextBlock Text="{x:Bind TimeTillNextSpawn, Mode=OneWay}"/>
+                                </StackPanel>
+                                <CheckBox x:Name="BossCheckBox" HorizontalAlignment="Right" FlowDirection="LeftToRight"
                                           IsChecked="{x:Bind IsTimerEnabled, Mode=OneWay}"
                                           Padding="0" MinWidth="0"
                                           cm:Message.Attach="[Event Click] = [Action EnableTimerAsync($dataContext)]">
-                                    </CheckBox>
-                                </Grid>
+                                </CheckBox>
                             </Grid>
-                        </DataTemplate>
-                    </GridView.ItemTemplate>
+                        </Grid>
+                    </DataTemplate>
+                </GridView.ItemTemplate>
+            </GridView>
 
-                </GridView>
-            
+
             <Grid x:Name="Settings"
                   
                   Grid.Column="1"
