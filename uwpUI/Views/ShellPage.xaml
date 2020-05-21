@@ -19,6 +19,8 @@
         PaneDisplayMode="LeftCompact"
         Background="{ThemeResource SystemControlBackgroundAltHighBrush}"
         IsBackButtonVisible="Collapsed">
+
+        <!-- TODO: Remove Icons if you do not have the necessary files.-->
         
         <winui:NavigationView.MenuItems>
             <winui:NavigationViewItem x:Uid="Shell_Main" helpers:NavHelper.NavigateTo="views:MainPage">

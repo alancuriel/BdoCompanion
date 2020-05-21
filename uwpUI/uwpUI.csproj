@@ -179,12 +179,6 @@
     <Compile Include="Views\BossNotifcationsPage.xaml.cs">
       <DependentUpon>BossNotifcationsPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\CookingRecipesDetail\DetailsView.xaml.cs">
-      <DependentUpon>DetailsView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\CookingRecipesDetail\MasterView.xaml.cs">
-      <DependentUpon>MasterView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\RecipesPage.xaml.cs">
       <DependentUpon>RecipesPage.xaml</DependentUpon>
     </Compile>
@@ -243,14 +237,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\BossNotifcationsPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\CookingRecipesDetail\DetailsView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\CookingRecipesDetail\MasterView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
