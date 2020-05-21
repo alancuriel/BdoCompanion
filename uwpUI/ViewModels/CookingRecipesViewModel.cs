@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Caliburn.Micro;
 using uwpUI.Core.Models;
 using uwpUI.Core.Services;
+using uwpUI.Models;
 using Windows.UI.Xaml.Input;
 
 namespace uwpUI.ViewModels
@@ -18,8 +19,11 @@ namespace uwpUI.ViewModels
             get { return _selectedRecipe; }
             set
             {
-                Set(ref _selectedRecipe, value);
-                //NotifyOfPropertyChange(() => SelectedRecipe);
+                if (_selectedRecipe != value )
+                {
+                    Set(ref _selectedRecipe, value);
+                    if(value != null) LoadMaterials();
+                }
             }
         }
 
@@ -35,6 +39,32 @@ namespace uwpUI.ViewModels
             {
                 Set(ref _searchStr, value);
                 NotifyOfPropertyChange(() => SearchStr);
+            }
+        }
+
+        private BindableCollection<RecipeMaterialModel> _materials = new BindableCollection<RecipeMaterialModel>();
+        public BindableCollection<RecipeMaterialModel> Materials
+        {
+            get
+            {
+                return _materials;
+            }
+            set
+            {
+                _materials = value;
+                NotifyOfPropertyChange(() => Materials);
+            }
+        }
+
+        private BindableCollection<BdoItem> _results = new BindableCollection<BdoItem>();
+
+        public BindableCollection<BdoItem> Results
+        {
+            get { return _results; }
+            set
+            {
+                _results = value;
+                NotifyOfPropertyChange(() => Results);
             }
         }
 
@@ -96,7 +126,57 @@ namespace uwpUI.ViewModels
         {
             if (args.Key == Windows.System.VirtualKey.Enter) SearchRecipe();
         }
-            
+
+        private void LoadMaterials()
+        {
+            Materials.Clear();
+            Results.Clear();
+            var materials = BdoDataService.GetRecipeMatsByRecipeID(SelectedRecipe.Id);
+            foreach (var material in materials)
+            {
+                if (material.IsItem)
+                {
+                    material.Item = BdoDataService.GetItemById(material.ItemId.Value);
+                    Materials.Add(new RecipeMaterialModel
+                    {
+                        Name = material.Item.Name,
+                        Img = material.Item.Img,
+                        Grade = material.Item.Grade,
+                        IsItem = true,
+                        Id = material.Item.Id,
+                        Amount = material.Amount
+                    });
+                }
+                else
+                {
+                    //Item Group
+                    material.ItemGroup = BdoDataService.GetItemGroupById(material.ItemGroupId.Value);
+                    BdoItem item = BdoDataService.FirstItemFromItemGroup(material.ItemGroupId.Value);
+                    Materials.Add(new RecipeMaterialModel
+                    {
+                        Name = material.ItemGroup.Name,
+                        Img = material.ItemGroup.Items[0].Img,
+                        Grade = ItemGrade.White,
+                        IsItem = false,
+                        Id = material.ItemGroup.Id,
+                        Amount = material.Amount
+                    });
+                }
+            }
+
+            BdoItem result0 = BdoDataService.GetItemById(SelectedRecipe.Item1Id.Value);
+            Results.Add(result0);
+
+            if (SelectedRecipe.Item2Id.HasValue)
+            {
+                BdoItem result1 = BdoDataService.GetItemById(SelectedRecipe.Item2Id.Value);
+                Results.Add(result1);
+            }
+
+            NotifyOfPropertyChange(() => Materials);
+            NotifyOfPropertyChange(() => Results);
+        }
+
 
     }
 }

@@ -8,7 +8,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:local="using:uwpUI.ViewModels"
     xmlns:models="using:uwpUI.Core.Models"
-    xmlns:reg="using:uwpUI.Services"
+    xmlns:uwpModels="using:uwpUI.Models"
     xmlns:helpers="using:uwpUI.Helpers"
     Style="{StaticResource PageStyle}"
     mc:Ignorable="d">
@@ -76,7 +76,8 @@
                 <Button x:Name="SearchRecipe"
                         HorizontalAlignment="Right"
                         Content="Search"
-                        Grid.Column="1"/>
+                        Grid.Column="1"
+                        Margin="{StaticResource SmallRightMargin}"/>
             </Grid>
         </StackPanel>
 
@@ -85,7 +86,8 @@
             <ListView ItemsSource="{x:Bind ViewModel.Recipes, Mode=OneWay}"
                       SelectedItem="{x:Bind ViewModel.SelectedRecipe, Mode=TwoWay}"
                       Margin="{StaticResource SmallTopMargin}"
-                      SelectionMode="Single">
+                      SelectionMode="Single"
+                      >
                 <ListView.ItemTemplate>
                     <DataTemplate x:DataType="models:Recipe">
                         <Grid Height="45">
@@ -109,95 +111,97 @@
             </ListView>
         </Grid>
 
-    </Grid>
-
-
-    <!--<Page.Resources>
-        <DataTemplate x:Key="ItemTemplate">
-            <ContentControl x:Name="Items" cm:View.Model="{Binding}" cm:View.Context="MasterView"
-                            IsFocusEngagementEnabled="False" IsFocusEngaged="False"
-                            />
-        </DataTemplate>
-
-        <DataTemplate x:Key="DetailsTemplate">
-            <ContentControl x:Name="ItemPages" cm:View.Model="{Binding}" cm:View.Context="DetailsView"
-                            HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
-                            IsFocusEngagementEnabled="True" FocusVisualPrimaryThickness="1" UseSystemFocusVisuals="True" />
-        </DataTemplate>
-
-        <DataTemplate x:Key="NoSelectionContentTemplate" >
-            <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-                <TextBlock
-                    x:Uid="CookingRecipes_NoSelection"
-                    Style="{StaticResource SubtitleTextBlockStyle}"
-                    VerticalAlignment="Center"
-                    HorizontalAlignment="Center"
-                    TextAlignment="Center" />
-            </Grid>
-        </DataTemplate>
-
-        <DataTemplate x:Key="MasterHeaderTemplate">
-            <StackPanel Orientation="Horizontal"
+        <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+              Grid.Row="0" Grid.Column="1" Grid.RowSpan="3">
+            <ScrollViewer
+            Name="ForegroundElement"
+            Padding="{StaticResource DetailPageMargin}"
+            HorizontalAlignment="Stretch"
+            Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+            VerticalScrollMode="Enabled">
+                <StackPanel HorizontalAlignment="Left">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch">
+                        <Image
                         HorizontalAlignment="Center"
-                        Margin="{StaticResource XSmallBottomMargin}">
-                
-                <RadioButton GroupName="recipeType" IsChecked="True"
-                                 cm:Message.Attach="LoadDataAsync('Cooking')">
-                    <RadioButton.Content>
-                        <StackPanel Orientation="Horizontal">
-                            <FontIcon FontFamily="/Assets/Fonts/Font-Awesome-5-Pro-Solid-900.otf#Font Awesome 5 Pro"
-                                      Glyph="&#xf2e7;" Margin="{StaticResource SmallRightMargin}"/>
-                            <TextBlock Text="Cooking"/>
-                        </StackPanel>
-                    </RadioButton.Content>
-                </RadioButton>
+                        VerticalAlignment="Center"
+                        Source="{x:Bind ViewModel.SelectedRecipe.Img, Mode=OneWay}" />
+                        <TextBlock
+                        Margin="{StaticResource SmallLeftMargin}"
+                        VerticalAlignment="Center"
+                        Style="{ThemeResource TitleTextBlockStyle}"
+                        Text="{x:Bind ViewModel.SelectedRecipe.Name, Mode=OneWay}" />
+                    </StackPanel>
+                    <StackPanel Name="block" Padding="0,15,0,0">
+                        <TextBlock Style="{StaticResource DetailSubTitleStyle}" Text="Category" />
+                        <TextBlock Style="{StaticResource DetailBodyBaseMediumStyle}" Text="{x:Bind ViewModel.SelectedRecipe.Type, Mode=OneWay}" />
+                        <TextBlock
+                        Margin="{StaticResource SmallTopMargin}"
+                        Style="{StaticResource DetailSubTitleStyle}"
+                        Text="Skill Level" />
+                        <TextBlock Text="{x:Bind ViewModel.SelectedRecipe.SkillLevel, Mode=OneWay}" Style="{StaticResource DetailBodyBaseMediumStyle}" />
+                        <TextBlock
+                        Margin="{StaticResource SmallTopMargin}"
+                        Style="{StaticResource DetailSubTitleStyle}"
+                        Text="Experience" />
+                        <TextBlock Text="{x:Bind ViewModel.SelectedRecipe.Exp, Mode=OneWay}" Style="{StaticResource DetailBodyBaseMediumStyle}" />
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
 
-                <RadioButton GroupName="recipeType"
-                    cm:Message.Attach="LoadDataAsync('Alchemy')">
-                    <RadioButton.Content>
-                        <StackPanel Orientation="Horizontal">
-                            <FontIcon FontFamily="/Assets/Fonts/Font-Awesome-5-Pro-Solid-900.otf#Font Awesome 5 Pro"
-                                      Glyph="&#xf6e1;" Margin="{StaticResource SmallRightMargin}"/>
-                            <TextBlock Text="Alchemy"/>
-                        </StackPanel>
-                    </RadioButton.Content>
-                </RadioButton>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
 
-            </StackPanel>
+                            <TextBlock Grid.Row="0" Grid.Column="0"
+                        Margin="{StaticResource SmallTopMargin}"
+                        Style="{StaticResource DetailSubTitleStyle}"
+                        Text="Materials" />
 
-            -->
-    <!--<TextBlock
-                    x:Name="headerText"
-                    Text="Recipes"
-                    VerticalAlignment="Center"
-                    Style="{StaticResource ListTitleStyle}" />-->
-    <!--
-        </DataTemplate>
+                            <ListView x:Name="Materials"
+                                  Grid.Row="1" Grid.Column="0"
+                                  XYFocusRight="{x:Bind Results}">
+                                <ListView.ItemTemplate>
+                                    <DataTemplate x:DataType="uwpModels:RecipeMaterialModel">
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Style="{StaticResource DetailBodyBaseMediumStyle}" Text="{x:Bind Amount}"
+                                               Margin="{StaticResource SmallRightMargin}" VerticalAlignment="Center"/>
+                                            <Image x:Name="MatImg" Source="{x:Bind Img}"/>
+                                            <TextBlock x:Name="MatName" Foreground="{x:Bind Grade, Converter={StaticResource ItemGradeEnumToColorConverter}}"
+                                               Margin="{StaticResource SmallLeftMargin}" Text="{x:Bind Name}" VerticalAlignment="Center"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
 
-    </Page.Resources>
+                            <TextBlock
+                            Grid.Row="0" Grid.Column="1"
+                            Margin="{StaticResource SmallTopMargin}"
+                            Style="{StaticResource DetailSubTitleStyle}"
+                            Text="Results"/>
 
-    <Grid x:Name="ContentArea">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
-        
-        <controls:MasterDetailsView
-            Grid.Row="0"
-            x:Name="MasterDetailsViewControl"
-            x:Uid="Recipes"
-            BackButtonBehavior="Automatic"
-            Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}"
-            BorderBrush="Transparent"
-            DetailsTemplate="{StaticResource DetailsTemplate}"
-            MasterHeaderTemplate="{StaticResource MasterHeaderTemplate}"
-            ItemsSource="{x:Bind ViewModel.Items}"
-            ItemTemplate="{StaticResource ItemTemplate}"
-            Loaded="MasterDetailsViewControl_Loaded"
-            NoSelectionContentTemplate="{StaticResource NoSelectionContentTemplate}"
-            SelectedItem="{x:Bind ViewModel.ActiveItem, Mode=TwoWay}"
-            >
+                            <ListView x:Name="Results"
+                                  Grid.Row="1" Grid.Column="1"
+                                  XYFocusLeft="{x:Bind Materials}">
+                                <ListView.ItemTemplate>
+                                    <DataTemplate x:DataType="models:BdoItem">
+                                        <StackPanel Orientation="Horizontal">
+                                            <Image Source="{x:Bind Img}"/>
+                                            <TextBlock Style="{StaticResource DetailBodyBaseMediumStyle}"  Text="{x:Bind Name}"
+                                               Foreground="{x:Bind Grade, Converter={StaticResource ItemGradeEnumToColorConverter}}"
+                                               VerticalAlignment="Center" Margin="{StaticResource SmallLeftMargin}"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
+                        </Grid>
 
-        </controls:MasterDetailsView>
-    </Grid>-->
+                    </StackPanel>
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
+
+    </Grid>
 </Page>
