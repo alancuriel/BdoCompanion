@@ -261,7 +261,7 @@
     <value>PC - SEA</value>
   </data>
   <data name="Shell_BossNotifcations.Content" xml:space="preserve">
-    <value>BossNotifcations</value>
+    <value>Boss Notifcations</value>
     <comment>Navigation view item name for BossNotifcations</comment>
   </data>
 </root>
