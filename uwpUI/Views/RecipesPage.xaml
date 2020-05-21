@@ -89,7 +89,7 @@
                       SelectedItem="{x:Bind ViewModel.SelectedRecipe, Mode=TwoWay}"
                       Margin="{StaticResource SmallTopMargin}"
                       SelectionMode="Single"
-                      >
+                      Loaded="ListView_Loaded">
                 <ListView.ItemTemplate>
                     <DataTemplate x:DataType="models:Recipe">
                         <Grid Height="45">

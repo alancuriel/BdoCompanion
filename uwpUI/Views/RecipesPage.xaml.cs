@@ -2,7 +2,7 @@
 using System.Linq;
 
 using Microsoft.Toolkit.Uwp.UI.Controls;
-
+using uwpUI.Helpers;
 using uwpUI.ViewModels;
 
 using Windows.UI.Xaml;
@@ -21,6 +21,11 @@ namespace uwpUI.Views
         private CookingRecipesViewModel ViewModel
         {
             get { return DataContext as CookingRecipesViewModel; }
+        }
+
+        private void ListView_Loaded(object sender, RoutedEventArgs e)
+        {
+            (sender as ListView).SelectedIndex = 0;
         }
 
 
