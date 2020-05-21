@@ -23,14 +23,15 @@ namespace uwpUI.Views
             get { return DataContext as CookingRecipesViewModel; }
         }
 
-        private void MasterDetailsViewControl_Loaded(object sender, RoutedEventArgs e)
-        {
-            if (MasterDetailsViewControl.ViewState == MasterDetailsViewState.Both)
-            {
-                ViewModel.ActiveItem = ViewModel.Items.FirstOrDefault();
-            }
-        }
 
-        
+        //private void MasterDetailsViewControl_Loaded(object sender, RoutedEventArgs e)
+        //{
+        //    if (MasterDetailsViewControl.ViewState == MasterDetailsViewState.Both)
+        //    {
+        //        ViewModel.ActiveItem = ViewModel.Items.FirstOrDefault();
+        //    }
+        //}
+
+
     }
 }

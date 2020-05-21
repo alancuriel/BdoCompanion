@@ -9,9 +9,110 @@
     xmlns:local="using:uwpUI.ViewModels"
     xmlns:models="using:uwpUI.Core.Models"
     xmlns:reg="using:uwpUI.Services"
+    xmlns:helpers="using:uwpUI.Helpers"
     Style="{StaticResource PageStyle}"
     mc:Ignorable="d">
     <Page.Resources>
+        <helpers:ItemGradeEnumToColorConverter x:Key="ItemGradeEnumToColorConverter"/>
+    </Page.Resources>
+    <Grid x:Name="ContentArea">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="3*" MinWidth="300" MaxWidth="300"/>
+            <ColumnDefinition Width="9*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}"
+                        Grid.Row="0"
+                        Grid.Column="0">
+            <TextBlock Text="Recipes"
+                   Style="{StaticResource PageTitleStyle}"/>
+        </Grid>
+
+        <StackPanel Grid.Row="1"
+                    Grid.Column="0"
+                    Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Center"
+                        Margin="{StaticResource XSmallBottomMargin}">
+                <RadioButton GroupName="recipeType" IsChecked="True"
+                                 cm:Message.Attach="LoadDataAsync('Cooking')">
+                    <RadioButton.Content>
+                        <StackPanel Orientation="Horizontal">
+                            <FontIcon FontFamily="/Assets/Fonts/Font-Awesome-5-Pro-Solid-900.otf#Font Awesome 5 Pro"
+                                      Glyph="&#xf2e7;" Margin="{StaticResource SmallRightMargin}"/>
+                            <TextBlock Text="Cooking"/>
+                        </StackPanel>
+                    </RadioButton.Content>
+                </RadioButton>
+
+                <RadioButton GroupName="recipeType"
+                    cm:Message.Attach="LoadDataAsync('Alchemy')">
+                    <RadioButton.Content>
+                        <StackPanel Orientation="Horizontal">
+                            <FontIcon FontFamily="/Assets/Fonts/Font-Awesome-5-Pro-Solid-900.otf#Font Awesome 5 Pro"
+                                      Glyph="&#xf6e1;" Margin="{StaticResource SmallRightMargin}"/>
+                            <TextBlock Text="Alchemy"/>
+                        </StackPanel>
+                    </RadioButton.Content>
+                </RadioButton>
+            </StackPanel>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBox HorizontalAlignment="Stretch"
+                         Grid.Column="0"
+                         cm:Message.Attach="[Event KeyUp] = [Action EnterSearchRecipe($eventArgs)]"
+                         Margin="{StaticResource SmallLeftRightMargin}"
+                         x:Name="SearchStr"
+                         />
+                <Button x:Name="SearchRecipe"
+                        HorizontalAlignment="Right"
+                        Content="Search"
+                        Grid.Column="1"/>
+            </Grid>
+        </StackPanel>
+
+        <Grid Grid.Row="3" Grid.Column="0"
+              Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
+            <ListView ItemsSource="{x:Bind ViewModel.Recipes, Mode=OneWay}"
+                      SelectedItem="{x:Bind ViewModel.SelectedRecipe, Mode=TwoWay}"
+                      Margin="{StaticResource SmallTopMargin}"
+                      SelectionMode="Single">
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="models:Recipe">
+                        <Grid Height="45">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Image Grid.Column="0"
+                                       Source="{x:Bind Img}"
+                                       VerticalAlignment="Center" />
+                            <StackPanel Grid.Column="1" Margin="{StaticResource SmallLeftMargin}" VerticalAlignment="Center">
+                                <TextBlock Text="{x:Bind Name}"
+                                               Style="{ThemeResource ListTitleStyle}"
+                                               Foreground="{x:Bind Grade, Converter={StaticResource ItemGradeEnumToColorConverter}}"/>
+                                <TextBlock Text="{x:Bind Id}"
+                                               Style="{StaticResource ListSubTitleStyle}"/>
+                            </StackPanel>
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
+
+    </Grid>
+
+
+    <!--<Page.Resources>
         <DataTemplate x:Key="ItemTemplate">
             <ContentControl x:Name="Items" cm:View.Model="{Binding}" cm:View.Context="MasterView"
                             IsFocusEngagementEnabled="False" IsFocusEngaged="False"
@@ -39,8 +140,7 @@
             <StackPanel Orientation="Horizontal"
                         HorizontalAlignment="Center"
                         Margin="{StaticResource XSmallBottomMargin}">
-                <!--<RadioButton GroupName="recipeType" IsChecked="True"
-                    x:Uid="Recipes_Type_Cooking" cm:Message.Attach="LoadDataAsync('Cooking')">-->
+                
                 <RadioButton GroupName="recipeType" IsChecked="True"
                                  cm:Message.Attach="LoadDataAsync('Cooking')">
                     <RadioButton.Content>
@@ -65,11 +165,13 @@
 
             </StackPanel>
 
-            <!--<TextBlock
+            -->
+    <!--<TextBlock
                     x:Name="headerText"
                     Text="Recipes"
                     VerticalAlignment="Center"
                     Style="{StaticResource ListTitleStyle}" />-->
+    <!--
         </DataTemplate>
 
     </Page.Resources>
@@ -97,5 +199,5 @@
             >
 
         </controls:MasterDetailsView>
-    </Grid>
+    </Grid>-->
 </Page>

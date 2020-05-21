@@ -154,6 +154,26 @@ namespace uwpUI.Core.Services
             return db.Recipes.Find(id);
         }
 
+        public static IEnumerable<Recipe> GetCookingRecipeByName(string str)
+        {
+            IEnumerable<Recipe> query = from i in db.Recipes
+                                        where i.Type == RecipeType.Cooking &&
+                                        (string.IsNullOrEmpty(str) || string.IsNullOrWhiteSpace(str)||
+                                        i.Name.ToLower().Contains(str.ToLower()))
+                                        select i;
+            return query;
+        }
+
+        public static IEnumerable<Recipe> GetAlchemyRecipeByName(string str)
+        {
+            IEnumerable<Recipe> query = from i in db.Recipes
+                                        where i.Type == RecipeType.Alchemy &&
+                                        (string.IsNullOrEmpty(str) || string.IsNullOrWhiteSpace(str) ||
+                                        i.Name.ToLower().Contains(str.ToLower()))
+                                        select i;
+            return query;
+        }
+
         public static RecipeMat DeleteRecipeMat(int id)
         {
             RecipeMat recipeMat = GetRecipeMatById(id);

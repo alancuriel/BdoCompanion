@@ -21,14 +21,7 @@
         IsBackButtonVisible="Collapsed">
         
         <winui:NavigationView.MenuItems>
-            
-            <!--
-            TODO WTS: Change the symbols for each item as appropriate for your app
-            More on Segoe UI Symbol icons: https://docs.microsoft.com/windows/uwp/style/segoe-ui-symbol-font
-            Or to use an IconElement instead of a Symbol see https://github.com/Microsoft/WindowsTemplateStudio/blob/master/docs/projectTypes/navigationpane.md
-            Edit String/en-US/Resources.resw: Add a menu item title for each page
-            -->
-            <winui:NavigationViewItem x:Uid="Shell_Main" helpers:NavHelper.NavigateTo="views:MainPage">
+            <!--<winui:NavigationViewItem x:Uid="Shell_Main" helpers:NavHelper.NavigateTo="views:MainPage">
                 <winui:NavigationViewItem.Icon>
                     <FontIcon FontFamily="/Assets/Fonts/Font-Awesome-5-Pro-Solid-900.otf#Font Awesome 5 Pro" Glyph="&#xf80a;"/>
                 </winui:NavigationViewItem.Icon>
@@ -40,19 +33,16 @@
                 </winui:NavigationViewItem.Icon>
             </winui:NavigationViewItem>
 
-            <!--<winui:NavigationViewItem x:Uid="Shell_Second" helpers:NavHelper.NavigateTo="views:SecondPage">
-                <winui:NavigationViewItem.Icon>
-                    <FontIcon FontFamily="/Assets/Fonts/Font-Awesome-5-Pro-Solid-900.otf#Font Awesome 5 Pro" Glyph="&#xf0f3;"/>
-                </winui:NavigationViewItem.Icon>
-            </winui:NavigationViewItem>-->
-            
-            <!--<winui:NavigationViewItem x:Uid="Shell_Dev" helpers:NavHelper.NavigateTo="views:DevPage" />-->
-
             <winui:NavigationViewItem x:Uid="Shell_CookingRecipes" helpers:NavHelper.NavigateTo="views:CookingRecipesPage">
                 <winui:NavigationViewItem.Icon>
                     <FontIcon FontFamily="/Assets/Fonts/Font-Awesome-5-Pro-Solid-900.otf#Font Awesome 5 Pro" Glyph="&#xf6bf;"/>
                 </winui:NavigationViewItem.Icon>
-            </winui:NavigationViewItem>
+            </winui:NavigationViewItem>-->
+
+
+            <winui:NavigationViewItem x:Uid="Shell_Main" helpers:NavHelper.NavigateTo="views:MainPage"/>
+            <winui:NavigationViewItem x:Uid="Shell_BossNotifcations" helpers:NavHelper.NavigateTo="views:BossNotifcationsPage"/>
+            <winui:NavigationViewItem x:Uid="Shell_CookingRecipes" helpers:NavHelper.NavigateTo="views:CookingRecipesPage"/>
             
         </winui:NavigationView.MenuItems>
         <Grid>
@@ -66,3 +56,5 @@
         </Grid>
     </winui:NavigationView>
 </Page>
+
+
