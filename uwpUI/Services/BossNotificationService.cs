@@ -569,10 +569,7 @@ namespace uwpUI.Services
             // Add the content to the toast
             var toast = new ScheduledToastNotification(content.GetXml(), spawnTime)
             {
-                // TODO WTS: Set a unique identifier for this notification within the notification group. (optional)
-                // More details at https://docs.microsoft.com/uwp/api/windows.ui.notifications.toastnotification.tag
                 Group = boss.Name,
-
             };
 
             return toast;

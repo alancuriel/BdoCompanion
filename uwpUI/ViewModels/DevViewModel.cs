@@ -245,7 +245,6 @@ namespace uwpUI.ViewModels
 
             
 
-            // TODO WTS: Replace this with your actual data
             var data = BdoDataService.AllItems();
             var groupdata = BdoDataService.AllItemGroups();
             
