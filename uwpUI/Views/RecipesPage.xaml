@@ -39,8 +39,10 @@
             <StackPanel Orientation="Horizontal"
                         HorizontalAlignment="Center"
                         Margin="{StaticResource XSmallBottomMargin}">
-                <RadioButton GroupName="recipeType" IsChecked="True"
-                                 cm:Message.Attach="LoadDataAsync('Cooking')">
+                <RadioButton GroupName="recipeType" x:Name="cook"
+                             IsChecked="True"
+                             cm:Message.Attach="LoadDataAsync('Cooking')"
+                             XYFocusDown="{x:Bind SearchStr}">
                     <RadioButton.Content>
                         <StackPanel Orientation="Horizontal">
                             <!-- TODO: Remove Icon if you do not have the necessary files.-->
@@ -51,11 +53,13 @@
                     </RadioButton.Content>
                 </RadioButton>
 
-                <RadioButton GroupName="recipeType"
-                    cm:Message.Attach="LoadDataAsync('Alchemy')">
+                <RadioButton GroupName="recipeType" x:Name="alchemy"
+                             cm:Message.Attach="LoadDataAsync('Alchemy')"
+                             XYFocusDown="{x:Bind SearchRecipe}"
+                             XYFocusLeft="{x:Bind cook}">
                     <RadioButton.Content>
                         <StackPanel Orientation="Horizontal">
-                            <!-- TODO: Remove Icon if you do not have the necessary files.-->
+                            <!-- TODO: Remove Icon if you do not have the necessary files. -->
                             <FontIcon FontFamily="/Assets/Fonts/Font-Awesome-5-Pro-Solid-900.otf#Font Awesome 5 Pro"
                                       Glyph="&#xf6e1;" Margin="{StaticResource SmallRightMargin}"/>
                             <TextBlock Text="Alchemy"/>
@@ -74,12 +78,16 @@
                          cm:Message.Attach="[Event KeyUp] = [Action EnterSearchRecipe($eventArgs)]"
                          Margin="{StaticResource SmallLeftRightMargin}"
                          x:Name="SearchStr"
-                         />
+                         XYFocusUp="{x:Bind cook}"
+                         XYFocusDown="{x:Bind recipeList}"/>
                 <Button x:Name="SearchRecipe"
                         HorizontalAlignment="Right"
                         Content="Search"
                         Grid.Column="1"
-                        Margin="{StaticResource SmallRightMargin}"/>
+                        Margin="{StaticResource SmallRightMargin}"
+                        XYFocusUp="{x:Bind alchemy}"
+                        XYFocusDown="{x:Bind recipeList}"
+                        XYFocusLeft="{x:Bind SearchStr}"/>
             </Grid>
         </StackPanel>
 
@@ -89,7 +97,9 @@
                       SelectedItem="{x:Bind ViewModel.SelectedRecipe, Mode=TwoWay}"
                       Margin="{StaticResource SmallTopMargin}"
                       SelectionMode="Single"
-                      Loaded="ListView_Loaded">
+                      Loaded="ListView_Loaded"
+                      x:Name="recipeList"
+                      XYFocusUp="{x:Bind SearchStr}">
                 <ListView.ItemTemplate>
                     <DataTemplate x:DataType="models:Recipe">
                         <Grid Height="45">
@@ -158,13 +168,15 @@
                             </Grid.ColumnDefinitions>
 
                             <TextBlock Grid.Row="0" Grid.Column="0"
-                        Margin="{StaticResource SmallTopMargin}"
-                        Style="{StaticResource DetailSubTitleStyle}"
-                        Text="Materials" />
+                                       Margin="{StaticResource SmallTopMargin}"
+                                       Style="{StaticResource DetailSubTitleStyle}"
+                                       Text="Materials" />
 
                             <ListView x:Name="Materials"
                                   Grid.Row="1" Grid.Column="0"
-                                  XYFocusRight="{x:Bind Results}">
+                                  XYFocusRight="{x:Bind Results}"
+                                  XYFocusLeft="{x:Bind SearchRecipe}"
+                                  XYFocusUp="{x:Bind alchemy}">
                                 <ListView.ItemTemplate>
                                     <DataTemplate x:DataType="uwpModels:RecipeMaterialModel">
                                         <StackPanel Orientation="Horizontal">
