@@ -9,7 +9,7 @@ using Windows.UI.Xaml.Input;
 
 namespace uwpUI.ViewModels
 {
-    public class CookingRecipesViewModel : Screen /*Conductor<CookingRecipesDetailViewModel>.Collection.OneActive*/
+    public class CookingRecipesViewModel : Screen
     {
         public BindableCollection<Recipe> Recipes { get; set; } = new BindableCollection<Recipe>();
         private Recipe _selectedRecipe;
@@ -19,10 +19,10 @@ namespace uwpUI.ViewModels
             get { return _selectedRecipe; }
             set
             {
-                if (_selectedRecipe != value )
+                if (_selectedRecipe != value)
                 {
                     Set(ref _selectedRecipe, value);
-                    if(value != null) LoadMaterials();
+                    if (value != null) LoadMaterials();
                 }
             }
         }

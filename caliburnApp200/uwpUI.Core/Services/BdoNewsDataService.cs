@@ -28,35 +28,36 @@ namespace uwpUI.Core.Services
 
         public static async Task<IEnumerable<NewsItem>> GetXboxNews()
         {
-            byte[] bytes = Encoding.UTF8.GetBytes("pageNo=1&category=0&hashtag=xbox&searchText=&searchType=\r\n\r\n");
-            var formContent = new ByteArrayContent(bytes);
-            formContent.Headers.ContentType = new MediaTypeHeaderValue("application/x-www-form-urlencoded")
-            {
-                CharSet = "UTF-8"
-            };
+            //byte[] bytes = Encoding.UTF8.GetBytes("pageNo=1&category=0&hashtag=xbox&searchText=&searchType=\r\n\r\n");
+            //var formContent = new ByteArrayContent(bytes);
+            //formContent.Headers.ContentType = new MediaTypeHeaderValue("application/x-www-form-urlencoded")
+            //{
+            //    CharSet = "UTF-8"
+            //};
 
 
-            var response = await Client.
-                PostAsync("https://www.console.playblackdesert.com/xbox/News/List", formContent);
+            //var response = await Client.
+            //    PostAsync("https://www.console.playblackdesert.com/xbox/News/List", formContent);
 
-            if (!response.IsSuccessStatusCode)
-            {
-                return null;
-            }
+            //if (!response.IsSuccessStatusCode)
+            //{
+            //    return null;
+            //}
 
-            var json = await response.Content.ReadAsStringAsync();
+            //var json = await response.Content.ReadAsStringAsync();
 
-            var jsonObject = await Json.ToObjectAsync<NewsResult>(json);
+            //var jsonObject = await Json.ToObjectAsync<NewsResult>(json);
 
-            foreach (var item in jsonObject.Result.List)
-            {
-                item.DetailUrl = $"https://www.console.playblackdesert.com/xbox/News/Detail?boardNo={item.BoardNo}&category=0";
-            }
+            //foreach (var item in jsonObject.Result.List)
+            //{
+            //    item.DetailUrl = $"https://www.console.playblackdesert.com/xbox/News/Detail?boardNo={item.BoardNo}&category=0";
+            //}
 
-            return jsonObject.Result.List;
+            //return jsonObject.Result.List;
+            return await GetPcNews(isConsole: true);
         }
 
-        public static async Task<IEnumerable<NewsItem>> GetPcNews(bool isSea = false)
+        public static async Task<IEnumerable<NewsItem>> GetPcNews(bool isSea = false, bool isConsole = false)
         {
             string url;
             if (isSea)
@@ -65,7 +66,12 @@ namespace uwpUI.Core.Services
             }
             else
             {
-                url = "https://www.blackdesertonline.com/news/list";
+                url = "https://www.naeu.playblackdesert.com/en-US/News/Notice";
+            }
+
+            if (isConsole)
+            {
+                url = "https://www.console.playblackdesert.com/News/Notice";
             }
 
             var response = await Client.GetAsync(url);
@@ -86,7 +92,7 @@ namespace uwpUI.Core.Services
             string subtitle_class;
             string date_class;
 
-            if (isSea)
+            if (true)
             {
                 list_class = "thumb_nail_list";
                 subtitle_class = "desc";

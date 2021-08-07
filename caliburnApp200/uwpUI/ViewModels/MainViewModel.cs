@@ -140,23 +140,33 @@ namespace uwpUI.ViewModels
             clockTimer.Start();
             countdownTimer.Start();
 
-            if (RegionSelectorService.Region == ServerRegion.XBOXEU ||
+            try
+            {
+                if (RegionSelectorService.Region == ServerRegion.XBOXEU ||
                RegionSelectorService.Region == ServerRegion.XBOXNA)
-            {
-                News?.Clear();
-                News = new ObservableCollection<NewsItem>(await BdoNewsDataService.GetXboxNews());
+                {
+                    News?.Clear();
+                    News = new ObservableCollection<NewsItem>(await BdoNewsDataService.GetXboxNews());
+                }
+                else if (RegionSelectorService.Region == ServerRegion.PCEU ||
+                        RegionSelectorService.Region == ServerRegion.PCNA)
+                {
+                    News?.Clear();
+                    News = new ObservableCollection<NewsItem>(await BdoNewsDataService.GetPcNews());
+                }
+                else if (RegionSelectorService.Region == ServerRegion.PCSEA)
+                {
+                    News?.Clear();
+                    News = new ObservableCollection<NewsItem>(await BdoNewsDataService.GetPcNews(isSea: true));
+                }
             }
-            else if (RegionSelectorService.Region == ServerRegion.PCEU ||
-                    RegionSelectorService.Region == ServerRegion.PCNA)
+            catch (Exception)
             {
-                News?.Clear();
-                News = new ObservableCollection<NewsItem>(await BdoNewsDataService.GetPcNews());
+
+                
             }
-            else if (RegionSelectorService.Region == ServerRegion.PCSEA)
-            {
-                News?.Clear();
-                News = new ObservableCollection<NewsItem>(await BdoNewsDataService.GetPcNews(isSea: true));
-            }
+
+            
         }
 
         private void InitCountdownTick(object sender, object e)

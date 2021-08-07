@@ -178,7 +178,7 @@
   </data>
   <data name="WhatsNew_Body.Text" xml:space="preserve">
     <value>This update brings:
--Recipe Searching and optimization</value>
+- Fix Crash on start up</value>
     <comment>What's new prompt message body</comment>
   </data>
   <data name="WhatsNewDialog.Title" xml:space="preserve">

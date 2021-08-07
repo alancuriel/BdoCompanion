@@ -10,9 +10,9 @@
   <Identity
     Name="1103alannitro17.BDOCompanion"
     Publisher="CN=732693BD-7C83-4AFE-901E-27C0C68261EF"
-    Version="1.2.3.0" />
+    Version="1.2.13.0" />
 
-  <mp:PhoneIdentity PhoneProductId="7a8c4a6b-116b-4891-ae3d-e767da9ccf36" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
+  <mp:PhoneIdentity PhoneProductId="1bf9edcf-e167-42f7-bc0d-23703dfb4b09" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
   <Properties>
     <DisplayName>BDO Companion</DisplayName>
