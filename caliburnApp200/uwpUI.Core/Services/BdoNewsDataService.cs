@@ -115,8 +115,7 @@ namespace uwpUI.Core.Services
             {
                 var newsItem = new NewsItem();
 
-                newsItem.DetailUrl = isSea ? newsNode.GetAttributeValue("href", string.Empty) 
-                                     : $"https://www.blackdesertonline.com{newsNode.GetAttributeValue("href", string.Empty)}";
+                newsItem.DetailUrl = newsNode.GetAttributeValue("href", string.Empty);
                   
 
                 var imgNode = newsNode.Descendants("img").FirstOrDefault();
