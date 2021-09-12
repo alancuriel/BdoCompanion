@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -91,11 +92,17 @@ namespace uwpUI.Services
         private async Task InitializeAsync()
         {
             await ThemeSelectorService.InitializeAsync();
+            Debug.WriteLine("ThemeSelectorService Initialized");
             await RegionSelectorService.InitializeAsync();
+            Debug.WriteLine("RegionSelectorService Initialized");
             await BossNotificationService.InitializeAsync();
+            Debug.WriteLine("BossNotificationService Initialized");
             await BdoDataLoadService.InitializeAsync();
+            Debug.WriteLine("BdoDataLoadService Initialized");
             await BdoDataService.InitializeAsync();
+            Debug.WriteLine("BdoDataService Initialized");
             await BdoNewsDataService.InitializeAsync();
+            Debug.WriteLine("BdoNewsDataService Initialized");
         }
 
         private async Task StartupAsync()
