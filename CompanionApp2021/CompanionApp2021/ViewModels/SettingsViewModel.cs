@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using System.Windows.Input;
-
+using CompanionApp2021.Core.Enums;
 using CompanionApp2021.Helpers;
 using CompanionApp2021.Services;
 
@@ -23,6 +23,14 @@ namespace CompanionApp2021.ViewModels
             get { return _elementTheme; }
 
             set { SetProperty(ref _elementTheme, value); }
+        }
+
+        private ServerRegion _serverRegion = RegionSelectorService.Region;
+
+        public ServerRegion ServerRegion
+        {
+            get { return _serverRegion; }
+            set { SetProperty(ref _serverRegion, value); }
         }
 
         private string _versionDescription;
@@ -51,6 +59,26 @@ namespace CompanionApp2021.ViewModels
                 }
 
                 return _switchThemeCommand;
+            }
+        }
+
+        private ICommand _switchRegionCommand;
+
+        public ICommand SwitchRegionCommand
+        {
+            get
+            {
+                if (_switchRegionCommand == null)
+                {
+                    _switchRegionCommand = new RelayCommand<ServerRegion>(
+                        async (param) =>
+                        {
+                            ServerRegion = param;
+                            await RegionSelectorService.SetRegionAsync(param);
+                        });
+                }
+
+                return _switchRegionCommand;
             }
         }
 

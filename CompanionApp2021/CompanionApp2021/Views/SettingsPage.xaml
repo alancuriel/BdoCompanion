@@ -7,15 +7,18 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Style="{StaticResource PageStyle}"
     xmlns:xaml="using:Windows.UI.Xaml"
+    xmlns:enms="using:CompanionApp2021.Core.Enums"
     mc:Ignorable="d">
     <Page.Resources>
         <helper:EnumToBooleanConverter x:Key="EnumToBooleanConverter" EnumType="ElementTheme" />
+        <helper:EnumToBooleanConverter x:Key="EnumToBooleanConverter1" EnumType="enms:ServerRegion" />
     </Page.Resources>
 
     <Grid Margin="{StaticResource MediumLeftRightMargin}">
         <StackPanel
             x:Name="ContentArea">
             <TextBlock x:Uid="Settings_Personalization" Style="{ThemeResource SubtitleTextBlockStyle}" />
+
             <StackPanel Margin="{StaticResource SmallTopBottomMargin}">
                 <TextBlock x:Uid="Settings_Theme" />
 
@@ -52,6 +55,70 @@
                     </RadioButton>
                 </StackPanel>
             </StackPanel>
+
+
+            <StackPanel Margin="{StaticResource SmallTopBottomMargin}">
+                <TextBlock x:Uid="Settings_Region" />
+
+                <StackPanel Margin="{StaticResource XSmallTopMargin}">
+                    <RadioButton
+                        x:Uid="Settings_Region_PCNA"
+                        Command="{x:Bind ViewModel.SwitchRegionCommand}"
+                        IsChecked="{x:Bind ViewModel.ServerRegion, Converter={StaticResource EnumToBooleanConverter1}, ConverterParameter=PCNA, Mode=OneWay}"
+                        FontSize="15"
+                        GroupName="AppServer">
+                        <RadioButton.CommandParameter>
+                            <enms:ServerRegion>PCNA</enms:ServerRegion>
+                        </RadioButton.CommandParameter>
+                    </RadioButton>
+
+                    <RadioButton
+                        x:Uid="Settings_Region_PCEU"
+                        Command="{x:Bind ViewModel.SwitchRegionCommand}"
+                        IsChecked="{x:Bind ViewModel.ServerRegion, Converter={StaticResource EnumToBooleanConverter1}, ConverterParameter=PCEU, Mode=OneWay}"
+                        FontSize="15"
+                        GroupName="AppServer">
+                        <RadioButton.CommandParameter>
+                            <enms:ServerRegion>PCEU</enms:ServerRegion>
+                        </RadioButton.CommandParameter>
+                    </RadioButton>
+
+                    <RadioButton
+                        x:Uid="Settings_Region_PCSEA"
+                        Command="{x:Bind ViewModel.SwitchRegionCommand}"
+                        IsChecked="{x:Bind ViewModel.ServerRegion, Converter={StaticResource EnumToBooleanConverter1}, ConverterParameter=PCSEA, Mode=OneWay}"
+                        FontSize="15"
+                        GroupName="AppServer">
+                        <RadioButton.CommandParameter>
+                            <enms:ServerRegion>PCSEA</enms:ServerRegion>
+                        </RadioButton.CommandParameter>
+                    </RadioButton>
+
+                    <RadioButton
+                        x:Uid="Settings_Region_XBOXNA"
+                        Command="{x:Bind ViewModel.SwitchRegionCommand}"
+                        IsChecked="{x:Bind ViewModel.ServerRegion, Converter={StaticResource EnumToBooleanConverter1}, ConverterParameter=XBOXNA, Mode=OneWay}"
+                        FontSize="15"
+                        GroupName="AppServer">
+                        <RadioButton.CommandParameter>
+                            <enms:ServerRegion>XBOXNA</enms:ServerRegion>
+                        </RadioButton.CommandParameter>
+                    </RadioButton>
+
+                    <RadioButton
+                        x:Uid="Settings_Region_XBOXEU"
+                        Command="{x:Bind ViewModel.SwitchRegionCommand}"
+                        IsChecked="{x:Bind ViewModel.ServerRegion, Converter={StaticResource EnumToBooleanConverter1}, ConverterParameter=XBOXEU, Mode=OneWay}"
+                        FontSize="15"
+                        GroupName="AppServer">
+                        <RadioButton.CommandParameter>
+                            <enms:ServerRegion>XBOXEU</enms:ServerRegion>
+                        </RadioButton.CommandParameter>
+                    </RadioButton>
+                    
+                </StackPanel>
+            </StackPanel>
+
 
             <TextBlock x:Uid="Settings_About" Style="{ThemeResource SubtitleTextBlockStyle}" />
 

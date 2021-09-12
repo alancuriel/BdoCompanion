@@ -1,6 +1,5 @@
 ﻿using CompanionApp2021.Models;
 using CompanionApp2021.ViewModels;
-
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 
@@ -22,11 +21,12 @@ namespace CompanionApp2021.Views
 
         private void ToggleSwitch_Toggled(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
+            
             var worldEvent = (sender as ToggleSwitch).DataContext as WorldEventModel;
 
             if (worldEvent != null)
             {
-                ViewModel.Switch(worldEvent);
+                ViewModel.Switch(worldEvent, (sender as ToggleSwitch).IsOn);
             }
         }
     }

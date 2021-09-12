@@ -72,7 +72,7 @@
 
                 <TextBlock Grid.Column="2"
                            HorizontalAlignment="Right"
-                           Text="Notifications"/>
+                           Text="Notify?"/>
             </Grid>
 
             
@@ -129,8 +129,7 @@
                                                   HorizontalContentAlignment="Left"
                                                   FlowDirection="RightToLeft"
                                                   IsOn="{x:Bind IsNotificationEnabled, Mode=OneWay}"
-                                                  Toggled="ToggleSwitch_Toggled"
-                                                  />
+                                                  Toggled="ToggleSwitch_Toggled"/>
 
                                 </Grid>
                             </winui:Expander.Header>

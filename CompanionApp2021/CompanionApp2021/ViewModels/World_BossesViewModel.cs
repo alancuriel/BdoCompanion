@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using CompanionApp2021.Core.Helpers;
@@ -29,6 +30,8 @@ namespace CompanionApp2021.ViewModels
             }
         }
 
+        private bool canToggle = true;
+
         public World_BossesViewModel()
         {
         }
@@ -53,13 +56,33 @@ namespace CompanionApp2021.ViewModels
         public void wow()
         {
             WorldEventModel worldEvent = WorldEventModels.ElementAt(0);
-            worldEvent.IsNotificationEnabled = false;
-            worldEvent.NotifyNotificationChanged();
+
+            ToggleLock(() =>
+            {
+                worldEvent.IsNotificationEnabled = false;
+                worldEvent.NotifyNotificationChanged();
+            });
+            
         }
 
-        public void Switch(WorldEventModel worldEvent)
+        public void Switch(WorldEventModel worldEvent, bool switchedOn)
         {
-            worldEvent.IsNotificationEnabled = !worldEvent.IsNotificationEnabled;
+            if (canToggle)
+            {
+                Debug.WriteLine("Toggled: " + switchedOn);
+            }
         }
+
+        
+        private void ToggleLock(Action doWork)
+        {
+            canToggle = false;
+
+            doWork.Invoke();
+
+            canToggle = true;
+        }
+
+
     }
 }
