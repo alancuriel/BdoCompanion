@@ -15,10 +15,10 @@ namespace CompanionApp2021.ViewModels
 {
     public class World_BossesViewModel : ObservableObject
     {
-        private static IWorldEventRepository worldEventService = Singleton<WorldEventLocalService>.Instance;
+        private static IWorldEventRepository worldEventService = Singleton<WorldEventGimuService>.Instance;
 
-        private IEnumerable<WorldEventModel> worldEventModels;
-        public IEnumerable<WorldEventModel> WorldEventModels
+        private ObservableCollection<WorldEventModel> worldEventModels = new ObservableCollection<WorldEventModel>();
+        public ObservableCollection<WorldEventModel> WorldEventModels
         {
             get
             {
@@ -39,18 +39,20 @@ namespace CompanionApp2021.ViewModels
         public async Task InitializeAsync()
         {
             bool d = true;
-            WorldEventModels = new ObservableCollection<WorldEventModel>
-                                    (worldEventService.GetWorldEvents()
-                                                .Select(e =>
-                                                {
-                                                    return new WorldEventModel(d)
-                                                    {
-                                                        WorldEvent = e
-                                                    };
-                                                }));
 
+            var events = await worldEventService.GetWorldEventsAsync();
 
-            await Task.CompletedTask;
+            foreach(var e in events)
+            {
+                e.ImageSource = $"/Assets/BossImages/{e.Name}.png";
+
+                WorldEventModels.Add(new WorldEventModel(d)
+                {
+                    WorldEvent = e
+                });
+            }
+                
+                      
         }
 
         public void wow()
